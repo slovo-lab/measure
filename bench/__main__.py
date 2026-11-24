@@ -10,6 +10,7 @@ from bench import runner
 
 ADAPTERS = {
     "pint": ("bench.adapters.pint_uncertainties", "PintUncertaintiesAdapter"),
+    "ucon": ("bench.adapters.ucon_adapter", "UconAdapter"),
 }
 
 

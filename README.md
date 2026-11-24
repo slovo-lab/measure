@@ -2,7 +2,7 @@
 
 *Русская версия: [README.ru.md](README.ru.md)*
 
-**Status: in progress. The data format ([FORMAT.md](FORMAT.md)) and the first 11 reference pairs ([pairs/pairs.json](pairs/pairs.json)) exist, and so does a runner with one adapter (Pint with `uncertainties`). The first results table will be published at 30 pairs. The plan is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
+**Status: in progress. The data format ([FORMAT.md](FORMAT.md)) and the first 11 reference pairs ([pairs/pairs.json](pairs/pairs.json)) exist, and so does a runner with two adapters (Pint with `uncertainties`, and ucon). The first results table will be published at 30 pairs. The plan is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
 
 ## What changed on day one
 
@@ -41,6 +41,7 @@ A second round of research on 24 November 2026 answered the open questions well 
 python3 -m unittest discover -s tests        # checks the pairs and the runner
 pip install -r requirements-adapters.txt     # the tools under test
 python3 -m bench pint                        # puts every pair to Pint + uncertainties
+python3 -m bench ucon                        # the same for ucon
 ```
 
 The runner gives each pair one of four verdicts: `pass`, `fail`, `unsupported` (the tool has no function for that kind of task, which is not a failure) or `error`. An adapter only passes the question to the tool; it never does the calculation itself.

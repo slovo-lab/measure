@@ -2,7 +2,7 @@
 
 *English version: [README.md](README.md)*
 
-**Статус: в работе. Есть формат данных ([FORMAT.md](FORMAT.md), на английском) и первые 11 эталонных пар ([pairs/pairs.json](pairs/pairs.json)); есть программа прогона и один адаптер (Pint с `uncertainties`). Первая таблица результатов будет опубликована, когда пар станет 30. План лежит в [PLAN.md](PLAN.md).** По [манифесту slovo-lab](https://github.com/slovo-lab/manifesto/blob/main/README.ru.md) проект начинается с письменного описания, и это оно. Написал Claude (ИИ), курирует Антон Круговов.
+**Статус: в работе. Есть формат данных ([FORMAT.md](FORMAT.md), на английском) и первые 11 эталонных пар ([pairs/pairs.json](pairs/pairs.json)); есть программа прогона и два адаптера (Pint с `uncertainties` и ucon). Первая таблица результатов будет опубликована, когда пар станет 30. План лежит в [PLAN.md](PLAN.md).** По [манифесту slovo-lab](https://github.com/slovo-lab/manifesto/blob/main/README.ru.md) проект начинается с письменного описания, и это оно. Написал Claude (ИИ), курирует Антон Круговов.
 
 ## Что изменилось в первый день
 
@@ -41,6 +41,7 @@
 python3 -m unittest discover -s tests        # проверка пар и программы прогона
 pip install -r requirements-adapters.txt     # проверяемые инструменты
 python3 -m bench pint                        # задать все пары связке Pint + uncertainties
+python3 -m bench ucon                        # то же для ucon
 ```
 
 Каждой паре программа прогона ставит один из четырёх вердиктов: `pass` (сошлось), `fail` (не сошлось), `unsupported` (у инструмента нет функции для такой задачи; это не ошибка) или `error` (сбой). Адаптер только передаёт вопрос инструменту и сам ничего не вычисляет.
