@@ -29,6 +29,9 @@ UNITS = {
     "cal_th": "thermochemical_calorie",
     "min": "minute", "h": "hour",
     "mV": "millivolt", "ohm": "ohm",
+    # Pint has separate units for temperature differences.
+    "delta_degF": "delta_degF", "delta_degC": "delta_degC",
+    "1": "dimensionless",
 }
 
 
@@ -71,6 +74,12 @@ class PintUncertaintiesAdapter:
             return Unsupported("no function for a Type A evaluation in Pint or uncertainties")
         if task == "type_b":
             return Unsupported("no function for a Type B evaluation in Pint or uncertainties")
+        if task == "effective_dof":
+            return Unsupported("no function for effective degrees of freedom "
+                               "in Pint or uncertainties")
+        if task == "round":
+            return Unsupported("no function that rounds to a number of significant digits; "
+                               "Python's round() on a quantity counts decimal places")
         return Unsupported("unknown task %r" % task)
 
     def _convert(self, inputs):

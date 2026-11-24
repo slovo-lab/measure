@@ -30,6 +30,8 @@ TASK_OUTPUTS = {
     "type_b": {"standard_uncertainty"},
     "propagate": {"value", "combined_standard_uncertainty"},
     "add": {"value"},
+    "effective_dof": {"effective_degrees_of_freedom"},
+    "round": {"value"},
 }
 
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
@@ -80,12 +82,41 @@ def _check_inputs(errors, where, task, inputs):
                 _num(errors, "%s readings[%d]" % (where, i), {"v": r}, "v")
         _text(errors, where, inputs, "unit")
     elif task == "type_b":
-        if inputs.get("distribution") not in ("rectangular", "triangular"):
+        distribution = inputs.get("distribution")
+        if distribution not in ("rectangular", "triangular", "normal"):
             errors.append("%s: unknown 'distribution'" % where)
+        if distribution == "normal":
+            p = _num(errors, where, inputs, "coverage_probability")
+            if p is not None and not 0 < p < 1:
+                errors.append("%s: 'coverage_probability' must be between 0 and 1" % where)
+        elif "coverage_probability" in inputs:
+            errors.append("%s: 'coverage_probability' is only for a normal distribution" % where)
         hw = _num(errors, where, inputs, "half_width")
         if hw is not None and hw <= 0:
             errors.append("%s: 'half_width' must be positive" % where)
         _text(errors, where, inputs, "unit")
+    elif task == "effective_dof":
+        components = inputs.get("components")
+        if not isinstance(components, list) or len(components) < 2:
+            errors.append("%s: 'components' must be a list of at least 2" % where)
+        else:
+            for i, component in enumerate(components):
+                cwhere = "%s components[%d]" % (where, i)
+                if not isinstance(component, dict):
+                    errors.append("%s: must be an object" % cwhere)
+                    continue
+                c = _num(errors, cwhere, component, "contribution")
+                nu = _num(errors, cwhere, component, "degrees_of_freedom")
+                if c is not None and c <= 0:
+                    errors.append("%s: 'contribution' must be positive" % cwhere)
+                if nu is not None and nu <= 0:
+                    errors.append("%s: 'degrees_of_freedom' must be positive" % cwhere)
+        _text(errors, where, inputs, "unit")
+    elif task == "round":
+        _num(errors, where, inputs, "value")
+        digits = inputs.get("significant_digits")
+        if isinstance(digits, bool) or not isinstance(digits, int) or digits < 1:
+            errors.append("%s: 'significant_digits' must be a whole number, 1 or more" % where)
     elif task == "add":
         terms = inputs.get("terms")
         if not isinstance(terms, list) or len(terms) < 2:

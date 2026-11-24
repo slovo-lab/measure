@@ -1138,6 +1138,360 @@
         }
       ],
       "derivation": "dA/ds = 2s = 6 m. u_c = 6 x 0.020 = 0.12 m^2. This is the same calculation as in the pair comb-square-same-variable, with the model written as a power instead of a product."
+    },
+    {
+      "id": "conv-degf-interval-k",
+      "category": "unit-conversion",
+      "question": "Two temperatures differ by 9 degrees Fahrenheit. Express that difference in kelvin.",
+      "task": "convert",
+      "inputs": {
+        "value": "9",
+        "unit": "delta_degF",
+        "to_unit": "K"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "5",
+            "unit": "K",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'degree Fahrenheit (temperature interval)' to kelvin: 5.555 556 E-01 (rounded, not bold). The exact factor 1/1.8 follows from the divisor 1.8, printed in bold in the row 'degree Fahrenheit (temperature)'",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "A difference has no offset: 9/1.8 = 5 K. The rounded factor in the table agrees: 9 x 0.5555556 = 5.0000004. Treating the 9 as a temperature would give 260.37 K, which is wrong here."
+    },
+    {
+      "id": "conv-degc-interval-k",
+      "category": "unit-conversion",
+      "question": "Two temperatures differ by 15 degrees Celsius. Express that difference in kelvin.",
+      "task": "convert",
+      "inputs": {
+        "value": "15",
+        "unit": "delta_degC",
+        "to_unit": "K"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "15",
+            "unit": "K",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Section 8.5, 'Temperature interval and temperature difference': the numerical value of an interval is the same in degrees Celsius and in kelvin",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "A difference of 15 degC is 15 K. Treating the 15 as a temperature would give 288.15 K, which is wrong here."
+    },
+    {
+      "id": "dim-convert-mass-length",
+      "category": "dimensional-safety",
+      "question": "Convert 5 kilograms to metres.",
+      "task": "convert",
+      "inputs": {
+        "value": "5",
+        "unit": "kg",
+        "to_unit": "m"
+      },
+      "reference": {
+        "outcome": "refuse"
+      },
+      "sources": [
+        {
+          "document": "JCGM 200:2012, International vocabulary of metrology (VIM), 3rd edition",
+          "locator": "Entry 1.24, 'conversion factor between units': defined only for units of quantities of the same kind. Cited by entry number only",
+          "url": "https://www.iso.org/sites/JCGM/VIM/JCGM_200e_FILES/MAIN_JCGM_200e/01_e.html",
+          "checked": "2026-11-24"
+        },
+        {
+          "document": "ISO 31-0:1992, Quantities and units - Part 0: General principles (withdrawn in 2009 and replaced by ISO 80000-1)",
+          "locator": "Clause 2.1: quantities of the same kind are those that are mutually comparable. Cited by clause number only; the clause is in the publisher's free sample",
+          "url": "https://cdn.standards.iteh.ai/samples/3621/ce9ec16579cc41768dc34cff01a890fe/ISO-31-0-1992.pdf",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "Mass and length are not quantities of the same kind (dimensions M and L), so there is no conversion factor between kilogram and metre. No number is a correct answer; the tool must report an error or decline."
+    },
+    {
+      "id": "typeb-normal-9973-limits",
+      "category": "type-b",
+      "question": "A quantity is normally distributed and lies within plus or minus 0.6 mm of its estimate with a probability of 99.73 percent. Give its standard uncertainty.",
+      "task": "type_b",
+      "inputs": {
+        "distribution": "normal",
+        "half_width": "0.6",
+        "coverage_probability": "0.9973",
+        "unit": "mm"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "standard_uncertainty",
+            "value": "0.2",
+            "unit": "mm",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-4"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Section 4.6: for a normal distribution with limits that contain about 99.73 percent of values, u = a/3",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-4-type-b-evaluation-standard-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "u = 0.6/3 = 0.2. The tolerance is 1e-4 because the source's divisor 3 is itself rounded: the exact normal quantile for 99.73 percent is 2.99998, which gives 0.2000013."
+    },
+    {
+      "id": "typeb-normal-95-interval",
+      "category": "type-b",
+      "question": "A certificate states an uncertainty of plus or minus 0.0392 V as a 95 percent confidence interval, and the quantity may be taken as normally distributed. Give its standard uncertainty.",
+      "task": "type_b",
+      "inputs": {
+        "distribution": "normal",
+        "half_width": "0.0392",
+        "coverage_probability": "0.95",
+        "unit": "V"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "standard_uncertainty",
+            "value": "0.02",
+            "unit": "V",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-4"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Section 4.3: a quoted 95 percent confidence interval is divided by 1.960 (99 percent: by 2.576)",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-4-type-b-evaluation-standard-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "u = 0.0392/1.960 = 0.02. The tolerance is 1e-4 because the source's divisor 1.960 is rounded: the exact normal quantile is 1.959964, which gives 0.02000037."
+    },
+    {
+      "id": "dof-welch-satterthwaite-two",
+      "category": "degrees-of-freedom",
+      "question": "A combined standard uncertainty has two independent components, each already multiplied by its sensitivity coefficient: 0.3 mm with 4 degrees of freedom and 0.4 mm with 9 degrees of freedom. Give the effective degrees of freedom by the Welch-Satterthwaite formula, without rounding.",
+      "task": "effective_dof",
+      "inputs": {
+        "components": [
+          {
+            "contribution": "0.3",
+            "degrees_of_freedom": "4"
+          },
+          {
+            "contribution": "0.4",
+            "degrees_of_freedom": "9"
+          }
+        ],
+        "unit": "mm"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "effective_degrees_of_freedom",
+            "value": "12.8351397604",
+            "unit": "1",
+            "exact": false,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix B, B.3, equation (B-1) (Welch-Satterthwaite formula). Step 3 says to interpolate or truncate a non-integer result; the reference here is the value before that step",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-b-coverage-factors",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "u_c^2 = 0.09 + 0.16 = 0.25, so u_c^4 = 0.0625. Denominator: 0.3^4/4 + 0.4^4/9 = 0.002025 + 0.0028444... = 0.0048694... Result: 12.8351397604 (rounded to 12 significant digits). Truncated as the source suggests, this is 12."
+    },
+    {
+      "id": "dof-welch-satterthwaite-three",
+      "category": "degrees-of-freedom",
+      "question": "A combined standard uncertainty has three independent components, each already multiplied by its sensitivity coefficient: 1.0 mV with 5 degrees of freedom, 2.0 mV with 10 degrees of freedom and 2.0 mV with 20 degrees of freedom. Give the effective degrees of freedom by the Welch-Satterthwaite formula, without rounding.",
+      "task": "effective_dof",
+      "inputs": {
+        "components": [
+          {
+            "contribution": "1.0",
+            "degrees_of_freedom": "5"
+          },
+          {
+            "contribution": "2.0",
+            "degrees_of_freedom": "10"
+          },
+          {
+            "contribution": "2.0",
+            "degrees_of_freedom": "20"
+          }
+        ],
+        "unit": "mV"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "effective_degrees_of_freedom",
+            "value": "31.1538461538",
+            "unit": "1",
+            "exact": false,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix B, B.3, equation (B-1) (Welch-Satterthwaite formula). Step 3 says to interpolate or truncate a non-integer result; the reference here is the value before that step",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-b-coverage-factors",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "u_c^2 = 1 + 4 + 4 = 9, so u_c^4 = 81. Denominator: 1/5 + 16/10 + 16/20 = 2.6. Result: 81/2.6 = 31.1538461538 (rounded to 12 significant digits). Truncated, this is 31."
+    },
+    {
+      "id": "round-half-odd-goes-up",
+      "category": "reporting",
+      "question": "Round 2.675 to 3 significant digits.",
+      "task": "round",
+      "inputs": {
+        "value": "2.675",
+        "significant_digits": 3
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "2.68",
+            "unit": "1",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B, B.7.1 'Rounding numbers', third rule: when the discarded part is exactly 5, the last kept digit is made even",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "The discarded part is exactly 5 and the last kept digit, 7, is odd, so it goes up: 2.68. A program that stores 2.675 as a binary floating-point number holds 2.67499999..., and returns 2.67."
+    },
+    {
+      "id": "round-half-even-stays",
+      "category": "reporting",
+      "question": "Round 2.665 to 3 significant digits.",
+      "task": "round",
+      "inputs": {
+        "value": "2.665",
+        "significant_digits": 3
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "2.66",
+            "unit": "1",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B, B.7.1 'Rounding numbers', third rule: when the discarded part is exactly 5, the last kept digit is made even",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "The discarded part is exactly 5 and the last kept digit, 6, is even, so it stays: 2.66. Rounding halves upward would give 2.67."
+    },
+    {
+      "id": "round-above-half-goes-up",
+      "category": "reporting",
+      "question": "Round 1.2501 to 2 significant digits.",
+      "task": "round",
+      "inputs": {
+        "value": "1.2501",
+        "significant_digits": 2
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "1.3",
+            "unit": "1",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B, B.7.1 'Rounding numbers', second rule: when the discarded part starts with 5 and a later digit is not zero, the last kept digit goes up",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "The discarded part, 501, is more than half a unit of the last kept digit, so 1.2 becomes 1.3. The even-digit rule does not apply here."
     }
   ]
 }
