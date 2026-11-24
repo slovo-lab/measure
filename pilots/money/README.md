@@ -34,7 +34,7 @@ The trial was meant to be able to fail, and on the main question it came close t
 
 What it did find is narrower: how tools behave when a question has no answer or more than one, and whether they start. These are worth reporting to the authors. They are not, yet, a case for a project of the size of Measure.
 
-Nothing has been reported to the authors of these servers; that needs the lab owner's confirmation.
+Reports to authors: drafts for personal-finance-mcp and vibe-math-mcp are in `reports/`. pyxirr-mcp-server has no public place for reports (its repository address on the package index leads to a private page), so nothing can be sent there.
 
 ## Running it
 
