@@ -88,13 +88,25 @@ class PublishedFile(unittest.TestCase):
         self.assertEqual(check_pairs.check_document(load()), [])
 
     def test_every_pair_is_recomputed(self):
-        ids = {pair["id"] for pair in load()["pairs"]}
+        ids = {pair["id"] for pair in load()["pairs"]
+               if pair["reference"].get("outcome") != "refuse"}
         self.assertEqual(ids, set(recompute()))
+
+    def test_refuse_pairs_have_units_of_different_dimension(self):
+        """Dimensions written out by hand here, not taken from any units tool."""
+        dimension = {"m": "L", "s": "T"}
+        refuse = [p for p in load()["pairs"] if p["reference"].get("outcome") == "refuse"]
+        self.assertTrue(refuse)
+        for pair in refuse:
+            with self.subTest(pair=pair["id"]):
+                self.assertEqual(pair["task"], "add")
+                dims = {dimension[t["unit"]] for t in pair["inputs"]["terms"]}
+                self.assertGreater(len(dims), 1)
 
     def test_reference_answers_match_recomputation(self):
         expected = recompute()
         for pair in load()["pairs"]:
-            for out in pair["reference"]["outputs"]:
+            for out in pair["reference"].get("outputs", []):
                 with self.subTest(pair=pair["id"], output=out["name"]):
                     ours = as_decimal(expected[pair["id"]][out["name"]])
                     stated = as_decimal(check_pairs.parse_number(out["value"]))
@@ -108,7 +120,7 @@ class PublishedFile(unittest.TestCase):
     def test_rounding_error_is_inside_tolerance(self):
         """A rounded reference must be much more precise than its tolerance."""
         for pair in load()["pairs"]:
-            for out in pair["reference"]["outputs"]:
+            for out in pair["reference"].get("outputs", []):
                 if out["exact"]:
                     continue
                 with self.subTest(pair=pair["id"], output=out["name"]):
@@ -155,6 +167,14 @@ class CheckerRejectsBrokenFiles(unittest.TestCase):
 
     def test_missing_derivation(self):
         self.assertTrue(self.broken(lambda d: d["pairs"][0].pop("derivation")))
+
+    def test_unknown_outcome(self):
+        self.assertTrue(self.broken(
+            lambda d: d["pairs"][0].update(reference={"outcome": "maybe"})))
+
+    def test_add_needs_two_terms(self):
+        self.assertTrue(self.broken(
+            lambda d: d["pairs"][-1]["inputs"]["terms"].pop()))
 
     def test_wrong_format_version(self):
         self.assertTrue(self.broken(lambda d: d.update(format_version=2)))

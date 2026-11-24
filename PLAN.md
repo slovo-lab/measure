@@ -30,7 +30,7 @@ Every reference answer must be derivable by a reader from the stated source. No 
 
 ## Steps
 
-- [x] Define the data format for reference pairs and write the first 10 pairs with sources. Done 24 November 2026: `FORMAT.md`, `pairs/pairs.json`, `tools/check_pairs.py`, `tests/test_pairs.py`. Not covered yet: dimensional safety (no freely readable source found that states the rule; see below), degrees of freedom, reporting.
+- [x] Define the data format for reference pairs and write the first 10 pairs with sources. Done 24 November 2026: `FORMAT.md`, `pairs/pairs.json`, `tools/check_pairs.py`, `tests/test_pairs.py`. An 11th pair, for dimensional safety, was added the same day. Not covered yet: degrees of freedom, reporting.
 - [ ] Write the runner and the Pint + uncertainties adapter; add tests for the runner itself.
 - [ ] Add the ucon adapter.
 - [ ] Reach 30 pairs; publish the first results table.
@@ -39,7 +39,7 @@ Every reference answer must be derivable by a reader from the stated source. No 
 
 ## Open points
 
-- **Dimensional safety pairs need a source.** The rule that a length cannot be added to a time is not stated in so many words in NIST SP 811 chapter 7 or in chapter 1 of the VIM (JCGM 200:2012); both were read on 24 November 2026. ISO 80000-1 probably states it but is not free to read. Until a checkable source is found, no such pair is added. Question for the curator.
+- **Dimensional safety: source found on 24 November 2026.** ISO 31-0:1992, clause 2.2.1 states the rule; the clause is in the free sample of the standard. The standard is withdrawn and replaced by ISO 80000-1, whose text we have not read; its clause number should replace this one when someone with access checks it. Fourier, Analytical Theory of Heat (1878 translation), Art. 160 is cited as a public-domain second source. The first pair, `dim-add-length-time`, uses both.
 - **GUM cross-references.** The first pairs cite NIST Technical Note 1297, which is free to read. Matching GUM clause numbers can be added once each has been checked against the document.
 
 ## Rules for fairness
