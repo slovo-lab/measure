@@ -40,7 +40,9 @@ Every reference answer must be derivable by a reader from the stated source. No 
 - [x] Add adapters for tools that run as servers for AI agents. First two done 24 November 2026: `ucon-mcp` (from ucon-tools 0.13.0) and `unit-converter-mcp` 0.1.2, both started as local servers and called through `bench/mcp_client.py`. Both passed all 18 conversion pairs they have a tool for.
 - [x] measurement-uncertainty-mcp added on 24 November 2026 (installed from its repository at commit fe254e0, with the owner's approval; it needs no account when run locally). It passed all 6 pairs it has a tool for.
 - [x] mcp-units (repository commit 913fee9, approved by the owner) and mcp-gnu-units 0.1.1 (package index, in an environment of its own) added on 24 November 2026. Each passed all 20 conversion pairs.
-- [ ] Open question: no server found so far takes a measurement model and returns the first-order combined uncertainty. Look for one; if none exists, say so plainly in the results, because that is where the one library failure was.
+- [x] Open question answered on 24 November 2026: three more searches found no server that propagates uncertainty through a model to first order. Instead of writing one, an addition to measurement-uncertainty-mcp was prepared: `contrib/measurement-uncertainty-mcp` (a patch with 15 tests; passes all eight propagation pairs).
+- [ ] Offer the addition to the author of measurement-uncertainty-mcp and report the fresh-install defect. Drafts: `reports/2026-11-24-measurement-uncertainty-mcp.md`. Needs the owner's confirmation. A pull request there also needs a fork, which the owner has to create or approve.
+- [ ] When a released server has first-order propagation, add the task to its adapter. The server has no units, so decide first how pairs that mix units are put to it.
 
 ## Open points
 

@@ -1,0 +1,479 @@
+From 2dc683f2559b4765d9037723487df15a35bbf1d6 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 24 Nov 2026 15:45:07 +0100
+Subject: [PATCH] Add propagate_uncertainty: first-order propagation through a
+ formula
+
+Co-Authored-By: Claude Fable 5.2 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Rbjnvk2ryiRJsvfCY9VmQs
+---
+ README.md                                     |   3 +-
+ .../math_kernel.py                            | 186 ++++++++++++++++++
+ src/measurement_uncertainty_mcp/server.py     |  66 +++++++
+ tests/test_propagate_formula.py               | 148 ++++++++++++++
+ 4 files changed, 402 insertions(+), 1 deletion(-)
+ create mode 100644 tests/test_propagate_formula.py
+
+diff --git a/README.md b/README.md
+index dc56f93..3e25149 100644
+--- a/README.md
++++ b/README.md
+@@ -20,7 +20,7 @@ Most calibration labs are currently updating their Excel templates and uncertain
+ 
+ ## What this server does
+ 
+-Exposes 10 MCP tools that implement the **Guide to the Expression of Uncertainty in Measurement (GUM, JCGM 100:2008)** and its **Monte Carlo supplement (JCGM 101:2008)**:
++Exposes 11 MCP tools that implement the **Guide to the Expression of Uncertainty in Measurement (GUM, JCGM 100:2008)** and its **Monte Carlo supplement (JCGM 101:2008)**:
+ 
+ | Tool | What it returns |
+ |---|---|
+@@ -31,6 +31,7 @@ Exposes 10 MCP tools that implement the **Guide to the Expression of Uncertainty
+ | `combine_uncertainty` | Combined standard uncertainty from a list of components and sensitivities |
+ | `welch_satterthwaite` | Effective degrees of freedom from components |
+ | `expanded_uncertainty` | Expanded uncertainty with coverage factor k for a target confidence level |
++| `propagate_uncertainty` | **First-order propagation through a formula** (GUM 5.1.2, 5.2.2) — y, u_c(y), symbolically derived sensitivity coefficients and per-input contributions; accepts covariances between inputs |
+ | `monte_carlo_propagate` | **JCGM 101 Monte Carlo propagation** — output mean, standard uncertainty, shortest coverage interval, skewness, excess kurtosis. Use when the model is non-linear, inputs are non-Gaussian, or ν_eff is too small for k=2 to be valid |
+ | `list_uncertainty_templates` | Catalog of pre-built uncertainty budgets (CMM length, CD-SEM CD, DMM voltage, thermocouple, balance, OCD film thickness). Filters by industry / measurand |
+ | `apply_uncertainty_template` | Run a named template end-to-end — combine components, compute ν_eff, report U at target confidence. Accepts an `overrides` map so a template adapts to your setup without copy-paste |
+diff --git a/src/measurement_uncertainty_mcp/math_kernel.py b/src/measurement_uncertainty_mcp/math_kernel.py
+index 3bf37ca..c6e3c1f 100644
+--- a/src/measurement_uncertainty_mcp/math_kernel.py
++++ b/src/measurement_uncertainty_mcp/math_kernel.py
+@@ -515,3 +515,189 @@ def monte_carlo_propagate(
+         "skewness": y_skew,
+         "excess_kurtosis": y_kurt,
+     }
++
++
++# --- First-order propagation through a formula (GUM 5.1.2, 5.2.2) -----------
++
++
++def _parse_formula(formula: str, input_names: Sequence[str]):
++    """Parse a formula string into a sympy expression over the named inputs.
++
++    Applies the same AST safety gate as `monte_carlo_propagate` before sympy
++    sees the string. Returns (expr, symbols) with symbols in input order.
++    """
++    _validate_formula_ast(formula)
++    sympy = _get_sympy()
++
++    if len(set(input_names)) != len(input_names):
++        raise ValueError("Input names must be unique")
++
++    symbols = sympy.symbols(list(input_names))
++    if not isinstance(symbols, (list, tuple)):
++        symbols = (symbols,)
++    local_dict = dict(zip(input_names, symbols))
++
++    try:
++        expr = sympy.sympify(sympy.parse_expr(formula, local_dict=local_dict))
++    except Exception as e:
++        raise ValueError(f"Could not parse formula {formula!r}: {e}") from e
++
++    if not hasattr(expr, "free_symbols"):
++        raise ValueError(
++            f"Formula {formula!r} did not parse as a valid sympy expression"
++        )
++
++    undefined = {str(sym) for sym in expr.free_symbols} - set(input_names)
++    if undefined:
++        raise ValueError(
++            f"Formula references undefined inputs: {sorted(undefined)}. "
++            f"Known inputs: {list(input_names)}"
++        )
++    return expr, tuple(symbols)
++
++
++def propagate_formula(
++    formula: str,
++    inputs: Sequence[dict],
++    covariances: Sequence[dict] | None = None,
++) -> dict:
++    """Combined standard uncertainty of y = f(x_1..x_n) by the law of
++    propagation of uncertainty, with f given as a formula string.
++
++    Sensitivity coefficients c_i = df/dx_i are derived symbolically and
++    evaluated at the input estimates, so a quantity that appears more than
++    once in the formula (e.g. "s * s") is treated as ONE input, as the GUM
++    requires.
++
++        u_c(y)^2 = sum_i c_i^2 u(x_i)^2                      (GUM 5.1.2, eq. 10)
++                   + 2 sum_{i<j} c_i c_j u(x_i, x_j)         (GUM 5.2.2, eq. 13)
++
++    Parameters
++    ----------
++    formula : str
++        Expression in sympy syntax, e.g. "V / I", "x1 - x2", "s**2".
++    inputs : list of dict
++        Each: {"name": str, "value": float, "u": float, "dof": float (optional)}.
++        `value` is the estimate x_i, `u` its standard uncertainty.
++    covariances : list of dict, optional
++        Each: {"between": [name_a, name_b], "value": float}, the covariance
++        u(x_a, x_b) in the product of the two inputs' units. Pairs not
++        listed are taken as uncorrelated.
++
++    Returns
++    -------
++    dict
++        y_estimate, combined_standard_uncertainty, variance, sensitivities,
++        components (per-input contribution c_i * u_i), covariance_term,
++        effective_dof (Welch-Satterthwaite; None when covariances are given,
++        because that formula assumes uncorrelated inputs), formula, method.
++
++    Notes
++    -----
++    This is the first-order (linear) approximation. For strongly non-linear
++    models or non-Gaussian inputs use `monte_carlo_propagate` instead.
++    """
++    if not inputs:
++        raise ValueError("Need at least one input")
++    names = [str(i["name"]) for i in inputs]
++    expr, symbols = _parse_formula(formula, names)
++    sympy = _get_sympy()
++
++    estimates = {}
++    stds = {}
++    dofs = {}
++    for raw, name in zip(inputs, names):
++        u = float(raw["u"])
++        if u < 0:
++            raise ValueError(f"Standard uncertainty of '{name}' must be >= 0")
++        estimates[name] = float(raw["value"])
++        stds[name] = u
++        dof = raw.get("dof")
++        dofs[name] = float(dof) if dof is not None else math.inf
++
++    subs = {sym: estimates[str(sym)] for sym in symbols}
++
++    def _evaluate(expression, what: str) -> float:
++        problem = ValueError(
++            f"{what} is not a finite real number at the given estimates — "
++            f"check for division by zero, log of non-positive, etc."
++        )
++        try:
++            number = complex(expression.evalf(subs=subs))
++        except Exception as e:
++            # sympy returns zoo/nan for 1/0 and the like; these do not convert.
++            raise problem from e
++        if not (math.isfinite(number.real) and math.isfinite(number.imag)):
++            raise problem
++        if abs(number.imag) > 1e-12 * max(1.0, abs(number.real)):
++            raise problem
++        return number.real
++
++    y0 = _evaluate(expr, "the formula")
++    sens = {
++        str(sym): _evaluate(sympy.diff(expr, sym), f"the derivative with respect to {sym}")
++        for sym in symbols
++    }
++
++    variance = sum((sens[n] * stds[n]) ** 2 for n in names)
++
++    covariance_term = 0.0
++    seen = set()
++    for cov in covariances or ():
++        between = cov.get("between")
++        if not isinstance(between, (list, tuple)) or len(between) != 2:
++            raise ValueError("Each covariance needs 'between': [name_a, name_b]")
++        a, b = str(between[0]), str(between[1])
++        if a == b:
++            raise ValueError(f"Covariance of '{a}' with itself is its variance; pass it as u")
++        if a not in stds or b not in stds:
++            raise ValueError(f"Covariance refers to unknown input(s): {[a, b]}")
++        key = frozenset((a, b))
++        if key in seen:
++            raise ValueError(f"Covariance between '{a}' and '{b}' given more than once")
++        seen.add(key)
++        value = float(cov["value"])
++        if abs(value) > stds[a] * stds[b] * (1 + 1e-12):
++            raise ValueError(
++                f"|u({a},{b})| = {abs(value)} exceeds u({a})*u({b}) = "
++                f"{stds[a] * stds[b]}, which is not possible"
++            )
++        covariance_term += 2.0 * sens[a] * sens[b] * value
++
++    variance_total = variance + covariance_term
++    if variance_total < 0:
++        if variance_total > -1e-12 * max(variance, 1e-300):
++            variance_total = 0.0
++        else:
++            raise ValueError(
++                "The covariances given make the combined variance negative; "
++                "the covariance matrix is not positive semi-definite"
++            )
++    uc = math.sqrt(variance_total)
++
++    applied = [
++        UncertaintyComponent(name=n, value=stds[n], sensitivity=sens[n],
++                             degrees_of_freedom=dofs[n])
++        for n in names
++    ]
++    components = [
++        {"name": c.name, "u": c.value, "sensitivity": c.sensitivity,
++         "contribution": c.contribution}
++        for c in applied
++    ]
++    if covariances:
++        effective_dof = None
++    else:
++        effective_dof = welch_satterthwaite(applied).get("effective_dof")
++
++    return {
++        "y_estimate": y0,
++        "combined_standard_uncertainty": uc,
++        "variance": variance_total,
++        "sensitivities": sens,
++        "components": components,
++        "covariance_term": covariance_term,
++        "effective_dof": effective_dof,
++        "formula": formula,
++        "method": "first-order law of propagation of uncertainty (GUM 5.1.2, 5.2.2)",
++    }
+diff --git a/src/measurement_uncertainty_mcp/server.py b/src/measurement_uncertainty_mcp/server.py
+index e99cf59..b93e2de 100644
+--- a/src/measurement_uncertainty_mcp/server.py
++++ b/src/measurement_uncertainty_mcp/server.py
+@@ -21,6 +21,7 @@ from .math_kernel import (
+     welch_satterthwaite,
+     expanded_uncertainty,
+     monte_carlo_propagate,
++    propagate_formula,
+ )
+ from .templates import (
+     apply_uncertainty_template,
+@@ -174,6 +175,65 @@ _TOOLS: list[Tool] = [
+             "required": ["u_combined"],
+         },
+     ),
++    Tool(
++        name="propagate_uncertainty",
++        description=(
++            "Combined standard uncertainty of y = f(x1..xn) by the GUM law of "
++            "propagation of uncertainty (first order; GUM 5.1.2 and 5.2.2), with the "
++            "measurement model given as a formula. Sensitivity coefficients are derived "
++            "symbolically from the formula, so the caller does not supply them, and an "
++            "input that appears twice (e.g. 's * s') is treated as one quantity. "
++            "Accepts covariances between inputs. Returns y, u_c(y), the sensitivity "
++            "coefficients, per-input contributions and, for uncorrelated inputs, the "
++            "Welch-Satterthwaite effective dof. For strongly non-linear models or "
++            "non-Gaussian inputs use monte_carlo_propagate instead."
++        ),
++        inputSchema={
++            "type": "object",
++            "properties": {
++                "formula": {
++                    "type": "string",
++                    "description": (
++                        "Sympy-parseable expression of the measurement model. "
++                        "Variable names must match inputs[*].name. "
++                        "Examples: 'V / I', 'x1 - x2', 's**2', '2*a + 3*b'."
++                    ),
++                },
++                "inputs": {
++                    "type": "array",
++                    "minItems": 1,
++                    "items": {
++                        "type": "object",
++                        "properties": {
++                            "name": {"type": "string"},
++                            "value": {"type": "number", "description": "Estimate x_i"},
++                            "u": {"type": "number", "minimum": 0,
++                                  "description": "Standard uncertainty u(x_i)"},
++                            "dof": {"type": "number", "exclusiveMinimum": 0},
++                        },
++                        "required": ["name", "value", "u"],
++                    },
++                },
++                "covariances": {
++                    "type": "array",
++                    "description": (
++                        "Optional covariances u(x_a, x_b) between inputs, in the product "
++                        "of the two inputs' units. Pairs not listed are uncorrelated."
++                    ),
++                    "items": {
++                        "type": "object",
++                        "properties": {
++                            "between": {"type": "array", "items": {"type": "string"},
++                                        "minItems": 2, "maxItems": 2},
++                            "value": {"type": "number"},
++                        },
++                        "required": ["between", "value"],
++                    },
++                },
++            },
++            "required": ["formula", "inputs"],
++        },
++    ),
+     Tool(
+         name="monte_carlo_propagate",
+         description=(
+@@ -360,6 +420,12 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
+                 effective_dof=float(dof) if dof != float("inf") else float("inf"),
+                 confidence=float(arguments.get("confidence", 0.95)),
+             ))
++        if name == "propagate_uncertainty":
++            return _as_text(propagate_formula(
++                formula=str(arguments["formula"]),
++                inputs=list(arguments["inputs"]),
++                covariances=arguments.get("covariances"),
++            ))
+         if name == "monte_carlo_propagate":
+             return _as_text(monte_carlo_propagate(
+                 formula=str(arguments["formula"]),
+diff --git a/tests/test_propagate_formula.py b/tests/test_propagate_formula.py
+new file mode 100644
+index 0000000..6c82973
+--- /dev/null
++++ b/tests/test_propagate_formula.py
+@@ -0,0 +1,148 @@
++"""First-order propagation through a formula string (GUM 5.1.2, 5.2.2).
++
++Each expected value is worked out by hand in the docstring of its test from
++the law of propagation of uncertainty, not taken from the code under test.
++"""
++import math
++import sys
++from pathlib import Path
++
++import pytest
++
++ROOT = Path(__file__).resolve().parents[1] / "src"
++sys.path.insert(0, str(ROOT))
++
++from measurement_uncertainty_mcp.math_kernel import (  # noqa: E402
++    monte_carlo_propagate,
++    InputQuantity,
++    propagate_formula,
++)
++
++
++def _in(name, value, u, dof=None):
++    out = {"name": name, "value": value, "u": u}
++    if dof is not None:
++        out["dof"] = dof
++    return out
++
++
++def test_product_uncorrelated():
++    """P = V*I, V = 10 +/- 0.1, I = 2 +/- 0.04.
++    u_c^2 = (2*0.1)^2 + (10*0.04)^2 = 0.04 + 0.16 = 0.20."""
++    out = propagate_formula("V * I", [_in("V", 10.0, 0.1), _in("I", 2.0, 0.04)])
++    assert out["y_estimate"] == pytest.approx(20.0, rel=1e-12)
++    assert out["combined_standard_uncertainty"] == pytest.approx(math.sqrt(0.20), rel=1e-12)
++    assert out["sensitivities"] == pytest.approx({"V": 2.0, "I": 10.0})
++
++
++def test_quotient_uncorrelated():
++    """R = V/I, V = 12 +/- 0.06, I = 3 +/- 0.03.
++    c_V = 1/3, c_I = -12/9. u_c^2 = 0.02^2 + 0.04^2 = 0.002."""
++    out = propagate_formula("V / I", [_in("V", 12.0, 0.06), _in("I", 3.0, 0.03)])
++    assert out["y_estimate"] == pytest.approx(4.0, rel=1e-12)
++    assert out["combined_standard_uncertainty"] == pytest.approx(math.sqrt(0.002), rel=1e-12)
++
++
++def test_linear_combination():
++    """y = 2a + 3b, u(a) = 0.1, u(b) = 0.2. u_c^2 = 0.04 + 0.36 = 0.4."""
++    out = propagate_formula("2*a + 3*b", [_in("a", 1.0, 0.1), _in("b", 2.0, 0.2)])
++    assert out["y_estimate"] == pytest.approx(8.0, rel=1e-12)
++    assert out["combined_standard_uncertainty"] == pytest.approx(math.sqrt(0.4), rel=1e-12)
++
++
++def test_sum_with_positive_covariance():
++    """L = x1 + x2, u = 0.003 and 0.004, u(x1,x2) = 0.000012.
++    u_c^2 = 9e-6 + 16e-6 + 2*12e-6 = 49e-6, so u_c = 0.007.
++    Ignoring the covariance would give 0.005."""
++    out = propagate_formula(
++        "x1 + x2",
++        [_in("x1", 50.0, 0.003), _in("x2", 30.0, 0.004)],
++        covariances=[{"between": ["x1", "x2"], "value": 0.000012}],
++    )
++    assert out["combined_standard_uncertainty"] == pytest.approx(0.007, rel=1e-9)
++    assert out["effective_dof"] is None
++
++
++def test_difference_with_positive_covariance_reduces_uncertainty():
++    """d = x1 - x2, both u = 0.005, u(x1,x2) = 0.000016.
++    u_c^2 = 25e-6 + 25e-6 - 2*16e-6 = 18e-6."""
++    out = propagate_formula(
++        "x1 - x2",
++        [_in("x1", 100.0, 0.005), _in("x2", 40.0, 0.005)],
++        covariances=[{"between": ["x1", "x2"], "value": 0.000016}],
++    )
++    assert out["combined_standard_uncertainty"] == pytest.approx(math.sqrt(18e-6), rel=1e-9)
++
++
++def test_same_input_twice_is_one_quantity():
++    """A = s*s with ONE measured s = 2 +/- 0.01: dA/ds = 2s = 4, u_c = 0.04.
++    Treating the two factors as independent would give 0.0283, which is wrong."""
++    as_product = propagate_formula("s * s", [_in("s", 2.0, 0.01)])
++    as_power = propagate_formula("s**2", [_in("s", 2.0, 0.01)])
++    assert as_product["combined_standard_uncertainty"] == pytest.approx(0.04, rel=1e-12)
++    assert as_power["combined_standard_uncertainty"] == pytest.approx(0.04, rel=1e-12)
++
++
++def test_quantity_minus_itself_has_zero_uncertainty():
++    out = propagate_formula("x - x", [_in("x", 5.0, 0.3)])
++    assert out["y_estimate"] == 0.0
++    assert out["combined_standard_uncertainty"] == 0.0
++
++
++def test_effective_dof_for_uncorrelated_inputs():
++    """Contributions 0.3 (dof 4) and 0.4 (dof 9):
++    nu_eff = 0.5^4 / (0.3^4/4 + 0.4^4/9) = 0.0625 / 0.00486944... = 12.835..."""
++    out = propagate_formula("a + b", [_in("a", 1.0, 0.3, dof=4), _in("b", 1.0, 0.4, dof=9)])
++    expected = 0.5 ** 4 / (0.3 ** 4 / 4 + 0.4 ** 4 / 9)
++    assert out["effective_dof"] == pytest.approx(expected, rel=1e-9)
++
++
++def test_agrees_with_monte_carlo_on_a_linear_gaussian_model():
++    first_order = propagate_formula("a + b", [_in("a", 10.0, 0.3), _in("b", 5.0, 0.4)])
++    mc = monte_carlo_propagate(
++        "a + b",
++        [InputQuantity("a", "normal", {"mean": 10.0, "std": 0.3}),
++         InputQuantity("b", "normal", {"mean": 5.0, "std": 0.4})],
++        n_trials=200_000, seed=1,
++    )
++    assert first_order["combined_standard_uncertainty"] == pytest.approx(0.5, rel=1e-12)
++    assert mc["standard_uncertainty"] == pytest.approx(0.5, rel=0.01)
++
++
++def test_functions_are_differentiated():
++    """y = exp(x) at x = 0: dy/dx = 1, so u_c = u(x)."""
++    out = propagate_formula("exp(x)", [_in("x", 0.0, 0.05)])
++    assert out["combined_standard_uncertainty"] == pytest.approx(0.05, rel=1e-12)
++
++
++def test_undefined_input_is_rejected():
++    with pytest.raises(ValueError, match="undefined inputs"):
++        propagate_formula("a + z", [_in("a", 1.0, 0.1)])
++
++
++def test_impossible_covariance_is_rejected():
++    with pytest.raises(ValueError, match="not possible"):
++        propagate_formula(
++            "a + b", [_in("a", 1.0, 0.1), _in("b", 1.0, 0.1)],
++            covariances=[{"between": ["a", "b"], "value": 0.5}],
++        )
++
++
++def test_covariance_with_unknown_input_is_rejected():
++    with pytest.raises(ValueError, match="unknown input"):
++        propagate_formula(
++            "a + b", [_in("a", 1.0, 0.1), _in("b", 1.0, 0.1)],
++            covariances=[{"between": ["a", "c"], "value": 0.001}],
++        )
++
++
++def test_division_by_zero_is_reported():
++    with pytest.raises(ValueError, match="finite real number"):
++        propagate_formula("a / b", [_in("a", 1.0, 0.1), _in("b", 0.0, 0.1)])
++
++
++def test_unsafe_formula_is_rejected_before_parsing():
++    with pytest.raises(ValueError):
++        propagate_formula("__import__('os').system('true')", [_in("a", 1.0, 0.1)])
++    with pytest.raises(ValueError):
++        propagate_formula("a.real", [_in("a", 1.0, 0.1)])
+-- 
+2.43.0
+
