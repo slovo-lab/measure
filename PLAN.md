@@ -33,8 +33,10 @@ Every reference answer must be derivable by a reader from the stated source. No 
 - [x] Define the data format for reference pairs and write the first 10 pairs with sources. Done 24 November 2026: `FORMAT.md`, `pairs/pairs.json`, `tools/check_pairs.py`, `tests/test_pairs.py`. An 11th pair, for dimensional safety, was added the same day. Not covered yet: degrees of freedom, reporting.
 - [x] Write the runner and the Pint + uncertainties adapter; add tests for the runner itself. Done 24 November 2026: `bench/` (runner, model evaluator, adapter, command line) and `tests/test_runner.py`. Pint and `uncertainties` have no function for Type A or Type B evaluations, so those pairs come back as `unsupported` for this tool.
 - [x] Add the ucon adapter. Done 24 November 2026: `bench/adapters/ucon_adapter.py`, for ucon 2.4.2 used as a Python library. Type A, Type B and inputs with a covariance come back as `unsupported`: we found no function for them in that version.
-- [ ] Reach 30 pairs; publish the first results table.
-- [ ] Tell the authors of the tested tools, by opening an issue in their repositories. This is posting on an outside platform, so it needs the curator's confirmation first.
+- [x] Reach 30 pairs; publish the first results table. Done 24 November 2026: 33 pairs, `tools/make_results.py`, `RESULTS.md`, version 0.1.0.
+- [ ] Tell the authors of the tested tools, by opening an issue in their repositories. This is posting on an outside platform, so it needs the curator's confirmation first. Draft for ucon: `reports/2026-11-24-ucon.md` (not sent).
+- [ ] Add pairs for the two empty categories: degrees of freedom and reporting. Each needs a source that has been read first.
+- [ ] Run the tests automatically on every change (a GitHub Actions workflow). Not set up yet; tests are run by hand.
 - [ ] Add adapters for tools that run as servers for AI agents (measurement-uncertainty-mcp, mcp-units, mcp-gnu-units).
 
 ## Open points

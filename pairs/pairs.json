@@ -246,6 +246,898 @@
          "checked": "2026-11-24"}
       ],
       "derivation": "Length and time are not quantities of the same kind and have different dimensions (L and T), so the sum is not defined. No number with any unit is a correct answer; the tool must report an error or decline."
+    },
+    {
+      "id": "conv-foot-m",
+      "category": "unit-conversion",
+      "question": "Convert 6 feet to metres.",
+      "task": "convert",
+      "inputs": {
+        "value": "6",
+        "unit": "ft",
+        "to_unit": "m"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "1.8288",
+            "unit": "m",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'foot (ft)' to metre: 3.048 E-01, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "6 x 0.3048 m = 1.8288 m."
+    },
+    {
+      "id": "conv-mile-km",
+      "category": "unit-conversion",
+      "question": "Convert 26.2 miles to kilometres.",
+      "task": "convert",
+      "inputs": {
+        "value": "26.2",
+        "unit": "mi",
+        "to_unit": "km"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "42.1648128",
+            "unit": "km",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'mile (mi)' to metre: 1.609 344 E+03, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "26.2 x 1609.344 m = 42164.8128 m = 42.1648128 km."
+    },
+    {
+      "id": "conv-mph-ms",
+      "category": "unit-conversion",
+      "question": "Convert 60 miles per hour to metres per second.",
+      "task": "convert",
+      "inputs": {
+        "value": "60",
+        "unit": "mi/h",
+        "to_unit": "m/s"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "26.8224",
+            "unit": "m/s",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'mile per hour (mi/h)' to metre per second: 4.4704 E-01, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "60 x 0.44704 m/s = 26.8224 m/s."
+    },
+    {
+      "id": "conv-nautical-mile-km",
+      "category": "unit-conversion",
+      "question": "Convert 10 nautical miles to kilometres.",
+      "task": "convert",
+      "inputs": {
+        "value": "10",
+        "unit": "nmi",
+        "to_unit": "km"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "18.52",
+            "unit": "km",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'mile, nautical' to metre: 1.852 E+03, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "10 x 1852 m = 18520 m = 18.52 km."
+    },
+    {
+      "id": "conv-litre-m3",
+      "category": "unit-conversion",
+      "question": "Convert 250 litres to cubic metres.",
+      "task": "convert",
+      "inputs": {
+        "value": "250",
+        "unit": "L",
+        "to_unit": "m^3"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "0.25",
+            "unit": "m^3",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'liter (L)' to cubic metre: 1.0 E-03, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "250 x 0.001 m^3 = 0.25 m^3."
+    },
+    {
+      "id": "conv-atm-kpa",
+      "category": "unit-conversion",
+      "question": "Convert 1 standard atmosphere to kilopascals.",
+      "task": "convert",
+      "inputs": {
+        "value": "1",
+        "unit": "atm",
+        "to_unit": "kPa"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "101.325",
+            "unit": "kPa",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'atmosphere, standard (atm)' to pascal: 1.013 25 E+05, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "1 x 101325 Pa = 101.325 kPa."
+    },
+    {
+      "id": "conv-bar-pa",
+      "category": "unit-conversion",
+      "question": "Convert 2.5 bar to pascals.",
+      "task": "convert",
+      "inputs": {
+        "value": "2.5",
+        "unit": "bar",
+        "to_unit": "Pa"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "250000",
+            "unit": "Pa",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'bar (bar)' to pascal: 1.0 E+05, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "2.5 x 100000 Pa = 250000 Pa."
+    },
+    {
+      "id": "conv-calth-j",
+      "category": "unit-conversion",
+      "question": "Convert 500 thermochemical calories to joules.",
+      "task": "convert",
+      "inputs": {
+        "value": "500",
+        "unit": "cal_th",
+        "to_unit": "J"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "2092",
+            "unit": "J",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'calorie_th (cal_th)', the thermochemical calorie, to joule: 4.184 E+00, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "500 x 4.184 J = 2092 J. Other calories (International Table, mean, 15 degC, 20 degC) have different factors."
+    },
+    {
+      "id": "conv-sqin-mm2",
+      "category": "unit-conversion",
+      "question": "Convert 2 square inches to square millimetres.",
+      "task": "convert",
+      "inputs": {
+        "value": "2",
+        "unit": "in^2",
+        "to_unit": "mm^2"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "1290.32",
+            "unit": "mm^2",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'square inch (in2)' to square metre: 6.4516 E-04, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "2 x 0.00064516 m^2 = 0.00129032 m^2 = 1290.32 mm^2."
+    },
+    {
+      "id": "conv-degf-k",
+      "category": "unit-conversion",
+      "question": "A temperature is minus 40 degrees Fahrenheit. Express it in kelvin.",
+      "task": "convert",
+      "inputs": {
+        "value": "-40",
+        "unit": "degF",
+        "to_unit": "K"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "233.15",
+            "unit": "K",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'degree Fahrenheit (temperature)' to kelvin: T/K = (t/degF + 459.67)/1.8",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "(-40 + 459.67)/1.8 = 419.67/1.8 = 233.15. This is a temperature, not a temperature interval."
+    },
+    {
+      "id": "conv-min-h",
+      "category": "unit-conversion",
+      "question": "Convert 90 minutes to hours.",
+      "task": "convert",
+      "inputs": {
+        "value": "90",
+        "unit": "min",
+        "to_unit": "h"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "1.5",
+            "unit": "h",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'minute (min)' to second: 6.0 E+01, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        },
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, row 'hour (h)' to second: 3.6 E+03, printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "90 x 60 s = 5400 s; 5400/3600 = 1.5 h."
+    },
+    {
+      "id": "dim-add-length-mass",
+      "category": "dimensional-safety",
+      "question": "Add 2 metres and 3 kilograms.",
+      "task": "add",
+      "inputs": {
+        "terms": [
+          {
+            "value": "2",
+            "unit": "m"
+          },
+          {
+            "value": "3",
+            "unit": "kg"
+          }
+        ]
+      },
+      "reference": {
+        "outcome": "refuse"
+      },
+      "sources": [
+        {
+          "document": "ISO 31-0:1992, Quantities and units - Part 0: General principles (withdrawn in 2009 and replaced by ISO 80000-1)",
+          "locator": "Clause 2.2.1, 'Mathematical operations with quantities', page 2: quantities can be added or subtracted only if they are of the same kind. Cited by clause number only; the clause is in the publisher's free sample",
+          "url": "https://cdn.standards.iteh.ai/samples/3621/ce9ec16579cc41768dc34cff01a890fe/ISO-31-0-1992.pdf",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "Length and mass are not quantities of the same kind (dimensions L and M), so the sum is not defined. The tool must report an error or decline."
+    },
+    {
+      "id": "dim-add-voltage-current",
+      "category": "dimensional-safety",
+      "question": "Add 12 volts and 2 amperes.",
+      "task": "add",
+      "inputs": {
+        "terms": [
+          {
+            "value": "12",
+            "unit": "V"
+          },
+          {
+            "value": "2",
+            "unit": "A"
+          }
+        ]
+      },
+      "reference": {
+        "outcome": "refuse"
+      },
+      "sources": [
+        {
+          "document": "ISO 31-0:1992, Quantities and units - Part 0: General principles (withdrawn in 2009 and replaced by ISO 80000-1)",
+          "locator": "Clause 2.2.1, 'Mathematical operations with quantities', page 2: quantities can be added or subtracted only if they are of the same kind. Cited by clause number only; the clause is in the publisher's free sample",
+          "url": "https://cdn.standards.iteh.ai/samples/3621/ce9ec16579cc41768dc34cff01a890fe/ISO-31-0-1992.pdf",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "Electric potential difference and electric current are not quantities of the same kind, so the sum is not defined. The tool must report an error or decline."
+    },
+    {
+      "id": "dim-add-foot-inch",
+      "category": "dimensional-safety",
+      "question": "Add 1 foot and 6 inches. Give the result in metres.",
+      "task": "add",
+      "inputs": {
+        "terms": [
+          {
+            "value": "1",
+            "unit": "ft"
+          },
+          {
+            "value": "6",
+            "unit": "in"
+          }
+        ]
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "0.4572",
+            "unit": "m",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "locator": "Appendix B.8, rows 'foot (ft)' to metre: 3.048 E-01 and 'inch (in)' to metre: 2.54 E-02, both printed in bold (exact)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "Both terms are lengths, so the sum is defined: 0.3048 m + 6 x 0.0254 m = 0.3048 m + 0.1524 m = 0.4572 m. This pair is a control: a tool that refuses every sum of different units would fail it."
+    },
+    {
+      "id": "comb-quotient-uncorrelated",
+      "category": "combined",
+      "question": "Resistance is R = V / I. V = 12.0 V with standard uncertainty 0.06 V; I = 3.00 A with standard uncertainty 0.03 A; the two are uncorrelated. Give R in ohms and its combined standard uncertainty.",
+      "task": "propagate",
+      "inputs": {
+        "model": "V / I",
+        "variables": {
+          "V": {
+            "value": "12.0",
+            "standard_uncertainty": "0.06",
+            "unit": "V"
+          },
+          "I": {
+            "value": "3.00",
+            "standard_uncertainty": "0.03",
+            "unit": "A"
+          }
+        },
+        "covariances": []
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "4",
+            "unit": "ohm",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          },
+          {
+            "name": "combined_standard_uncertainty",
+            "value": "0.0447213595500",
+            "unit": "ohm",
+            "exact": false,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty)",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "dR/dV = 1/I = 1/3, dR/dI = -V/I^2 = -12/9. u_c^2 = (0.06/3)^2 + (12 x 0.03/9)^2 = 0.0004 + 0.0016 = 0.002. u_c = sqrt(0.002) = 0.0447213595500 (rounded to 12 significant digits)."
+    },
+    {
+      "id": "comb-difference-with-covariance",
+      "category": "combined",
+      "question": "A length difference is d = x1 - x2. x1 = 100.000 mm and x2 = 40.000 mm, each with standard uncertainty 0.005 mm; their covariance is 0.000016 mm^2. Give d and its combined standard uncertainty.",
+      "task": "propagate",
+      "inputs": {
+        "model": "x1 - x2",
+        "variables": {
+          "x1": {
+            "value": "100.000",
+            "standard_uncertainty": "0.005",
+            "unit": "mm"
+          },
+          "x2": {
+            "value": "40.000",
+            "standard_uncertainty": "0.005",
+            "unit": "mm"
+          }
+        },
+        "covariances": [
+          {
+            "between": [
+              "x1",
+              "x2"
+            ],
+            "value": "0.000016",
+            "unit": "mm^2"
+          }
+        ]
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "60",
+            "unit": "mm",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          },
+          {
+            "name": "combined_standard_uncertainty",
+            "value": "0.00424264068712",
+            "unit": "mm",
+            "exact": false,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty)",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "Sensitivity coefficients are 1 and -1. u_c^2 = 0.005^2 + 0.005^2 - 2 x 0.000016 = 0.000025 + 0.000025 - 0.000032 = 0.000018 mm^2. u_c = sqrt(0.000018) = 0.00424264068712 mm (rounded to 12 significant digits). Ignoring the covariance would give 0.00707 mm."
+    },
+    {
+      "id": "comb-square-same-variable",
+      "category": "combined",
+      "question": "The area of a square is A = s * s, where s is the measured side. s = 2.000 m with standard uncertainty 0.010 m. Give A and its combined standard uncertainty.",
+      "task": "propagate",
+      "inputs": {
+        "model": "s * s",
+        "variables": {
+          "s": {
+            "value": "2.000",
+            "standard_uncertainty": "0.010",
+            "unit": "m"
+          }
+        },
+        "covariances": []
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "4",
+            "unit": "m^2",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          },
+          {
+            "name": "combined_standard_uncertainty",
+            "value": "0.04",
+            "unit": "m^2",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty)",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "There is one input quantity, s, so A = s^2 and dA/ds = 2s = 4 m. u_c = 4 x 0.010 = 0.04 m^2. Treating the two factors as two independent measurements would give sqrt(2) x 2 x 0.010 = 0.0283 m^2, which is wrong here because both factors are the same measurement."
+    },
+    {
+      "id": "comb-product-mixed-units",
+      "category": "combined",
+      "question": "Electrical power is P = V * I. V = 5000 mV with standard uncertainty 20 mV; I = 0.4 A with standard uncertainty 0.002 A; the two are uncorrelated. Give P in watts and its combined standard uncertainty.",
+      "task": "propagate",
+      "inputs": {
+        "model": "V * I",
+        "variables": {
+          "V": {
+            "value": "5000",
+            "standard_uncertainty": "20",
+            "unit": "mV"
+          },
+          "I": {
+            "value": "0.4",
+            "standard_uncertainty": "0.002",
+            "unit": "A"
+          }
+        },
+        "covariances": []
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "2",
+            "unit": "W",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          },
+          {
+            "name": "combined_standard_uncertainty",
+            "value": "0.0128062484749",
+            "unit": "W",
+            "exact": false,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty)",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "In volts, V = 5 V with u = 0.02 V. dP/dV = I = 0.4, dP/dI = V = 5. u_c^2 = (0.4 x 0.02)^2 + (5 x 0.002)^2 = 0.000064 + 0.0001 = 0.000164. u_c = sqrt(0.000164) = 0.0128062484749 W (rounded to 12 significant digits)."
+    },
+    {
+      "id": "comb-linear-combination",
+      "category": "combined",
+      "question": "A length is y = 2 * a + 3 * b. a = 1.0 m with standard uncertainty 0.1 m; b = 2.0 m with standard uncertainty 0.2 m; the two are uncorrelated. Give y and its combined standard uncertainty.",
+      "task": "propagate",
+      "inputs": {
+        "model": "2 * a + 3 * b",
+        "variables": {
+          "a": {
+            "value": "1.0",
+            "standard_uncertainty": "0.1",
+            "unit": "m"
+          },
+          "b": {
+            "value": "2.0",
+            "standard_uncertainty": "0.2",
+            "unit": "m"
+          }
+        },
+        "covariances": []
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "8",
+            "unit": "m",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          },
+          {
+            "name": "combined_standard_uncertainty",
+            "value": "0.632455532034",
+            "unit": "m",
+            "exact": false,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty)",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "Sensitivity coefficients are 2 and 3. u_c^2 = (2 x 0.1)^2 + (3 x 0.2)^2 = 0.04 + 0.36 = 0.4. u_c = sqrt(0.4) = 0.632455532034 m (rounded to 12 significant digits)."
+    },
+    {
+      "id": "typea-mean-four-readings",
+      "category": "type-a",
+      "question": "Four independent readings of a voltage are 5.01, 5.03, 4.98 and 5.02 V. Give the arithmetic mean and the standard uncertainty of the mean (Type A evaluation).",
+      "task": "type_a",
+      "inputs": {
+        "readings": [
+          "5.01",
+          "5.03",
+          "4.98",
+          "5.02"
+        ],
+        "unit": "V"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "mean",
+            "value": "5.01",
+            "unit": "V",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          },
+          {
+            "name": "standard_uncertainty",
+            "value": "0.0108012344973",
+            "unit": "V",
+            "exact": false,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix A, A.4 and A.5, equations (A-4) (mean) and (A-5) (standard deviation of the mean)",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "Mean = 20.04/4 = 5.01. Deviations: 0, 0.02, -0.03, 0.01; sum of squares = 0.0014. u = sqrt(0.0014/(4 x 3)) = 0.0108012344973 (rounded to 12 significant digits). The readings are made up for this pair."
+    },
+    {
+      "id": "typeb-triangular-half-width",
+      "category": "type-b",
+      "question": "A quantity is known to lie within plus or minus 0.06 mm of its estimate, and values near the estimate are more likely than values near the limits (triangular distribution). Give its standard uncertainty.",
+      "task": "type_b",
+      "inputs": {
+        "distribution": "triangular",
+        "half_width": "0.06",
+        "unit": "mm"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "standard_uncertainty",
+            "value": "0.0244948974278",
+            "unit": "mm",
+            "exact": false,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Section 4.6 (triangular distribution, u = a/sqrt(6))",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-4-type-b-evaluation-standard-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "u = 0.06/sqrt(6) = 0.0244948974278 (rounded to 12 significant digits)."
+    },
+    {
+      "id": "comb-square-as-power",
+      "category": "combined",
+      "question": "The area of a square is A = s ** 2 (s squared), where s is the measured side. s = 3.000 m with standard uncertainty 0.020 m. Give A and its combined standard uncertainty.",
+      "task": "propagate",
+      "inputs": {
+        "model": "s ** 2",
+        "variables": {
+          "s": {
+            "value": "3.000",
+            "standard_uncertainty": "0.020",
+            "unit": "m"
+          }
+        },
+        "covariances": []
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "9",
+            "unit": "m^2",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          },
+          {
+            "name": "combined_standard_uncertainty",
+            "value": "0.12",
+            "unit": "m^2",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-9"
+            }
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty)",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "dA/ds = 2s = 6 m. u_c = 6 x 0.020 = 0.12 m^2. This is the same calculation as in the pair comb-square-same-variable, with the model written as a power instead of a product."
     }
   ]
 }
