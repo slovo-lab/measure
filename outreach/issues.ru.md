@@ -9,19 +9,19 @@
 | Issue | О чём | Последнее чтение | Состояние |
 |---|---|---|---|
 | [ucon 395](https://github.com/withtwoemms/ucon/issues/395) | `nmi` читается двумя способами | не прочитано после открытия | — |
-| [ucon 396](https://github.com/withtwoemms/ucon/issues/396) | неопределённость `x * x` | 24.11.2026, около 19:15 | комментариев нет |
-| [measurement-uncertainty-mcp 8](https://github.com/kyb8801/measurement-uncertainty-mcp/issues/8) | не запускается после свежей установки | 24.11.2026, около 19:10 | комментариев нет |
-| [measurement-uncertainty-mcp 9](https://github.com/kyb8801/measurement-uncertainty-mcp/issues/9) | предложение инструмента для переноса неопределённости | 24.11.2026, около 19:15 | комментариев нет |
-| [unit-converter-mcp 4](https://github.com/zazencodes/unit-converter-mcp/issues/4) | прошёл; как мы его вызываем | 24.11.2026, около 19:10 | комментариев нет |
-| [mcp-units 1](https://github.com/quantumleeps/mcp-units/issues/1) | прошёл; как мы его вызываем | 24.11.2026, около 19:25 | открыто, комментариев нет |
-| [mcp-gnu-units 2](https://github.com/laszlopere/mcp-gnu-units/issues/2) | прошёл; как мы его вызываем | 24.11.2026, около 19:25 | **закрыто автором (laszlopere) как выполненное 24.11.2026, без комментария** |
-| [personal-finance-mcp 17](https://github.com/sarveshtalele/personal-finance-mcp/issues/17) | не запускается после свежей установки | 24.11.2026, около 19:10 | комментариев нет |
-| [vibe-math-mcp 4](https://github.com/apetta/vibe-math-mcp/issues/4) | норма доходности: NaN и одна из двух ставок | 24.11.2026, около 19:10 | комментариев нет |
+| [ucon 396](https://github.com/withtwoemms/ucon/issues/396) | неопределённость `x * x` | 24.11.2026, с 19:00 до 19:10 | комментариев нет |
+| [measurement-uncertainty-mcp 8](https://github.com/kyb8801/measurement-uncertainty-mcp/issues/8) | не запускается после свежей установки | 24.11.2026, с 19:00 до 19:10 | комментариев нет |
+| [measurement-uncertainty-mcp 9](https://github.com/kyb8801/measurement-uncertainty-mcp/issues/9) | предложение инструмента для переноса неопределённости | 24.11.2026, с 19:00 до 19:10 | комментариев нет |
+| [unit-converter-mcp 4](https://github.com/zazencodes/unit-converter-mcp/issues/4) | прошёл; как мы его вызываем | 24.11.2026, с 19:00 до 19:10 | комментариев нет |
+| [mcp-units 1](https://github.com/quantumleeps/mcp-units/issues/1) | прошёл; как мы его вызываем | 24.11.2026, с 19:00 до 19:10 | открыто, комментариев нет |
+| [mcp-gnu-units 2](https://github.com/laszlopere/mcp-gnu-units/issues/2) | прошёл; как мы его вызываем | 24.11.2026, с 19:00 до 19:10 | **закрыто автором (laszlopere) как выполненное 24.11.2026, без комментария** |
+| [personal-finance-mcp 17](https://github.com/sarveshtalele/personal-finance-mcp/issues/17) | не запускается после свежей установки | 24.11.2026, с 19:00 до 19:10 | комментариев нет |
+| [vibe-math-mcp 4](https://github.com/apetta/vibe-math-mcp/issues/4) | норма доходности: NaN и одна из двух ставок | 24.11.2026, с 19:00 до 19:10 | комментариев нет |
 | [mcp-simple-timeserver 12](https://github.com/andybrandt/mcp-simple-timeserver/issues/12) | находка из пробы по времени | не прочитано после открытия | — |
 | [mcp-time 17](https://github.com/TheoBrigitte/mcp-time/issues/17) | находка из пробы по времени | не прочитано после открытия | — |
 | [geo-mcp 13](https://github.com/tabibhasann/geo-mcp/issues/13) | находка из пробы по координатам | не прочитано после открытия | — |
 | [GIS-MCP-Server 4](https://github.com/matbel91765/GIS-MCP-Server/issues/4) | находка из пробы по координатам | не прочитано после открытия | — |
-| [mcp-server-proj 1](https://github.com/radial-hks/mcp-server-proj/issues/1) | не запускается после свежей установки | 24.11.2026, около 19:15 | комментариев нет |
+| [mcp-server-proj 1](https://github.com/radial-hks/mcp-server-proj/issues/1) | не запускается после свежей установки | 24.11.2026, с 19:00 до 19:10 | комментариев нет |
 
 ## Журнал
 

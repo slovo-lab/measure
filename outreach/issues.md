@@ -9,19 +9,19 @@ How to check: the session cannot read other people's issues through the API. Pag
 | Issue | About | Last read | State then |
 |---|---|---|---|
 | [ucon 395](https://github.com/withtwoemms/ucon/issues/395) | `nmi` read in two ways | not read since opening | — |
-| [ucon 396](https://github.com/withtwoemms/ucon/issues/396) | uncertainty of `x * x` | 24 Nov 2026, about 19:15 | no comments |
-| [measurement-uncertainty-mcp 8](https://github.com/kyb8801/measurement-uncertainty-mcp/issues/8) | fresh install does not start | 24 Nov 2026, about 19:10 | no comments |
-| [measurement-uncertainty-mcp 9](https://github.com/kyb8801/measurement-uncertainty-mcp/issues/9) | offer of a propagation tool | 24 Nov 2026, about 19:15 | no comments |
-| [unit-converter-mcp 4](https://github.com/zazencodes/unit-converter-mcp/issues/4) | passed; how we call it | 24 Nov 2026, about 19:10 | no comments |
-| [mcp-units 1](https://github.com/quantumleeps/mcp-units/issues/1) | passed; how we call it | 24 Nov 2026, about 19:25 | open, no comments |
-| [mcp-gnu-units 2](https://github.com/laszlopere/mcp-gnu-units/issues/2) | passed; how we call it | 24 Nov 2026, about 19:25 | **closed as completed by the author (laszlopere) on 24 Nov 2026, without a comment** |
-| [personal-finance-mcp 17](https://github.com/sarveshtalele/personal-finance-mcp/issues/17) | fresh install does not start | 24 Nov 2026, about 19:10 | no comments |
-| [vibe-math-mcp 4](https://github.com/apetta/vibe-math-mcp/issues/4) | rate of return: NaN, and one of two rates | 24 Nov 2026, about 19:10 | no comments |
+| [ucon 396](https://github.com/withtwoemms/ucon/issues/396) | uncertainty of `x * x` | 24 Nov 2026, 19:00 to 19:10 | no comments |
+| [measurement-uncertainty-mcp 8](https://github.com/kyb8801/measurement-uncertainty-mcp/issues/8) | fresh install does not start | 24 Nov 2026, 19:00 to 19:10 | no comments |
+| [measurement-uncertainty-mcp 9](https://github.com/kyb8801/measurement-uncertainty-mcp/issues/9) | offer of a propagation tool | 24 Nov 2026, 19:00 to 19:10 | no comments |
+| [unit-converter-mcp 4](https://github.com/zazencodes/unit-converter-mcp/issues/4) | passed; how we call it | 24 Nov 2026, 19:00 to 19:10 | no comments |
+| [mcp-units 1](https://github.com/quantumleeps/mcp-units/issues/1) | passed; how we call it | 24 Nov 2026, 19:00 to 19:10 | open, no comments |
+| [mcp-gnu-units 2](https://github.com/laszlopere/mcp-gnu-units/issues/2) | passed; how we call it | 24 Nov 2026, 19:00 to 19:10 | **closed as completed by the author (laszlopere) on 24 Nov 2026, without a comment** |
+| [personal-finance-mcp 17](https://github.com/sarveshtalele/personal-finance-mcp/issues/17) | fresh install does not start | 24 Nov 2026, 19:00 to 19:10 | no comments |
+| [vibe-math-mcp 4](https://github.com/apetta/vibe-math-mcp/issues/4) | rate of return: NaN, and one of two rates | 24 Nov 2026, 19:00 to 19:10 | no comments |
 | [mcp-simple-timeserver 12](https://github.com/andybrandt/mcp-simple-timeserver/issues/12) | time trial finding | not read since opening | — |
 | [mcp-time 17](https://github.com/TheoBrigitte/mcp-time/issues/17) | time trial finding | not read since opening | — |
 | [geo-mcp 13](https://github.com/tabibhasann/geo-mcp/issues/13) | coordinates trial finding | not read since opening | — |
 | [GIS-MCP-Server 4](https://github.com/matbel91765/GIS-MCP-Server/issues/4) | coordinates trial finding | not read since opening | — |
-| [mcp-server-proj 1](https://github.com/radial-hks/mcp-server-proj/issues/1) | fresh install does not start | 24 Nov 2026, about 19:15 | no comments |
+| [mcp-server-proj 1](https://github.com/radial-hks/mcp-server-proj/issues/1) | fresh install does not start | 24 Nov 2026, 19:00 to 19:10 | no comments |
 
 ## Log
 
