@@ -38,4 +38,4 @@ This is the first of the three trials where ordinary questions fail: a line's le
 
 The cause is not the libraries, which are sound, but what the servers do around them: which routine they call and on which surface they measure.
 
-Draft reports for the authors are in `reports/`; none is sent until the lab owner has read it.
+Reports were sent to the authors on 24 November 2026, after the lab owner read them; texts and links are in `reports/`.

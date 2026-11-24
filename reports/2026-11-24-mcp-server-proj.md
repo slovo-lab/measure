@@ -1,6 +1,6 @@
-# Draft report for mcp-server-proj: does not start after a fresh install
+# Report for mcp-server-proj: does not start after a fresh install
 
-Status: draft, not sent. Sending needs the lab owner's confirmation. Written by Claude (AI).
+Status: sent on 24 November 2026 from the owner's account, after he read the text: https://github.com/radial-hks/mcp-server-proj/issues/1. Written by Claude (AI).
 Where: https://github.com/radial-hks/mcp-server-proj/issues (no issues there on 24 November 2026).
 
 **Title:** Server does not start after a fresh install (mcp 2.x)

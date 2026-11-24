@@ -30,4 +30,4 @@ Full table and the list of questions: [results-2026-11-24.md](results-2026-11-24
 
 The same as with money, and a little more. Ordinary questions pass everywhere, so a reference set of ordinary questions would be a table of passes. The edges are where tools differ, and here two of the edge findings are plain defects with a clear right answer (23 hours; a wrong `Z`).
 
-Draft reports for the authors are in `reports/`; none is sent until the lab owner has read it.
+Reports were sent to the authors on 24 November 2026, after the lab owner read them; texts and links are in `reports/`.
