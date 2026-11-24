@@ -294,5 +294,97 @@ class UconAdapterTests(unittest.TestCase):
         self.assertIn("ucon", report["versions"])
 
 
+def _have(module, command):
+    try:
+        __import__(module)
+        __import__("mcp")
+        from bench.mcp_client import find_command
+        find_command(command)
+        return True
+    except Exception:
+        return False
+
+
+HAVE_UCON_MCP = _have("ucon", "ucon-mcp")
+HAVE_UNIT_CONVERTER_MCP = _have("unit_converter_mcp", "unit-converter-mcp")
+
+
+class ServerAdapterBase:
+    """Shared checks for adapters that talk to a server for AI agents."""
+    adapter_class = None
+
+    @classmethod
+    def setUpClass(cls):
+        cls.adapter = cls.adapter_class()
+        cls.report = runner.run(PAIRS, cls.adapter)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.adapter.close()
+
+    def result(self, pair_id):
+        return next(r for r in self.report["results"] if r["id"] == pair_id)
+
+    def test_run_has_no_errors(self):
+        errors = [(r["id"], r["note"]) for r in self.report["results"] if r["verdict"] == "error"]
+        self.assertEqual(errors, [])
+
+    def test_only_conversions_are_attempted(self):
+        task = {p["id"]: p["task"] for p in PAIRS}
+        for r in self.report["results"]:
+            if task[r["id"]] != "convert":
+                with self.subTest(pair=r["id"]):
+                    self.assertEqual(r["verdict"], "unsupported")
+
+    def test_the_answer_comes_from_the_server(self):
+        self.assertTrue(self.adapter._server.server_name)
+        self.assertEqual(self.result("conv-inch-mm")["outputs"][0]["got"], 25.4)
+
+    def test_mass_to_length_is_a_refusal(self):
+        r = self.result("dim-convert-mass-length")
+        self.assertEqual(r["verdict"], "pass")
+        self.assertTrue(r["note"].startswith("refused"))
+
+    def test_temperature_difference_is_not_sent_as_a_temperature(self):
+        self.assertEqual(self.result("conv-degc-interval-k")["verdict"], "unsupported")
+
+    def test_notes_fit_on_one_line(self):
+        for r in self.report["results"]:
+            self.assertNotIn("\n", r["note"])
+
+
+@unittest.skipUnless(HAVE_UCON_MCP, "ucon-tools[mcp] is not installed")
+class UconMcpAdapterTests(ServerAdapterBase, unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.ucon_mcp import UconMcpAdapter
+        cls.adapter_class = UconMcpAdapter
+        super().setUpClass()
+
+
+@unittest.skipUnless(HAVE_UNIT_CONVERTER_MCP, "unit-converter-mcp is not installed")
+class UnitConverterMcpAdapterTests(ServerAdapterBase, unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.unit_converter_mcp import UnitConverterMcpAdapter
+        cls.adapter_class = UnitConverterMcpAdapter
+        super().setUpClass()
+
+    def test_knows_every_unit_used_in_conversions(self):
+        from bench.adapters.unit_converter_mcp import NO_UNIT, UNITS
+        for p in PAIRS:
+            if p["task"] == "convert":
+                for unit in (p["inputs"]["unit"], p["inputs"]["to_unit"]):
+                    with self.subTest(pair=p["id"], unit=unit):
+                        self.assertTrue(unit in UNITS or unit in NO_UNIT)
+
+
+class McpClient(unittest.TestCase):
+    def test_missing_command_is_reported(self):
+        from bench.mcp_client import ServerError, find_command
+        with self.assertRaises(ServerError):
+            find_command("no-such-server-command-for-measure")
+
+
 if __name__ == "__main__":
     unittest.main()
