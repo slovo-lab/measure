@@ -135,7 +135,53 @@ def recompute():
         "typeb-triangular-half-width": {
             "standard_uncertainty": sqrt(F("0.06") ** 2 / 6),
         },
+        # NIST SP 811 B.8: an interval in degF is divided by 1.8, with no offset.
+        "conv-degf-interval-k": {"value": 9 / F("1.8")},
+        # NIST SP 811 8.5: an interval has the same numerical value in degC and in K.
+        "conv-degc-interval-k": {"value": F(15)},
+        # NIST TN 1297 4.6: normal, limits containing about 99.73 percent: u = a/3.
+        "typeb-normal-9973-limits": {"standard_uncertainty": F("0.6") / 3},
+        # NIST TN 1297 4.3: a 95 percent confidence interval is divided by 1.960.
+        "typeb-normal-95-interval": {"standard_uncertainty": F("0.0392") / F("1.960")},
+        # NIST TN 1297 (B-1), Welch-Satterthwaite.
+        "dof-welch-satterthwaite-two": {
+            "effective_degrees_of_freedom": _welch_satterthwaite([("0.3", 4), ("0.4", 9)]),
+        },
+        "dof-welch-satterthwaite-three": {
+            "effective_degrees_of_freedom": _welch_satterthwaite(
+                [("1.0", 5), ("2.0", 10), ("2.0", 20)]),
+        },
+        # NIST SP 811 B.7.1, the three rounding rules.
+        "round-half-odd-goes-up": {"value": _round_sp811("2.675", 3)},
+        "round-half-even-stays": {"value": _round_sp811("2.665", 3)},
+        "round-above-half-goes-up": {"value": _round_sp811("1.2501", 2)},
     }
+
+
+def _welch_satterthwaite(components):
+    """nu_eff = (sum u_i^2)^2 / sum(u_i^4 / nu_i), exactly."""
+    numerator = sum(F(u) ** 2 for u, nu in components) ** 2
+    return numerator / sum(F(u) ** 4 / nu for u, nu in components)
+
+
+def _round_sp811(text, digits):
+    """Round a positive decimal string to `digits` significant digits by the
+    three rules of NIST SP 811 B.7.1, working on the digits themselves."""
+    whole, _, fraction = text.partition(".")
+    all_digits = (whole + fraction).lstrip("0")
+    leading_zeros = len(whole + fraction) - len(all_digits)
+    kept, dropped = all_digits[:digits], all_digits[digits:]
+    number = int(kept)
+    if dropped and dropped[0] > "5":
+        number += 1                                   # more than half: up
+    elif dropped and dropped[0] == "5":
+        if dropped[1:].strip("0"):
+            number += 1                               # rule 2: 5 followed by non-zero
+        elif number % 2 == 1:
+            number += 1                               # rule 3: exactly 5, make even
+    # rule 1 (first dropped digit below 5): unchanged
+    exponent = len(whole) - leading_zeros - digits    # power of ten of the last kept digit
+    return F(number) * F(10) ** exponent
 
 
 def _type_a(readings):
@@ -170,8 +216,12 @@ class PublishedFile(unittest.TestCase):
         self.assertTrue(refuse)
         for pair in refuse:
             with self.subTest(pair=pair["id"]):
-                self.assertEqual(pair["task"], "add")
-                dims = {dimension[t["unit"]] for t in pair["inputs"]["terms"]}
+                self.assertIn(pair["task"], ("add", "convert"))
+                if pair["task"] == "add":
+                    units = [t["unit"] for t in pair["inputs"]["terms"]]
+                else:
+                    units = [pair["inputs"]["unit"], pair["inputs"]["to_unit"]]
+                dims = {dimension[unit] for unit in units}
                 self.assertGreater(len(dims), 1)
 
     def test_reference_answers_match_recomputation(self):
@@ -258,6 +308,52 @@ class CheckerRejectsBrokenFiles(unittest.TestCase):
     def test_refuse_reference_is_accepted(self):
         self.assertEqual(self.broken(
             lambda d: d["pairs"][0].update(reference={"outcome": "refuse"})), [])
+
+
+class RoundingHelper(unittest.TestCase):
+    """The helper is checked against the worked examples printed in NIST SP 811 B.7.1."""
+
+    def test_examples_from_the_source(self):
+        for text, digits, expected in [
+            ("6.9749515", 3, "6.97"),
+            ("6.9749515", 2, "7.0"),
+            ("6.9749515", 5, "6.9750"),
+            ("6.9749515", 7, "6.974952"),
+            ("6.9749505", 7, "6.974950"),
+        ]:
+            with self.subTest(value=text, digits=digits):
+                self.assertEqual(_round_sp811(text, digits), F(expected))
+
+    def test_small_and_large_numbers(self):
+        self.assertEqual(_round_sp811("0.0125", 2), F("0.012"))
+        self.assertEqual(_round_sp811("1250", 2), F(1200))
+        self.assertEqual(_round_sp811("1350", 2), F(1400))
+
+
+class CheckerNewTasks(unittest.TestCase):
+    def broken(self, pair_id, change):
+        doc = copy.deepcopy(load())
+        change(next(p for p in doc["pairs"] if p["id"] == pair_id))
+        return check_pairs.check_document(doc)
+
+    def test_normal_needs_a_coverage_probability(self):
+        self.assertTrue(self.broken("typeb-normal-95-interval",
+                                    lambda p: p["inputs"].pop("coverage_probability")))
+        self.assertTrue(self.broken("typeb-normal-95-interval",
+                                    lambda p: p["inputs"].update(coverage_probability="1.5")))
+
+    def test_dof_components(self):
+        self.assertTrue(self.broken("dof-welch-satterthwaite-two",
+                                    lambda p: p["inputs"]["components"].pop()))
+        self.assertTrue(self.broken(
+            "dof-welch-satterthwaite-two",
+            lambda p: p["inputs"]["components"][0].update(degrees_of_freedom="0")))
+
+    def test_round_needs_whole_digits(self):
+        self.assertTrue(self.broken("round-half-even-stays",
+                                    lambda p: p["inputs"].update(significant_digits="3")))
+        self.assertTrue(self.broken("round-half-even-stays",
+                                    lambda p: p["inputs"].update(significant_digits=0)))
 
 
 class NumberParsing(unittest.TestCase):

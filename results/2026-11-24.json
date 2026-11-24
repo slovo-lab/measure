@@ -1,6 +1,6 @@
 {
   "date": "2026-11-24",
-  "pairs": 33,
+  "pairs": 43,
   "python": "3.13.18",
   "reports": [
     {
@@ -567,17 +567,107 @@
             }
           ],
           "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-interval-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 5.0,
+              "name": "value",
+              "ok": true,
+              "reference": "5",
+              "relative_difference": 0.0,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-interval-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 15.0,
+              "name": "value",
+              "ok": true,
+              "reference": "15",
+              "relative_difference": 0.0,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-convert-mass-length",
+          "note": "refused: Cannot convert from 'kilogram' ([mass]) to 'meter' ([length])",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-9973-limits",
+          "note": "no function for a Type B evaluation in Pint or uncertainties",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-95-interval",
+          "note": "no function for a Type B evaluation in Pint or uncertainties",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-two",
+          "note": "no function for effective degrees of freedom in Pint or uncertainties",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-three",
+          "note": "no function for effective degrees of freedom in Pint or uncertainties",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-odd-goes-up",
+          "note": "no function that rounds to a number of significant digits; Python's round() on a quantity counts decimal places",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-even-stays",
+          "note": "no function that rounds to a number of significant digits; Python's round() on a quantity counts decimal places",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-above-half-goes-up",
+          "note": "no function that rounds to a number of significant digits; Python's round() on a quantity counts decimal places",
+          "outputs": [],
+          "verdict": "unsupported"
         }
       ],
       "summary": {
         "error": 0,
         "fail": 0,
-        "pass": 29,
-        "unsupported": 4
+        "pass": 32,
+        "unsupported": 11
       },
       "tool": "Pint + uncertainties",
       "versions": {
-        "numpy": "2.5.5",
+        "numpy": "2.5.3",
         "pint": "0.26.2",
         "uncertainties": "3.2.3"
       }
@@ -1108,13 +1198,83 @@
             }
           ],
           "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-interval-k",
+          "note": "no unit for a temperature difference in degrees Fahrenheit",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-interval-k",
+          "note": "no unit for a temperature difference in degrees Celsius",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-convert-mass-length",
+          "note": "refused: Dimension(mass) != Dimension(length)",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-9973-limits",
+          "note": "no function for a Type B evaluation",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-95-interval",
+          "note": "no function for a Type B evaluation",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-two",
+          "note": "no function for effective degrees of freedom",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-three",
+          "note": "no function for effective degrees of freedom",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-odd-goes-up",
+          "note": "no function that rounds to a number of significant digits",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-even-stays",
+          "note": "no function that rounds to a number of significant digits",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-above-half-goes-up",
+          "note": "no function that rounds to a number of significant digits",
+          "outputs": [],
+          "verdict": "unsupported"
         }
       ],
       "summary": {
         "error": 0,
         "fail": 1,
-        "pass": 26,
-        "unsupported": 6
+        "pass": 27,
+        "unsupported": 15
       },
       "tool": "ucon",
       "versions": {

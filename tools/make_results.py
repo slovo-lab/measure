@@ -60,7 +60,8 @@ def markdown(reports, pairs, date):
         "",
         "Each tool was given the %d reference pairs in [`pairs/pairs.json`](pairs/pairs.json). "
         "A pair passes when every answer is within the tolerance stated in the pair. "
-        "The tolerances only allow for ordinary double-precision arithmetic." % len(pairs),
+        "Most tolerances only allow for ordinary double-precision arithmetic; "
+        "the exceptions are explained in [`FORMAT.md`](FORMAT.md)." % len(pairs),
         "",
         "## Versions tested",
         "",

@@ -30,7 +30,25 @@ UNITS = {
     "cal_th": "cal_th",
     "min": "min", "h": "h",
     "mV": "mV", "ohm": "ohm",
+    "1": "1",
 }
+
+# Spellings in the pairs file for which we found no unit in ucon 2.4.2.
+# A pair that uses one of them is reported as unsupported, with this reason.
+NO_UNIT = {
+    "delta_degF": "no unit for a temperature difference in degrees Fahrenheit",
+    "delta_degC": "no unit for a temperature difference in degrees Celsius",
+}
+
+
+def units_used(pair):
+    """Every unit spelling that appears in a pair's inputs."""
+    inputs = pair["inputs"]
+    used = [inputs[key] for key in ("unit", "to_unit") if key in inputs]
+    used += [t["unit"] for t in inputs.get("terms", [])]
+    used += [v["unit"] for v in inputs.get("variables", {}).values()]
+    used += [c["unit"] for c in inputs.get("covariances", [])]
+    return used
 
 
 class UconAdapter:
@@ -59,6 +77,10 @@ class UconAdapter:
     def solve(self, pair):
         task = pair["task"]
         inputs = pair["inputs"]
+        if task in ("convert", "add", "propagate"):
+            for spelling in units_used(pair):
+                if spelling in NO_UNIT:
+                    return Unsupported(NO_UNIT[spelling])
         try:
             if task == "convert":
                 number = self._number(inputs["value"], inputs["unit"])
@@ -77,6 +99,10 @@ class UconAdapter:
                                "the standard uncertainty of the mean")
         if task == "type_b":
             return Unsupported("no function for a Type B evaluation")
+        if task == "effective_dof":
+            return Unsupported("no function for effective degrees of freedom")
+        if task == "round":
+            return Unsupported("no function that rounds to a number of significant digits")
         return Unsupported("unknown task %r" % task)
 
     def _add(self, pair):

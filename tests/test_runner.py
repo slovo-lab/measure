@@ -204,6 +204,15 @@ class PintAdapter(unittest.TestCase):
         self.assertIsInstance(self.adapter.solve(BY_ID["dim-add-length-time"]), Refusal)
         self.assertIsInstance(self.adapter.solve(BY_ID["typea-mean-five-readings"]), Unsupported)
 
+    def test_temperature_difference_is_not_treated_as_a_temperature(self):
+        answer = self.adapter.solve(BY_ID["conv-degf-interval-k"])
+        self.assertAlmostEqual(answer.outputs["value"], 5.0, places=9)
+
+    def test_new_tasks_are_unsupported(self):
+        for pair_id in ("dof-welch-satterthwaite-two", "round-half-even-stays",
+                        "typeb-normal-95-interval"):
+            self.assertIsInstance(self.adapter.solve(BY_ID[pair_id]), Unsupported)
+
     def test_covariance_reaches_the_tool(self):
         """With the covariance removed the answer must change, from 0.007 to 0.005."""
         import copy
@@ -244,9 +253,24 @@ class UconAdapterTests(unittest.TestCase):
     def test_knows_every_unit_in_the_pairs_file(self):
         from bench.adapters.ucon_adapter import UNITS
         from bench.adapters.pint_uncertainties import UNITS as PINT_UNITS
-        self.assertEqual(set(UNITS), set(PINT_UNITS))
+        from bench.adapters.ucon_adapter import NO_UNIT
+        self.assertEqual(set(UNITS) | set(NO_UNIT), set(PINT_UNITS))
+        self.assertEqual(set(UNITS) & set(NO_UNIT), set())
         for spelling in UNITS:
             self.adapter._unit(spelling)  # must not raise
+
+    def test_a_pair_with_a_unit_ucon_lacks_is_unsupported(self):
+        answer = self.adapter.solve(BY_ID["conv-degf-interval-k"])
+        self.assertIsInstance(answer, Unsupported)
+        self.assertIn("temperature difference", answer.reason)
+
+    def test_new_tasks_are_unsupported(self):
+        for pair_id in ("dof-welch-satterthwaite-two", "round-half-even-stays",
+                        "typeb-normal-95-interval"):
+            self.assertIsInstance(self.adapter.solve(BY_ID[pair_id]), Unsupported)
+
+    def test_mass_to_length_is_a_refusal(self):
+        self.assertIsInstance(self.adapter.solve(BY_ID["dim-convert-mass-length"]), Refusal)
 
     def test_answer_types(self):
         self.assertIsInstance(self.adapter.solve(BY_ID["conv-inch-mm"]), Answer)

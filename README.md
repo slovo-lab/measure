@@ -2,7 +2,7 @@
 
 *Русская версия: [README.ru.md](README.ru.md)*
 
-**Status: first release, version 0.1.0, 24 November 2026. 33 reference pairs and two tools tested; the results are in [RESULTS.md](RESULTS.md) and the plan for what comes next is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
+**Status: first release, version 0.1.0, 24 November 2026. Version 0.1.0 has 33 reference pairs and two tools tested; 10 more pairs were added the same day, so the main branch has 43. The results are in [RESULTS.md](RESULTS.md) and the plan for what comes next is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
 
 ## First results
 

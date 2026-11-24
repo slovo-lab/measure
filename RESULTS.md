@@ -2,32 +2,34 @@
 
 Run on 2026-11-24 with Python 3.13.18. This file is written by `tools/make_results.py`; do not edit it by hand.
 
-Each tool was given the 33 reference pairs in [`pairs/pairs.json`](pairs/pairs.json). A pair passes when every answer is within the tolerance stated in the pair. The tolerances only allow for ordinary double-precision arithmetic.
+Each tool was given the 43 reference pairs in [`pairs/pairs.json`](pairs/pairs.json). A pair passes when every answer is within the tolerance stated in the pair. Most tolerances only allow for ordinary double-precision arithmetic; the exceptions are explained in [`FORMAT.md`](FORMAT.md).
 
 ## Versions tested
 
-- **Pint + uncertainties**: numpy 2.5.5, pint 0.26.2, uncertainties 3.2.3
+- **Pint + uncertainties**: numpy 2.5.3, pint 0.26.2, uncertainties 3.2.3
 - **ucon**: ucon 2.4.2
 
 ## Summary
 
 | Category | Pairs | Pint + uncertainties | ucon |
 |---|---|---|---|
-| Unit conversion | 17 | 17 of 17 pass | 17 of 17 pass |
-| Dimensional safety | 4 | 4 of 4 pass | 4 of 4 pass |
+| Unit conversion | 19 | 19 of 19 pass | 17 of 17 pass, 2 not offered |
+| Dimensional safety | 5 | 5 of 5 pass | 5 of 5 pass |
 | Combined uncertainty | 8 | 8 of 8 pass | 5 of 6 pass, 2 not offered |
 | Type A evaluation | 2 | not offered (2) | not offered (2) |
-| Type B evaluation | 2 | not offered (2) | not offered (2) |
-| **All** | 33 | 29 of 29 pass, 4 not offered | 26 of 27 pass, 6 not offered |
+| Type B evaluation | 4 | not offered (4) | not offered (4) |
+| Degrees of freedom | 2 | not offered (2) | not offered (2) |
+| Reporting | 3 | not offered (3) | not offered (3) |
+| **All** | 43 | 32 of 32 pass, 11 not offered | 27 of 28 pass, 15 not offered |
 
 "Not offered" means the tool has no function for that kind of task (the runner's verdict `unsupported`). It is not counted as a failure.
 
 ## What this does and does not show
 
-- It shows how each tool answered these 33 questions on this date, with these versions.
+- It shows how each tool answered these 43 questions on this date, with these versions.
 - It does not rank the tools, and a pass here does not certify a tool for any use.
 - The tools were called as Python libraries. Servers that wrap them for AI agents were not tested.
-- Categories with no pairs yet: Degrees of freedom, Reporting.
+- Categories with no pairs yet: none.
 
 ## Every answer that was not a pass
 
@@ -63,6 +65,10 @@ print(parse("10 nmi").to("km"))   # 1.609344e-08 km   (nano-mile)
 ```
 
 ucon's own name for the unit is `nautical_mile`, and with that name the pair `conv-nautical-mile-km` passes. An adapter's job is to translate our spellings into the tool's own, so the adapter uses `nautical_mile` and the pair is recorded as a pass. The behaviour of `nmi` is noted here because a user or an AI agent could type it and get a number without any warning.
+
+### Ten pairs added after version 0.1.0
+
+The run was repeated the same day with 43 pairs. Of the ten new pairs, the two libraries were asked only the three they have functions for; both refused to convert kilograms to metres, as they should. Pint converted both temperature differences correctly. In ucon 2.4.2 we found no unit for a temperature difference, so those two pairs are "not offered" there; we looked in the package, not in ucon's online documentation. Neither library has a function for effective degrees of freedom, for rounding to significant digits, or for a Type B evaluation, so the other seven pairs are "not offered" for both. Those pairs are there for the tools that do offer such functions and have not been tested yet.
 
 ### Reporting to the authors
 
@@ -105,5 +111,15 @@ Under this project's fairness rule, both points are to be reported to ucon's aut
 | `typea-mean-four-readings` | not offered | not offered |
 | `typeb-triangular-half-width` | not offered | not offered |
 | `comb-square-as-power` | pass | pass |
+| `conv-degf-interval-k` | pass | not offered |
+| `conv-degc-interval-k` | pass | not offered |
+| `dim-convert-mass-length` | pass | pass |
+| `typeb-normal-9973-limits` | not offered | not offered |
+| `typeb-normal-95-interval` | not offered | not offered |
+| `dof-welch-satterthwaite-two` | not offered | not offered |
+| `dof-welch-satterthwaite-three` | not offered | not offered |
+| `round-half-odd-goes-up` | not offered | not offered |
+| `round-half-even-stays` | not offered | not offered |
+| `round-above-half-goes-up` | not offered | not offered |
 
 Every number behind this table is in [`results/2026-11-24.json`](results/2026-11-24.json).
