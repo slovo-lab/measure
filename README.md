@@ -28,6 +28,7 @@ Measure calculates nothing new. It only compares other tools' answers with the r
 |---|---|---|---|
 | Pint 0.26.2 + uncertainties 3.2.3 | Python library | 32 | 32 |
 | ucon 2.4.2 | Python library | 28 | 27 |
+| GTC 1.5.1 (GUM Tree Calculator) | Python library | 13 | 13 |
 | ucon-mcp (ucon-tools 0.13.0) | server for AI agents | 18 | 18 |
 | unit-converter-mcp 0.1.2 | server for AI agents | 18 | 18 |
 | mcp-units 0.1.0 (commit 913fee9) | server for AI agents | 20 | 20 |
@@ -78,6 +79,7 @@ python3 -m unittest discover -s tests        # checks the pairs and the runner
 pip install -r requirements-adapters.txt     # the tools under test
 python3 -m bench pint                        # puts every pair to Pint + uncertainties
 python3 -m bench ucon                        # the same for ucon
+python3 -m bench gtc                         # GTC, the GUM Tree Calculator
 python3 -m bench ucon-mcp                    # ucon's server for AI agents
 python3 -m bench unit-converter-mcp          # another server for AI agents
 python3 -m bench mcp-units                   # likewise; also mcp-gnu-units, measurement-uncertainty-mcp

@@ -19,7 +19,7 @@ sys.path.insert(0, ROOT)
 from bench import runner  # noqa: E402
 from bench.__main__ import ADAPTERS  # noqa: E402
 
-ORDER = ("pint", "ucon", "ucon-mcp", "unit-converter-mcp", "mcp-units", "mcp-gnu-units",
+ORDER = ("pint", "ucon", "gtc", "ucon-mcp", "unit-converter-mcp", "mcp-units", "mcp-gnu-units",
          "measurement-uncertainty-mcp")
 CATEGORY_NAMES = {
     "unit-conversion": "Unit conversion",
