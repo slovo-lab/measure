@@ -39,7 +39,7 @@ Every reference answer must be derivable by a reader from the stated source. No 
 - [ ] Run the tests automatically on every change (a GitHub Actions workflow). Not set up yet; tests are run by hand.
 - [x] Add adapters for tools that run as servers for AI agents. First two done 24 November 2026: `ucon-mcp` (from ucon-tools 0.13.0) and `unit-converter-mcp` 0.1.2, both started as local servers and called through `bench/mcp_client.py`. Both passed all 18 conversion pairs they have a tool for.
 - [x] measurement-uncertainty-mcp added on 24 November 2026 (installed from its repository at commit fe254e0, with the owner's approval; it needs no account when run locally). It passed all 6 pairs it has a tool for.
-- [ ] More servers for AI agents: mcp-units and mcp-gnu-units (install from their repositories; running code from a repository needs the owner's approval each time).
+- [x] mcp-units (repository commit 913fee9, approved by the owner) and mcp-gnu-units 0.1.1 (package index, in an environment of its own) added on 24 November 2026. Each passed all 20 conversion pairs.
 - [ ] Open question: no server found so far takes a measurement model and returns the first-order combined uncertainty. Look for one; if none exists, say so plainly in the results, because that is where the one library failure was.
 
 ## Open points

@@ -8,5 +8,11 @@ ucon==2.4.2
 mcp==1.30.0
 ucon-tools[mcp]==0.13.0
 unit-converter-mcp==0.1.2
-# Not on the package index; installed from its repository at the commit tested.
+# Not on the package index; installed from their repositories at the commits tested.
+mcp-units @ git+https://github.com/quantumleeps/mcp-units@913fee989cbf66659d1197aea707fb102f7d5c0e
 measurement-uncertainty-mcp @ git+https://github.com/kyb8801/measurement-uncertainty-mcp@fe254e0e32023606841547e7be234797385884b4
+
+# mcp-gnu-units 0.1.1 is tested too, but it needs a newer `mcp` package than
+# the servers above, so it goes into an environment of its own:
+#   python3 -m venv gnu-env && gnu-env/bin/pip install mcp-gnu-units==0.1.1
+#   export MEASURE_SERVER_MCP_GNU_UNITS=$PWD/gnu-env/bin/mcp-gnu-units

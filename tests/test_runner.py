@@ -315,7 +315,12 @@ class ServerAdapterBase:
 
     @classmethod
     def setUpClass(cls):
-        cls.adapter = cls.adapter_class()
+        from bench.mcp_client import ServerError
+        try:
+            cls.adapter = cls.adapter_class()
+        except ServerError as exc:
+            # Installed, but it does not start with this Python: nothing to test here.
+            raise unittest.SkipTest(str(exc))
         cls.report = runner.run(PAIRS, cls.adapter)
 
     @classmethod
@@ -345,8 +350,12 @@ class ServerAdapterBase:
         self.assertEqual(r["verdict"], "pass")
         self.assertTrue(r["note"].startswith("refused"))
 
+    # True for servers that have units for temperature differences.
+    expects_differences = False
+
     def test_temperature_difference_is_not_sent_as_a_temperature(self):
-        self.assertEqual(self.result("conv-degc-interval-k")["verdict"], "unsupported")
+        expected = "pass" if self.expects_differences else "unsupported"
+        self.assertEqual(self.result("conv-degc-interval-k")["verdict"], expected)
 
     def test_notes_fit_on_one_line(self):
         for r in self.report["results"]:
@@ -377,6 +386,36 @@ class UnitConverterMcpAdapterTests(ServerAdapterBase, unittest.TestCase):
                 for unit in (p["inputs"]["unit"], p["inputs"]["to_unit"]):
                     with self.subTest(pair=p["id"], unit=unit):
                         self.assertTrue(unit in UNITS or unit in NO_UNIT)
+
+
+HAVE_MCP_UNITS = _have("mcp_units", "mcp-units")
+HAVE_MCP_GNU_UNITS = _have("mcp", "mcp-gnu-units")
+
+
+@unittest.skipUnless(HAVE_MCP_UNITS, "mcp-units is not installed")
+class McpUnitsAdapterTests(ServerAdapterBase, unittest.TestCase):
+    expects_differences = True
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.mcp_units import McpUnitsAdapter
+        cls.adapter_class = McpUnitsAdapter
+        super().setUpClass()
+
+
+@unittest.skipUnless(HAVE_MCP_GNU_UNITS, "mcp-gnu-units is not installed or not pointed to")
+class McpGnuUnitsAdapterTests(ServerAdapterBase, unittest.TestCase):
+    expects_differences = True
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.mcp_gnu_units import McpGnuUnitsAdapter
+        cls.adapter_class = McpGnuUnitsAdapter
+        super().setUpClass()
+
+    def test_a_temperature_is_written_as_a_function(self):
+        # 25 degC as a temperature is 298.15 K; as a difference it would be 25 K.
+        self.assertEqual(self.result("conv-degc-k")["verdict"], "pass")
 
 
 HAVE_MU_MCP = _have("measurement_uncertainty_mcp", "measurement-uncertainty-mcp")

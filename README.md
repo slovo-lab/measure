@@ -24,13 +24,21 @@ Measure calculates nothing new. It only compares other tools' answers with the r
 
 ## Results so far
 
-| | Pint + uncertainties | ucon | ucon-mcp (server) | unit-converter-mcp (server) | measurement-uncertainty-mcp (server) |
-|---|---|---|---|---|---|
-| Pairs the tool has a function for | 32 | 28 | 18 | 18 | 6 |
-| Passed | 32 | 27 | 18 | 18 | 6 |
-| Not offered by the tool | 11 | 15 | 25 | 25 | 37 |
+| Tool | How it was called | Pairs it has a function for | Passed |
+|---|---|---|---|
+| Pint 0.26.2 + uncertainties 3.2.3 | Python library | 32 | 32 |
+| ucon 2.4.2 | Python library | 28 | 27 |
+| ucon-mcp (ucon-tools 0.13.0) | server for AI agents | 18 | 18 |
+| unit-converter-mcp 0.1.2 | server for AI agents | 18 | 18 |
+| mcp-units 0.1.0 (commit 913fee9) | server for AI agents | 20 | 20 |
+| mcp-gnu-units 0.1.1 | server for AI agents | 20 | 20 |
+| measurement-uncertainty-mcp 0.1.0 (commit fe254e0) | server for AI agents | 6 | 6 |
 
-Versions: Pint 0.26.2 with uncertainties 3.2.3; ucon 2.4.2; ucon-tools 0.13.0; unit-converter-mcp 0.1.2; measurement-uncertainty-mcp 0.1.0 (from its repository, commit fe254e0). The first two were called as Python libraries. The three marked "(server)" were started as servers for AI agents and called through their tools, the way an agent calls them. This is how the tools answered 43 questions on one date. It is not a ranking and not a certificate. The one answer that differed, and the other observations, are explained in [RESULTS.md](RESULTS.md).
+There are 43 pairs in all. A tool is only asked the pairs it has a function for; the rest are listed as "not offered" and are not failures. Servers were started locally and called through their tools, the way an agent calls them.
+
+This is how the tools answered on one date. It is not a ranking and not a certificate. The one answer that differed, and the other observations, are explained in [RESULTS.md](RESULTS.md).
+
+No server found so far takes a measurement model and returns the combined uncertainty by the first-order law. That is the category where the one failure was found, and it can only be tested on the Python libraries for now.
 
 ## What changed on day one
 
@@ -72,6 +80,7 @@ python3 -m bench pint                        # puts every pair to Pint + uncerta
 python3 -m bench ucon                        # the same for ucon
 python3 -m bench ucon-mcp                    # ucon's server for AI agents
 python3 -m bench unit-converter-mcp          # another server for AI agents
+python3 -m bench mcp-units                   # likewise; also mcp-gnu-units, measurement-uncertainty-mcp
 python3 tools/make_results.py                # runs both and rewrites RESULTS.md
 ```
 
