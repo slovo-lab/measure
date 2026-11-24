@@ -75,6 +75,7 @@ Both use only the Python standard library. They were run with Python 3.13; older
 ## Sources used so far, and their reuse terms
 
 - **NIST Special Publication 811** (2008 edition) and **NIST Technical Note 1297** (1994 edition), read on nist.gov. NIST's [copyright page](https://www.nist.gov/copyrights-disclaimers), read on 24 November 2026, says that information on NIST sites, unless marked as copyrighted, may be distributed or copied, and asks for credit. We take only factors, formulas and their locations, and we credit NIST in every pair.
+- **ISO/IEC Directives, Part 2** (ninth edition, 2021) is free to read on iso.org and is under ISO/IEC copyright. Its Annex B is normative for how ISO and IEC documents treat quantities and units, and it states the rule that only quantities of the same kind can be added or subtracted. It is cited by location only. It is the current source for the dimensional-safety pairs.
 - **ISO 31-0:1992** (withdrawn, replaced by ISO 80000-1) is under ISO copyright. It is cited by clause number only, with a link to the free sample that shows the clause. Nothing is quoted.
 - **Fourier, The Analytical Theory of Heat** (Freeman's translation, 1878) is in the public domain.
 - **JCGM documents (GUM, VIM)** are not copied. When a pair cites them, it gives only the document and clause or example number. No pair cites them yet.
