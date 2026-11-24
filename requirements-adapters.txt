@@ -1,0 +1,5 @@
+# Tools under test, with the versions used for the last run (24 November 2026).
+# The runner itself needs only the Python standard library.
+pint==0.26.2
+uncertainties==3.2.3
+numpy==2.5.3

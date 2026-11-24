@@ -31,7 +31,7 @@ Every reference answer must be derivable by a reader from the stated source. No 
 ## Steps
 
 - [x] Define the data format for reference pairs and write the first 10 pairs with sources. Done 24 November 2026: `FORMAT.md`, `pairs/pairs.json`, `tools/check_pairs.py`, `tests/test_pairs.py`. An 11th pair, for dimensional safety, was added the same day. Not covered yet: degrees of freedom, reporting.
-- [ ] Write the runner and the Pint + uncertainties adapter; add tests for the runner itself.
+- [x] Write the runner and the Pint + uncertainties adapter; add tests for the runner itself. Done 24 November 2026: `bench/` (runner, model evaluator, adapter, command line) and `tests/test_runner.py`. Pint and `uncertainties` have no function for Type A or Type B evaluations, so those pairs come back as `unsupported` for this tool.
 - [ ] Add the ucon adapter.
 - [ ] Reach 30 pairs; publish the first results table.
 - [ ] Tell the authors of the tested tools, by opening an issue in their repositories. This is posting on an outside platform, so it needs the curator's confirmation first.
