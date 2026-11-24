@@ -1,0 +1,227 @@
+{
+  "format_version": 1,
+  "pairs": [
+    {
+      "id": "conv-inch-mm",
+      "category": "unit-conversion",
+      "question": "Convert 1 inch to millimetres.",
+      "task": "convert",
+      "inputs": {"value": "1", "unit": "in", "to_unit": "mm"},
+      "reference": {
+        "outputs": [
+          {"name": "value", "value": "25.4", "unit": "mm", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-12"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+         "locator": "Appendix B.8, row 'inch (in)' to metre: 2.54 E-02, printed in bold (exact)",
+         "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "1 in = 0.0254 m exactly; 0.0254 m = 25.4 mm."
+    },
+    {
+      "id": "conv-pound-kg",
+      "category": "unit-conversion",
+      "question": "Convert 150 pounds (avoirdupois) to kilograms.",
+      "task": "convert",
+      "inputs": {"value": "150", "unit": "lb", "to_unit": "kg"},
+      "reference": {
+        "outputs": [
+          {"name": "value", "value": "68.0388555", "unit": "kg", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-12"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+         "locator": "Appendix B.8, row 'pound (avoirdupois) (lb)' to kilogram, and footnote 22, which gives the exact factor 4.535 923 7 E-01",
+         "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-footnotes",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "150 x 0.45359237 kg = 68.0388555 kg. The table row itself shows the factor rounded to seven digits; the exact factor is in the footnote."
+    },
+    {
+      "id": "conv-kmh-ms",
+      "category": "unit-conversion",
+      "question": "Convert 90 kilometres per hour to metres per second.",
+      "task": "convert",
+      "inputs": {"value": "90", "unit": "km/h", "to_unit": "m/s"},
+      "reference": {
+        "outputs": [
+          {"name": "value", "value": "25", "unit": "m/s", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-12"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+         "locator": "Appendix B.8, row 'kilometer per hour (km/h)' to metre per second: 2.777 778 E-01 (rounded, not bold)",
+         "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "1 km = 1000 m (prefix kilo) and 1 h = 3600 s, so 1 km/h = 1000/3600 m/s and 90 km/h = 25 m/s exactly. The rounded factor in the cited table agrees: 90 x 0.2777778 = 25.000002."
+    },
+    {
+      "id": "conv-kwh-j",
+      "category": "unit-conversion",
+      "question": "Convert 2.5 kilowatt hours to joules.",
+      "task": "convert",
+      "inputs": {"value": "2.5", "unit": "kW.h", "to_unit": "J"},
+      "reference": {
+        "outputs": [
+          {"name": "value", "value": "9000000", "unit": "J", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-12"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+         "locator": "Appendix B.8, row 'kilowatt hour (kW.h)' to joule: 3.6 E+06, printed in bold (exact)",
+         "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "2.5 x 3 600 000 J = 9 000 000 J."
+    },
+    {
+      "id": "conv-degc-k",
+      "category": "unit-conversion",
+      "question": "A temperature is 25 degrees Celsius. Express it in kelvin.",
+      "task": "convert",
+      "inputs": {"value": "25", "unit": "degC", "to_unit": "K"},
+      "reference": {
+        "outputs": [
+          {"name": "value", "value": "298.15", "unit": "K", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-12"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+         "locator": "Appendix B.8, row 'degree Celsius (temperature)' to kelvin: T/K = t/degC + 273.15",
+         "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "25 + 273.15 = 298.15. This is a temperature, not a temperature interval: the offset applies."
+    },
+    {
+      "id": "conv-degf-degc",
+      "category": "unit-conversion",
+      "question": "A temperature is 98.6 degrees Fahrenheit. Express it in degrees Celsius.",
+      "task": "convert",
+      "inputs": {"value": "98.6", "unit": "degF", "to_unit": "degC"},
+      "reference": {
+        "outputs": [
+          {"name": "value", "value": "37", "unit": "degC", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-12"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+         "locator": "Appendix B.8, row 'degree Fahrenheit (temperature)' to degree Celsius: t/degC = (t/degF - 32)/1.8",
+         "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "(98.6 - 32)/1.8 = 66.6/1.8 = 37."
+    },
+    {
+      "id": "typea-mean-five-readings",
+      "category": "type-a",
+      "question": "Five independent readings of a length are 10.1, 10.3, 10.2, 10.4 and 10.0 mm. Give the arithmetic mean and the standard uncertainty of the mean (Type A evaluation).",
+      "task": "type_a",
+      "inputs": {"readings": ["10.1", "10.3", "10.2", "10.4", "10.0"], "unit": "mm"},
+      "reference": {
+        "outputs": [
+          {"name": "mean", "value": "10.2", "unit": "mm", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-12"}},
+          {"name": "standard_uncertainty", "value": "0.0707106781187", "unit": "mm", "exact": false,
+           "tolerance": {"kind": "relative", "value": "1e-9"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+         "locator": "Appendix A, A.4 and A.5, equations (A-4) (mean) and (A-5) (standard deviation of the mean)",
+         "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "Mean = 51.0/5 = 10.2. Deviations: -0.1, 0.1, 0, 0.2, -0.2; sum of squares = 0.10. u = sqrt(0.10/(5 x 4)) = sqrt(0.005) = 0.0707106781187 (rounded to 12 significant digits). The readings are made up for this pair; only the formulas come from the source."
+    },
+    {
+      "id": "typeb-rectangular-half-width",
+      "category": "type-b",
+      "question": "A quantity is known only to lie within plus or minus 0.05 mm of its estimate, with every value in that range equally likely. Give its standard uncertainty.",
+      "task": "type_b",
+      "inputs": {"distribution": "rectangular", "half_width": "0.05", "unit": "mm"},
+      "reference": {
+        "outputs": [
+          {"name": "standard_uncertainty", "value": "0.0288675134595", "unit": "mm", "exact": false,
+           "tolerance": {"kind": "relative", "value": "1e-9"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+         "locator": "Section 4.6 (rectangular distribution, u = a/sqrt(3)); also Appendix A, equation (A-7)",
+         "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-4-type-b-evaluation-standard-uncertainty",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "u = 0.05/sqrt(3) = 0.0288675134595 (rounded to 12 significant digits)."
+    },
+    {
+      "id": "comb-product-uncorrelated",
+      "category": "combined",
+      "question": "Electrical power is P = V * I. V = 10.0 V with standard uncertainty 0.1 V; I = 2.00 A with standard uncertainty 0.04 A; the two are uncorrelated. Give P and its combined standard uncertainty by the law of propagation of uncertainty.",
+      "task": "propagate",
+      "inputs": {
+        "model": "V * I",
+        "variables": {
+          "V": {"value": "10.0", "standard_uncertainty": "0.1", "unit": "V"},
+          "I": {"value": "2.00", "standard_uncertainty": "0.04", "unit": "A"}
+        },
+        "covariances": []
+      },
+      "reference": {
+        "outputs": [
+          {"name": "value", "value": "20", "unit": "W", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-12"}},
+          {"name": "combined_standard_uncertainty", "value": "0.447213595500", "unit": "W", "exact": false,
+           "tolerance": {"kind": "relative", "value": "1e-9"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+         "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty), with all covariance terms zero",
+         "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "dP/dV = I = 2, dP/dI = V = 10. u_c^2 = (2 x 0.1)^2 + (10 x 0.04)^2 = 0.04 + 0.16 = 0.20. u_c = sqrt(0.20) = 0.447213595500 (rounded to 12 significant digits). The reference is the first-order result that the cited equation defines; a Monte Carlo result would differ slightly."
+    },
+    {
+      "id": "comb-sum-with-covariance",
+      "category": "combined",
+      "question": "A length is L = x1 + x2. x1 = 50.000 mm with standard uncertainty 0.003 mm; x2 = 30.000 mm with standard uncertainty 0.004 mm; their covariance is 0.000012 mm^2. Give L and its combined standard uncertainty.",
+      "task": "propagate",
+      "inputs": {
+        "model": "x1 + x2",
+        "variables": {
+          "x1": {"value": "50.000", "standard_uncertainty": "0.003", "unit": "mm"},
+          "x2": {"value": "30.000", "standard_uncertainty": "0.004", "unit": "mm"}
+        },
+        "covariances": [
+          {"between": ["x1", "x2"], "value": "0.000012", "unit": "mm^2"}
+        ]
+      },
+      "reference": {
+        "outputs": [
+          {"name": "value", "value": "80", "unit": "mm", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-12"}},
+          {"name": "combined_standard_uncertainty", "value": "0.007", "unit": "mm", "exact": true,
+           "tolerance": {"kind": "relative", "value": "1e-9"}}
+        ]
+      },
+      "sources": [
+        {"document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+         "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty), including the covariance term",
+         "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+         "checked": "2026-11-24"}
+      ],
+      "derivation": "Both sensitivity coefficients are 1. u_c^2 = 0.003^2 + 0.004^2 + 2 x 0.000012 = 0.000009 + 0.000016 + 0.000024 = 0.000049 mm^2, so u_c = 0.007 mm. Ignoring the covariance would give 0.005 mm."
+    }
+  ]
+}

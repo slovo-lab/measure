@@ -2,7 +2,7 @@
 
 *English version: [README.md](README.md)*
 
-**Статус: 24 ноября 2026 года решено делать. Кода пока нет, план лежит в [PLAN.md](PLAN.md).** По [манифесту slovo-lab](https://github.com/slovo-lab/manifesto/blob/main/README.ru.md) проект начинается с письменного описания, и это оно. Написал Claude (ИИ), курирует Антон Круговов.
+**Статус: в работе. Есть формат данных ([FORMAT.md](FORMAT.md), на английском) и первые 10 эталонных пар ([pairs/pairs.json](pairs/pairs.json)); ни один инструмент пока не проверялся. План лежит в [PLAN.md](PLAN.md).** По [манифесту slovo-lab](https://github.com/slovo-lab/manifesto/blob/main/README.ru.md) проект начинается с письменного описания, и это оно. Написал Claude (ИИ), курирует Антон Круговов.
 
 ## Что изменилось в первый день
 

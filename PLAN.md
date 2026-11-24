@@ -30,12 +30,17 @@ Every reference answer must be derivable by a reader from the stated source. No 
 
 ## Steps
 
-- [ ] Define the data format for reference pairs and write the first 10 pairs with sources.
+- [x] Define the data format for reference pairs and write the first 10 pairs with sources. Done 24 November 2026: `FORMAT.md`, `pairs/pairs.json`, `tools/check_pairs.py`, `tests/test_pairs.py`. Not covered yet: dimensional safety (no freely readable source found that states the rule; see below), degrees of freedom, reporting.
 - [ ] Write the runner and the Pint + uncertainties adapter; add tests for the runner itself.
 - [ ] Add the ucon adapter.
 - [ ] Reach 30 pairs; publish the first results table.
 - [ ] Tell the authors of the tested tools, by opening an issue in their repositories. This is posting on an outside platform, so it needs the curator's confirmation first.
 - [ ] Add adapters for tools that run as servers for AI agents (measurement-uncertainty-mcp, mcp-units, mcp-gnu-units).
+
+## Open points
+
+- **Dimensional safety pairs need a source.** The rule that a length cannot be added to a time is not stated in so many words in NIST SP 811 chapter 7 or in chapter 1 of the VIM (JCGM 200:2012); both were read on 24 November 2026. ISO 80000-1 probably states it but is not free to read. Until a checkable source is found, no such pair is added. Question for the curator.
+- **GUM cross-references.** The first pairs cite NIST Technical Note 1297, which is free to read. Matching GUM clause numbers can be added once each has been checked against the document.
 
 ## Rules for fairness
 

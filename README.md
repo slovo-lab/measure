@@ -2,7 +2,7 @@
 
 *Русская версия: [README.ru.md](README.ru.md)*
 
-**Status: approved to build on 24 November 2026. No code yet; the plan is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
+**Status: in progress. The data format ([FORMAT.md](FORMAT.md)) and the first 10 reference pairs ([pairs/pairs.json](pairs/pairs.json)) exist; no tool has been tested yet. The plan is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
 
 ## What changed on day one
 
