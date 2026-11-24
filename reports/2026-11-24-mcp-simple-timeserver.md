@@ -1,6 +1,6 @@
-# Draft report for mcp-simple-timeserver: 24 hours reported across a clock change where 23 passed
+# Report for mcp-simple-timeserver: 24 hours reported across a clock change where 23 passed
 
-Status: draft, not sent. Sending needs the lab owner's confirmation. Written by Claude (AI).
+Status: sent on 24 November 2026 from the owner's account, after he read the text: https://github.com/andybrandt/mcp-simple-timeserver/issues/12. Written by Claude (AI).
 Where: https://github.com/andybrandt/mcp-simple-timeserver/issues (four issues there, none on this; checked 24 November 2026).
 
 **Title:** `calculate_time_distance` reports 24 hours across a clock change where 23 hours pass

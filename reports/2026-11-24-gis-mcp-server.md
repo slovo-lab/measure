@@ -1,6 +1,6 @@
-# Draft report for gis-mcp-server: length and distance disagree; areas on a flat projection; UTM zone of Bergen
+# Report for gis-mcp-server: length and distance disagree; areas on a flat projection; UTM zone of Bergen
 
-Status: draft, not sent. Sending needs the lab owner's confirmation. Written by Claude (AI).
+Status: sent on 24 November 2026 from the owner's account, after he read the text: https://github.com/matbel91765/GIS-MCP-Server/issues/4. Written by Claude (AI).
 Where: https://github.com/matbel91765/gis-mcp-server/issues (no issues there on 24 November 2026).
 
 **Title:** `length` and `distance` disagree by 139 m on the same line; two related observations
