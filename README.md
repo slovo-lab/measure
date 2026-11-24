@@ -2,7 +2,7 @@
 
 *Русская версия: [README.ru.md](README.ru.md)*
 
-**Status: in progress. The data format ([FORMAT.md](FORMAT.md)) and the first 11 reference pairs ([pairs/pairs.json](pairs/pairs.json)) exist; no tool has been tested yet. The plan is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
+**Status: in progress. The data format ([FORMAT.md](FORMAT.md)) and the first 11 reference pairs ([pairs/pairs.json](pairs/pairs.json)) exist, and so does a runner with one adapter (Pint with `uncertainties`). The first results table will be published at 30 pairs. The plan is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
 
 ## What changed on day one
 
@@ -34,6 +34,16 @@ A second round of research on 24 November 2026 answered the open questions well 
 - **The method is established metrology.** Validating software with reference data sets and reference results ("reference pairs") is the approach of the European TraCIM project, which applies the calibration principle to software. Measure borrows that method. It does not invent one.
 - **Nobody seems to apply it to tools made for AI agents.** TraCIM certifies specific numerical algorithms as a service. We found no public, cross-tool check of the unit and uncertainty calculators that agents call. This is still "not found", not "does not exist".
 - **Reference examples need care.** The GUM documents are under JCGM copyright and may be reproduced only with written permission. So Measure will not copy their text. It starts from cases with exact answers (SI definitions, closed-form formulas) and from NIST publications, and cites GUM examples by number.
+
+## Running it
+
+```
+python3 -m unittest discover -s tests        # checks the pairs and the runner
+pip install -r requirements-adapters.txt     # the tools under test
+python3 -m bench pint                        # puts every pair to Pint + uncertainties
+```
+
+The runner gives each pair one of four verdicts: `pass`, `fail`, `unsupported` (the tool has no function for that kind of task, which is not a failure) or `error`. An adapter only passes the question to the tool; it never does the calculation itself.
 
 ## Who it is for
 
