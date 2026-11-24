@@ -667,7 +667,7 @@
       },
       "tool": "Pint + uncertainties",
       "versions": {
-        "numpy": "2.5.3",
+        "numpy": "2.5.5",
         "pint": "0.26.2",
         "uncertainties": "3.2.3"
       }

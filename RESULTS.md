@@ -6,7 +6,7 @@ Each tool was given the 43 reference pairs in [`pairs/pairs.json`](pairs/pairs.j
 
 ## Versions tested
 
-- **Pint + uncertainties**: numpy 2.5.3, pint 0.26.2, uncertainties 3.2.3
+- **Pint + uncertainties**: numpy 2.5.5, pint 0.26.2, uncertainties 3.2.3
 - **ucon**: ucon 2.4.2
 
 ## Summary
@@ -72,7 +72,7 @@ The run was repeated the same day with 43 pairs. Of the ten new pairs, the two l
 
 ### Reporting to the authors
 
-Under this project's fairness rule, both points are to be reported to ucon's authors. The proposed text is in [`reports/2026-11-24-ucon.md`](reports/2026-11-24-ucon.md). It is sent only after the lab's owner confirms, because it is a post on an outside platform.
+Under this project's fairness rule, both points were reported to ucon's authors on 24 November 2026: [issue 395](https://github.com/withtwoemms/ucon/issues/395) (`nmi`) and [issue 396](https://github.com/withtwoemms/ucon/issues/396) (`x * x`). The text is in [`reports/2026-11-24-ucon.md`](reports/2026-11-24-ucon.md).
 
 ## All results
 
