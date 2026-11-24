@@ -225,5 +225,50 @@ class PintAdapter(unittest.TestCase):
         self.assertEqual(report["versions"]["pint"], pint.__version__)
 
 
+try:
+    import ucon  # noqa: F401
+    HAVE_UCON = True
+except ImportError:
+    HAVE_UCON = False
+
+
+@unittest.skipUnless(HAVE_UCON, "ucon is not installed")
+class UconAdapterTests(unittest.TestCase):
+    """Checks that the adapter is wired correctly, not that ucon is right."""
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.ucon_adapter import UconAdapter
+        cls.adapter = UconAdapter()
+
+    def test_knows_every_unit_in_the_pairs_file(self):
+        from bench.adapters.ucon_adapter import UNITS
+        from bench.adapters.pint_uncertainties import UNITS as PINT_UNITS
+        self.assertEqual(set(UNITS), set(PINT_UNITS))
+        for spelling in UNITS:
+            self.adapter._unit(spelling)  # must not raise
+
+    def test_answer_types(self):
+        self.assertIsInstance(self.adapter.solve(BY_ID["conv-inch-mm"]), Answer)
+        self.assertIsInstance(self.adapter.solve(BY_ID["comb-product-uncorrelated"]), Answer)
+        self.assertIsInstance(self.adapter.solve(BY_ID["dim-add-length-time"]), Refusal)
+        self.assertIsInstance(self.adapter.solve(BY_ID["typea-mean-five-readings"]), Unsupported)
+        self.assertIsInstance(self.adapter.solve(BY_ID["comb-sum-with-covariance"]), Unsupported)
+
+    def test_incompatible_conversion_is_a_refusal(self):
+        pair = {"task": "convert", "inputs": {"value": "1", "unit": "m", "to_unit": "s"},
+                "reference": {"outcome": "refuse"}}
+        self.assertIsInstance(self.adapter.solve(pair), Refusal)
+
+    def test_an_unrelated_type_error_is_not_called_a_refusal(self):
+        self.assertFalse(self.adapter._is_refusal(TypeError("bad operand type")))
+        self.assertFalse(self.adapter._is_refusal(ValueError("different dimensions")))
+
+    def test_run_has_no_errors(self):
+        report = runner.run(PAIRS, self.adapter)
+        self.assertEqual(report["summary"]["error"], 0)
+        self.assertIn("ucon", report["versions"])
+
+
 if __name__ == "__main__":
     unittest.main()
