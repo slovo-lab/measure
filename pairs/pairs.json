@@ -236,6 +236,7 @@
       },
       "reference": {"outcome": "refuse"},
       "sources": [
+        {"document": "ISO/IEC Directives, Part 2, Principles and rules for the structure and drafting of ISO and IEC documents, ninth edition, 2021 (the edition at ISO's 'current' address on the date checked)", "locator": "Annex B (normative), 'Quantities and units', item 'Addition and subtraction of quantity values': values can be added or subtracted only when they all belong to a quantity of the same kind. Free to read on iso.org; cited by location only", "url": "https://www.iso.org/sites/directives/current/part2/index.xhtml", "checked": "2026-11-24"},
         {"document": "ISO 31-0:1992, Quantities and units - Part 0: General principles (withdrawn in 2009 and replaced by ISO 80000-1)",
          "locator": "Clause 2.2.1, 'Mathematical operations with quantities', page 2: quantities can be added or subtracted only if they are of the same kind. Clause 2.1 defines 'quantities of the same kind'. Cited by clause number only; both clauses are in the publisher's free sample",
          "url": "https://cdn.standards.iteh.ai/samples/3621/ce9ec16579cc41768dc34cff01a890fe/ISO-31-0-1992.pdf",
@@ -648,6 +649,7 @@
         "outcome": "refuse"
       },
       "sources": [
+        {"document": "ISO/IEC Directives, Part 2, Principles and rules for the structure and drafting of ISO and IEC documents, ninth edition, 2021 (the edition at ISO's 'current' address on the date checked)", "locator": "Annex B (normative), 'Quantities and units', item 'Addition and subtraction of quantity values': values can be added or subtracted only when they all belong to a quantity of the same kind. Free to read on iso.org; cited by location only", "url": "https://www.iso.org/sites/directives/current/part2/index.xhtml", "checked": "2026-11-24"},
         {
           "document": "ISO 31-0:1992, Quantities and units - Part 0: General principles (withdrawn in 2009 and replaced by ISO 80000-1)",
           "locator": "Clause 2.2.1, 'Mathematical operations with quantities', page 2: quantities can be added or subtracted only if they are of the same kind. Cited by clause number only; the clause is in the publisher's free sample",
@@ -678,6 +680,7 @@
         "outcome": "refuse"
       },
       "sources": [
+        {"document": "ISO/IEC Directives, Part 2, Principles and rules for the structure and drafting of ISO and IEC documents, ninth edition, 2021 (the edition at ISO's 'current' address on the date checked)", "locator": "Annex B (normative), 'Quantities and units', item 'Addition and subtraction of quantity values': values can be added or subtracted only when they all belong to a quantity of the same kind. Free to read on iso.org; cited by location only", "url": "https://www.iso.org/sites/directives/current/part2/index.xhtml", "checked": "2026-11-24"},
         {
           "document": "ISO 31-0:1992, Quantities and units - Part 0: General principles (withdrawn in 2009 and replaced by ISO 80000-1)",
           "locator": "Clause 2.2.1, 'Mathematical operations with quantities', page 2: quantities can be added or subtracted only if they are of the same kind. Cited by clause number only; the clause is in the publisher's free sample",
@@ -1227,6 +1230,7 @@
           "url": "https://www.iso.org/sites/JCGM/VIM/JCGM_200e_FILES/MAIN_JCGM_200e/01_e.html",
           "checked": "2026-11-24"
         },
+        {"document": "ISO/IEC Directives, Part 2, Principles and rules for the structure and drafting of ISO and IEC documents, ninth edition, 2021 (the edition at ISO's 'current' address on the date checked)", "locator": "Annex B (normative), 'Quantities and units', item 'Addition and subtraction of quantity values': values can be added or subtracted only when they all belong to a quantity of the same kind. Free to read on iso.org; cited by location only", "url": "https://www.iso.org/sites/directives/current/part2/index.xhtml", "checked": "2026-11-24"},
         {
           "document": "ISO 31-0:1992, Quantities and units - Part 0: General principles (withdrawn in 2009 and replaced by ISO 80000-1)",
           "locator": "Clause 2.1: quantities of the same kind are those that are mutually comparable. Cited by clause number only; the clause is in the publisher's free sample",
