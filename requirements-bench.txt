@@ -1,0 +1,6 @@
+# Versions of the tools under test in the run of 2026-11-24.
+# The checker and the tests need none of these; only tools/run_bench.py does.
+Pint==0.26.2
+uncertainties==3.2.3
+numpy==2.5.5
+ucon==2.4.2

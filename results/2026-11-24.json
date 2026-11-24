@@ -1,0 +1,1017 @@
+{
+  "date": "2026-11-24",
+  "pairs": [
+    {
+      "category": "unit-conversion",
+      "id": "conv-inch-mm",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-pound-kg",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-kmh-ms",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-kwh-j",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-degc-k",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-degf-degc",
+      "task": "convert"
+    },
+    {
+      "category": "type-a",
+      "id": "typea-mean-five-readings",
+      "task": "type_a"
+    },
+    {
+      "category": "type-b",
+      "id": "typeb-rectangular-half-width",
+      "task": "type_b"
+    },
+    {
+      "category": "combined",
+      "id": "comb-product-uncorrelated",
+      "task": "propagate"
+    },
+    {
+      "category": "combined",
+      "id": "comb-sum-with-covariance",
+      "task": "propagate"
+    },
+    {
+      "category": "dimensional-safety",
+      "id": "dim-add-length-time",
+      "task": "add"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-foot-m",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-mile-km",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-mph-ms",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-nautical-mile-km",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-litre-m3",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-atm-kpa",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-bar-pa",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-calth-j",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-sqin-mm2",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-degf-k",
+      "task": "convert"
+    },
+    {
+      "category": "unit-conversion",
+      "id": "conv-min-h",
+      "task": "convert"
+    },
+    {
+      "category": "dimensional-safety",
+      "id": "dim-add-length-mass",
+      "task": "add"
+    },
+    {
+      "category": "dimensional-safety",
+      "id": "dim-add-voltage-current",
+      "task": "add"
+    },
+    {
+      "category": "dimensional-safety",
+      "id": "dim-add-foot-inch",
+      "task": "add"
+    },
+    {
+      "category": "combined",
+      "id": "comb-quotient-uncorrelated",
+      "task": "propagate"
+    },
+    {
+      "category": "combined",
+      "id": "comb-difference-with-covariance",
+      "task": "propagate"
+    },
+    {
+      "category": "combined",
+      "id": "comb-square-same-variable",
+      "task": "propagate"
+    },
+    {
+      "category": "combined",
+      "id": "comb-product-mixed-units",
+      "task": "propagate"
+    },
+    {
+      "category": "combined",
+      "id": "comb-linear-combination",
+      "task": "propagate"
+    },
+    {
+      "category": "type-a",
+      "id": "typea-mean-four-readings",
+      "task": "type_a"
+    },
+    {
+      "category": "type-b",
+      "id": "typeb-triangular-half-width",
+      "task": "type_b"
+    },
+    {
+      "category": "combined",
+      "id": "comb-square-as-power",
+      "task": "propagate"
+    }
+  ],
+  "python": "3.13.18",
+  "tools": [
+    {
+      "name": "Pint + uncertainties",
+      "results": {
+        "comb-difference-with-covariance": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 1.6835555854609118e-13,
+              "difference_kind": "relative",
+              "expected": "0.00424264068712",
+              "got": 0.004242640687119286,
+              "unit": "mm",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "60",
+              "got": 60.0,
+              "unit": "mm",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-linear-combination": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 5.122994555891741e-13,
+              "difference_kind": "relative",
+              "expected": "0.632455532034",
+              "got": 0.632455532033676,
+              "unit": "m",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "8",
+              "got": 8.0,
+              "unit": "m",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-product-mixed-units": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 2.6785292171580893e-12,
+              "difference_kind": "relative",
+              "expected": "0.0128062484749",
+              "got": 0.012806248474865698,
+              "unit": "W",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "2",
+              "got": 2.0,
+              "unit": "W",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-product-uncorrelated": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 9.395238800149362e-14,
+              "difference_kind": "relative",
+              "expected": "0.447213595500",
+              "got": 0.447213595499958,
+              "unit": "W",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "20",
+              "got": 20.0,
+              "unit": "W",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-quotient-uncorrelated": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 9.420064141681832e-14,
+              "difference_kind": "relative",
+              "expected": "0.0447213595500",
+              "got": 0.04472135954999579,
+              "unit": "ohm",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "4",
+              "got": 4.0,
+              "unit": "ohm",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-square-as-power": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 3.700743415417188e-17,
+              "difference_kind": "relative",
+              "expected": "0.12",
+              "got": 0.12,
+              "unit": "m^2",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "9",
+              "got": 9.0,
+              "unit": "m^2",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-square-same-variable": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 2.0816681711721685e-17,
+              "difference_kind": "relative",
+              "expected": "0.04",
+              "got": 0.04,
+              "unit": "m^2",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "4",
+              "got": 4.0,
+              "unit": "m^2",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-sum-with-covariance": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 2.0816681711721685e-17,
+              "difference_kind": "relative",
+              "expected": "0.007",
+              "got": 0.007,
+              "unit": "mm",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "80",
+              "got": 80.0,
+              "unit": "mm",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-atm-kpa": {
+          "outputs": {
+            "value": {
+              "difference": 2.805004631670763e-17,
+              "difference_kind": "relative",
+              "expected": "101.325",
+              "got": 101.325,
+              "unit": "kPa",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-bar-pa": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "250000",
+              "got": 250000.0,
+              "unit": "Pa",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-calth-j": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "2092",
+              "got": 2092.0,
+              "unit": "J",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-degc-k": {
+          "outputs": {
+            "value": {
+              "difference": 7.626150442503172e-17,
+              "difference_kind": "relative",
+              "expected": "298.15",
+              "got": 298.15,
+              "unit": "K",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-degf-degc": {
+          "outputs": {
+            "value": {
+              "difference": 1.5363086178596762e-15,
+              "difference_kind": "relative",
+              "expected": "37",
+              "got": 37.00000000000006,
+              "unit": "degC",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-degf-k": {
+          "outputs": {
+            "value": {
+              "difference": 2.438062142861163e-17,
+              "difference_kind": "relative",
+              "expected": "233.15",
+              "got": 233.15,
+              "unit": "K",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-foot-m": {
+          "outputs": {
+            "value": {
+              "difference": 1.31711497934533e-16,
+              "difference_kind": "relative",
+              "expected": "1.8288",
+              "got": 1.8287999999999998,
+              "unit": "m",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-inch-mm": {
+          "outputs": {
+            "value": {
+              "difference": 5.594824691024411e-17,
+              "difference_kind": "relative",
+              "expected": "25.4",
+              "got": 25.4,
+              "unit": "mm",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-kmh-ms": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "25",
+              "got": 25.0,
+              "unit": "m/s",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-kwh-j": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "9000000",
+              "got": 9000000.0,
+              "unit": "J",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-litre-m3": {
+          "outputs": {
+            "value": {
+              "difference": 2.220446049250313e-16,
+              "difference_kind": "relative",
+              "expected": "0.25",
+              "got": 0.25000000000000006,
+              "unit": "m^3",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-mile-km": {
+          "outputs": {
+            "value": {
+              "difference": 4.378708505967906e-19,
+              "difference_kind": "relative",
+              "expected": "42.1648128",
+              "got": 42.1648128,
+              "unit": "km",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-min-h": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "1.5",
+              "got": 1.5,
+              "unit": "h",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-mph-ms": {
+          "outputs": {
+            "value": {
+              "difference": 6.548487990630845e-17,
+              "difference_kind": "relative",
+              "expected": "26.8224",
+              "got": 26.8224,
+              "unit": "m/s",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-nautical-mile-km": {
+          "outputs": {
+            "value": {
+              "difference": 2.301974305918251e-17,
+              "difference_kind": "relative",
+              "expected": "18.52",
+              "got": 18.52,
+              "unit": "km",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-pound-kg": {
+          "outputs": {
+            "value": {
+              "difference": 1.6217188900111887e-16,
+              "difference_kind": "relative",
+              "expected": "68.0388555",
+              "got": 68.03885550000001,
+              "unit": "kg",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-sqin-mm2": {
+          "outputs": {
+            "value": {
+              "difference": 4.934018625155386e-17,
+              "difference_kind": "relative",
+              "expected": "1290.32",
+              "got": 1290.32,
+              "unit": "mm^2",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "dim-add-foot-inch": {
+          "outputs": {
+            "value": {
+              "difference": 1.31711497934533e-16,
+              "difference_kind": "relative",
+              "expected": "0.4572",
+              "got": 0.45719999999999994,
+              "unit": "m",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "dim-add-length-mass": {
+          "note": "Cannot convert from 'meter' ([length]) to 'kilogram' ([mass])",
+          "status": "pass"
+        },
+        "dim-add-length-time": {
+          "note": "Cannot convert from 'meter' ([length]) to 'second' ([time])",
+          "status": "pass"
+        },
+        "dim-add-voltage-current": {
+          "note": "Cannot convert from 'volt' ([mass] * [length] ** 2 / [time] ** 3 / [current]) to 'ampere' ([current])",
+          "status": "pass"
+        },
+        "typea-mean-five-readings": {
+          "note": "no type_a feature in Pint or uncertainties",
+          "status": "not_offered"
+        },
+        "typea-mean-four-readings": {
+          "note": "no type_a feature in Pint or uncertainties",
+          "status": "not_offered"
+        },
+        "typeb-rectangular-half-width": {
+          "note": "no type_b feature in Pint or uncertainties",
+          "status": "not_offered"
+        },
+        "typeb-triangular-half-width": {
+          "note": "no type_b feature in Pint or uncertainties",
+          "status": "not_offered"
+        }
+      },
+      "versions": {
+        "Pint": "0.26.2",
+        "numpy": "2.5.5",
+        "uncertainties": "3.2.3"
+      }
+    },
+    {
+      "name": "ucon",
+      "results": {
+        "comb-difference-with-covariance": {
+          "note": "ucon has no input for covariance",
+          "status": "not_offered"
+        },
+        "comb-linear-combination": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 5.122994555891741e-13,
+              "difference_kind": "relative",
+              "expected": "0.632455532034",
+              "got": 0.632455532033676,
+              "unit": "m",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "8",
+              "got": 8.0,
+              "unit": "m",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-product-mixed-units": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 2.67839375801255e-12,
+              "difference_kind": "relative",
+              "expected": "0.0128062484749",
+              "got": 0.0128062484748657,
+              "unit": "W",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "2",
+              "got": 2.0,
+              "unit": "W",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-product-uncorrelated": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 9.407651470915598e-14,
+              "difference_kind": "relative",
+              "expected": "0.447213595500",
+              "got": 0.4472135954999579,
+              "unit": "W",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "20",
+              "got": 20.0,
+              "unit": "W",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-quotient-uncorrelated": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 9.404548303224038e-14,
+              "difference_kind": "relative",
+              "expected": "0.0447213595500",
+              "got": 0.044721359549995794,
+              "unit": "ohm",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "4",
+              "got": 4.0,
+              "unit": "ohm",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-square-as-power": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 3.700743415417188e-17,
+              "difference_kind": "relative",
+              "expected": "0.12",
+              "got": 0.12,
+              "unit": "m^2",
+              "within_tolerance": true
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "9",
+              "got": 9.0,
+              "unit": "m^2",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "comb-square-same-variable": {
+          "outputs": {
+            "combined_standard_uncertainty": {
+              "difference": 0.2928932188134525,
+              "difference_kind": "relative",
+              "expected": "0.04",
+              "got": 0.0282842712474619,
+              "unit": "m^2",
+              "within_tolerance": false
+            },
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "4",
+              "got": 4.0,
+              "unit": "m^2",
+              "within_tolerance": true
+            }
+          },
+          "status": "fail"
+        },
+        "comb-sum-with-covariance": {
+          "note": "ucon has no input for covariance",
+          "status": "not_offered"
+        },
+        "conv-atm-kpa": {
+          "outputs": {
+            "value": {
+              "difference": 2.805004631670763e-17,
+              "difference_kind": "relative",
+              "expected": "101.325",
+              "got": 101.325,
+              "unit": "kPa",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-bar-pa": {
+          "outputs": {
+            "value": {
+              "difference": 1.164153218269348e-16,
+              "difference_kind": "relative",
+              "expected": "250000",
+              "got": 249999.99999999997,
+              "unit": "Pa",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-calth-j": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "2092",
+              "got": 2092.0,
+              "unit": "J",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-degc-k": {
+          "outputs": {
+            "value": {
+              "difference": 7.626150442503172e-17,
+              "difference_kind": "relative",
+              "expected": "298.15",
+              "got": 298.15,
+              "unit": "K",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-degf-degc": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "37",
+              "got": 37.0,
+              "unit": "degC",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-degf-k": {
+          "outputs": {
+            "value": {
+              "difference": 9.752248571444652e-17,
+              "difference_kind": "relative",
+              "expected": "233.15",
+              "got": 233.14999999999998,
+              "unit": "K",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-foot-m": {
+          "outputs": {
+            "value": {
+              "difference": 1.1111943483562372e-16,
+              "difference_kind": "relative",
+              "expected": "1.8288",
+              "got": 1.8288000000000002,
+              "unit": "m",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-inch-mm": {
+          "outputs": {
+            "value": {
+              "difference": 5.594824691024411e-17,
+              "difference_kind": "relative",
+              "expected": "25.4",
+              "got": 25.4,
+              "unit": "mm",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-kmh-ms": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "25",
+              "got": 25.0,
+              "unit": "m/s",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-kwh-j": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "9000000",
+              "got": 9000000.0,
+              "unit": "J",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-litre-m3": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "0.25",
+              "got": 0.25,
+              "unit": "m^3",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-mile-km": {
+          "outputs": {
+            "value": {
+              "difference": 4.378708505967906e-19,
+              "difference_kind": "relative",
+              "expected": "42.1648128",
+              "got": 42.1648128,
+              "unit": "km",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-min-h": {
+          "outputs": {
+            "value": {
+              "difference": 0.0,
+              "difference_kind": "relative",
+              "expected": "1.5",
+              "got": 1.5,
+              "unit": "h",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-mph-ms": {
+          "outputs": {
+            "value": {
+              "difference": 6.548487990630845e-17,
+              "difference_kind": "relative",
+              "expected": "26.8224",
+              "got": 26.8224,
+              "unit": "m/s",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-nautical-mile-km": {
+          "outputs": {
+            "value": {
+              "difference": 2.301974305918251e-17,
+              "difference_kind": "relative",
+              "expected": "18.52",
+              "got": 18.52,
+              "unit": "km",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-pound-kg": {
+          "outputs": {
+            "value": {
+              "difference": 4.6691922871819005e-17,
+              "difference_kind": "relative",
+              "expected": "68.0388555",
+              "got": 68.0388555,
+              "unit": "kg",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "conv-sqin-mm2": {
+          "outputs": {
+            "value": {
+              "difference": 4.934018625155386e-17,
+              "difference_kind": "relative",
+              "expected": "1290.32",
+              "got": 1290.32,
+              "unit": "mm^2",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "dim-add-foot-inch": {
+          "outputs": {
+            "value": {
+              "difference": 1.1111943483562372e-16,
+              "difference_kind": "relative",
+              "expected": "0.4572",
+              "got": 0.45720000000000005,
+              "unit": "m",
+              "within_tolerance": true
+            }
+          },
+          "status": "pass"
+        },
+        "dim-add-length-mass": {
+          "note": "Cannot add Numbers with different dimensions: Dimension(length) vs Dimension(mass)",
+          "status": "pass"
+        },
+        "dim-add-length-time": {
+          "note": "Cannot add Numbers with different dimensions: Dimension(length) vs Dimension(time)",
+          "status": "pass"
+        },
+        "dim-add-voltage-current": {
+          "note": "Cannot add Numbers with different dimensions: Dimension(voltage) vs Dimension(current)",
+          "status": "pass"
+        },
+        "typea-mean-five-readings": {
+          "note": "no type_a feature in ucon",
+          "status": "not_offered"
+        },
+        "typea-mean-four-readings": {
+          "note": "no type_a feature in ucon",
+          "status": "not_offered"
+        },
+        "typeb-rectangular-half-width": {
+          "note": "no type_b feature in ucon",
+          "status": "not_offered"
+        },
+        "typeb-triangular-half-width": {
+          "note": "no type_b feature in ucon",
+          "status": "not_offered"
+        }
+      },
+      "versions": {
+        "ucon": "2.4.2"
+      }
+    }
+  ]
+}
