@@ -41,7 +41,8 @@ Every reference answer must be derivable by a reader from the stated source. No 
 - [x] measurement-uncertainty-mcp added on 24 November 2026 (installed from its repository at commit fe254e0, with the owner's approval; it needs no account when run locally). It passed all 6 pairs it has a tool for.
 - [x] mcp-units (repository commit 913fee9, approved by the owner) and mcp-gnu-units 0.1.1 (package index, in an environment of its own) added on 24 November 2026. Each passed all 20 conversion pairs.
 - [x] Open question answered on 24 November 2026: three more searches found no server that propagates uncertainty through a model to first order. Instead of writing one, an addition to measurement-uncertainty-mcp was prepared: `contrib/measurement-uncertainty-mcp` (a patch with 15 tests; passes all eight propagation pairs).
-- [ ] Offer the addition to the author of measurement-uncertainty-mcp and report the fresh-install defect. Drafts: `reports/2026-11-24-measurement-uncertainty-mcp.md`. Needs the owner's confirmation. A pull request there also needs a fork, which the owner has to create or approve.
+- [x] Offered the addition to the author of measurement-uncertainty-mcp (issue 9 there) and reported the fresh-install defect (issue 8), 24 November 2026.
+- [ ] Watch issues 8 and 9 there and issues 395 and 396 at ucon. If the author accepts the offer, a pull request needs a fork of his repository in the slovo-lab organization, which the owner has to create or approve.
 - [ ] When a released server has first-order propagation, add the task to its adapter. The server has no units, so decide first how pairs that mix units are put to it.
 
 ## Open points
