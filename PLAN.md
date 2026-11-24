@@ -42,8 +42,17 @@ Every reference answer must be derivable by a reader from the stated source. No 
 - [x] mcp-units (repository commit 913fee9, approved by the owner) and mcp-gnu-units 0.1.1 (package index, in an environment of its own) added on 24 November 2026. Each passed all 20 conversion pairs.
 - [x] Open question answered on 24 November 2026: three more searches found no server that propagates uncertainty through a model to first order. Instead of writing one, an addition to measurement-uncertainty-mcp was prepared: `contrib/measurement-uncertainty-mcp` (a patch with 15 tests; passes all eight propagation pairs).
 - [x] Offered the addition to the author of measurement-uncertainty-mcp (issue 9 there) and reported the fresh-install defect (issue 8), 24 November 2026.
-- [ ] Watch issues 8 and 9 there and issues 395 and 396 at ucon. If the author accepts the offer, a pull request needs a fork of his repository in the slovo-lab organization, which the owner has to create or approve.
+- [x] Search for what exists before building the new kinds of check and the kit for authors. Done 24 November 2026, evening: [`docs/2026-11-24-new-checks-prior-art.md`](docs/2026-11-24-new-checks-prior-art.md). Result: no kit and no audit of our own (both exist); kinds 1, 3 and 4 go into the format; kind 2 goes into the rules of a round.
+- [ ] Write the rules of a monthly round in `ROUNDS.md`, with a Russian version, **before the first round on 1 December 2026**. A fixed set of pairs announced in advance; every tool installed fresh on the day, with one line per tool saying whether it installed and started and which versions were resolved; a dated report in both languages; earlier rounds kept unchanged; no ranking and no word "certified". Read first how proficiency testing schemes describe a round, and describe it in our own words (ISO/IEC 17043 may not be copied). The day and "24 November counts as round 0" are proposed and not yet confirmed by the owner.
+- [ ] Propose format version 2 in `FORMAT.md`, once, for three kinds of pair: a question with two answers (the "no answer" half exists as `refuse`); a relation between a tool's own answers, called metamorphic testing, where the source says why the relation holds; and a list of labels an answer must carry (unit, zone, method). Write the checker and its tests with the proposal.
+- [ ] Coordinates: read the Australian manual and a definition of UTM zones (including the Norway exception) in full, check their reuse terms, then write the first pairs for lengths, areas and conversions.
+- [ ] Read the documentation of `mcp-assert` and the suites repository linked from `mcp-test-harness`; decide whether and how to give Measure's pairs in a form such a framework can run. Look for a numeric tolerance and for "must refuse".
+- [ ] Add an adapter for the GUM Tree Calculator (`gtc` on the package index, MIT).
 - [ ] When a released server has first-order propagation, add the task to its adapter. The server has no units, so decide first how pairs that mix units are put to it.
+
+## Every session
+
+Not a step that can be ticked: read the outside issues and record what is there in [`outreach/issues.md`](outreach/issues.md) (fourteen issues as of 24 November 2026). If the author of measurement-uncertainty-mcp accepts the offer in issue 9, a pull request needs a fork of his repository in the slovo-lab organization, which the owner has to create or approve. If an author publishes a fix, rerun and record it in the results notes. This was a checkbox until 24 November 2026; it was moved here because a step that is never finished hid the steps after it.
 
 ## Open points
 
