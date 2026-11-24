@@ -29,6 +29,7 @@ TASK_OUTPUTS = {
     "type_a": {"mean", "standard_uncertainty"},
     "type_b": {"standard_uncertainty"},
     "propagate": {"value", "combined_standard_uncertainty"},
+    "add": {"value"},
 }
 
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
@@ -85,6 +86,18 @@ def _check_inputs(errors, where, task, inputs):
         if hw is not None and hw <= 0:
             errors.append("%s: 'half_width' must be positive" % where)
         _text(errors, where, inputs, "unit")
+    elif task == "add":
+        terms = inputs.get("terms")
+        if not isinstance(terms, list) or len(terms) < 2:
+            errors.append("%s: 'terms' must be a list of at least 2" % where)
+        else:
+            for i, term in enumerate(terms):
+                twhere = "%s terms[%d]" % (where, i)
+                if not isinstance(term, dict):
+                    errors.append("%s: must be an object" % twhere)
+                    continue
+                _num(errors, twhere, term, "value")
+                _text(errors, twhere, term, "unit")
     elif task == "propagate":
         _text(errors, where, inputs, "model")
         variables = inputs.get("variables")
@@ -133,6 +146,9 @@ def _check_inputs(errors, where, task, inputs):
 def _check_reference(errors, where, task, reference):
     if not isinstance(reference, dict):
         errors.append("%s: 'reference' must be an object" % where)
+        return
+    if "outcome" in reference and reference["outcome"] != "refuse":
+        errors.append("%s: the only known 'outcome' is 'refuse'" % where)
         return
     if reference.get("outcome") == "refuse":
         if "outputs" in reference:
