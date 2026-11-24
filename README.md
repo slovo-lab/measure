@@ -24,13 +24,13 @@ Measure calculates nothing new. It only compares other tools' answers with the r
 
 ## Results so far
 
-| | Pint + uncertainties | ucon | ucon-mcp (server) | unit-converter-mcp (server) |
-|---|---|---|---|---|
-| Pairs the tool has a function for | 32 | 28 | 18 | 18 |
-| Passed | 32 | 27 | 18 | 18 |
-| Not offered by the tool | 11 | 15 | 25 | 25 |
+| | Pint + uncertainties | ucon | ucon-mcp (server) | unit-converter-mcp (server) | measurement-uncertainty-mcp (server) |
+|---|---|---|---|---|---|
+| Pairs the tool has a function for | 32 | 28 | 18 | 18 | 6 |
+| Passed | 32 | 27 | 18 | 18 | 6 |
+| Not offered by the tool | 11 | 15 | 25 | 25 | 37 |
 
-Versions: Pint 0.26.2 with uncertainties 3.2.3; ucon 2.4.2; ucon-tools 0.13.0; unit-converter-mcp 0.1.2. The first two were called as Python libraries. The two marked "(server)" were started as servers for AI agents and called through their tools, the way an agent calls them. This is how the tools answered 43 questions on one date. It is not a ranking and not a certificate. The one answer that differed, and the other observations, are explained in [RESULTS.md](RESULTS.md).
+Versions: Pint 0.26.2 with uncertainties 3.2.3; ucon 2.4.2; ucon-tools 0.13.0; unit-converter-mcp 0.1.2; measurement-uncertainty-mcp 0.1.0 (from its repository, commit fe254e0). The first two were called as Python libraries. The three marked "(server)" were started as servers for AI agents and called through their tools, the way an agent calls them. This is how the tools answered 43 questions on one date. It is not a ranking and not a certificate. The one answer that differed, and the other observations, are explained in [RESULTS.md](RESULTS.md).
 
 ## What changed on day one
 

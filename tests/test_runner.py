@@ -379,6 +379,47 @@ class UnitConverterMcpAdapterTests(ServerAdapterBase, unittest.TestCase):
                         self.assertTrue(unit in UNITS or unit in NO_UNIT)
 
 
+HAVE_MU_MCP = _have("measurement_uncertainty_mcp", "measurement-uncertainty-mcp")
+
+
+@unittest.skipUnless(HAVE_MU_MCP, "measurement-uncertainty-mcp is not installed")
+class MeasurementUncertaintyMcpAdapterTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.measurement_uncertainty_mcp import MeasurementUncertaintyMcpAdapter
+        cls.adapter = MeasurementUncertaintyMcpAdapter()
+        cls.report = runner.run(PAIRS, cls.adapter)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.adapter.close()
+
+    def result(self, pair_id):
+        return next(r for r in self.report["results"] if r["id"] == pair_id)
+
+    def test_run_has_no_errors(self):
+        errors = [(r["id"], r["note"]) for r in self.report["results"] if r["verdict"] == "error"]
+        self.assertEqual(errors, [])
+
+    def test_only_its_three_tasks_are_attempted(self):
+        task = {p["id"]: p["task"] for p in PAIRS}
+        for r in self.report["results"]:
+            if task[r["id"]] not in ("type_a", "type_b", "effective_dof"):
+                with self.subTest(pair=r["id"]):
+                    self.assertEqual(r["verdict"], "unsupported")
+
+    def test_type_a_returns_both_outputs_from_the_server(self):
+        outputs = {o["name"]: o["got"] for o in self.result("typea-mean-five-readings")["outputs"]}
+        self.assertEqual(set(outputs), {"mean", "standard_uncertainty"})
+        self.assertIsInstance(outputs["standard_uncertainty"], float)
+
+    def test_coverage_probability_is_not_turned_into_a_factor_by_the_adapter(self):
+        self.assertEqual(self.result("typeb-normal-95-interval")["verdict"], "unsupported")
+
+    def test_propagation_is_not_done_by_the_adapter(self):
+        self.assertEqual(self.result("comb-product-uncorrelated")["verdict"], "unsupported")
+
+
 class McpClient(unittest.TestCase):
     def test_missing_command_is_reported(self):
         from bench.mcp_client import ServerError, find_command

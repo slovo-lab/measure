@@ -13,6 +13,8 @@ ADAPTERS = {
     "ucon": ("bench.adapters.ucon_adapter", "UconAdapter"),
     "ucon-mcp": ("bench.adapters.ucon_mcp", "UconMcpAdapter"),
     "unit-converter-mcp": ("bench.adapters.unit_converter_mcp", "UnitConverterMcpAdapter"),
+    "measurement-uncertainty-mcp": ("bench.adapters.measurement_uncertainty_mcp",
+                                    "MeasurementUncertaintyMcpAdapter"),
 }
 
 
