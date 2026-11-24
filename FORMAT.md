@@ -55,11 +55,11 @@ More tasks will be added when the first pair that needs them is written, and the
 
 - `exact: true` means the stated value is the whole answer. `exact: false` means it is rounded to 12 significant digits.
 - `tolerance` says how far a tool's answer may be from the reference and still pass: `relative` (a fraction of the reference value) or `absolute` (in the output unit). The tolerances in version 1 only allow for ordinary double-precision arithmetic: `1e-12` for exact answers and `1e-9` for rounded ones. They are not a judgment about how much error is acceptable in practice.
-- A pair where the correct behaviour is to refuse (for example, adding a length to a time) has `"reference": { "outcome": "refuse" }` and no outputs. A tool passes if it reports an error or declines, and fails if it returns any number. The first such pair, `dim-add-length-time`, was added on 24 November 2026.
+- A pair where the correct behaviour is to refuse (for example, adding a length to a time) has `"reference": { "outcome": "refuse" }` and no outputs. A tool passes if it reports an error or declines, and fails if it returns any number. The first such pair, `dim-add-length-time`, was added on 24 November 2026. The pair `dim-add-foot-inch` is the opposite control: a sum of two lengths in different units, which has an answer, so that a tool cannot pass this category by refusing every sum.
 
 ## Units
 
-Units are written in plain ASCII: `mm`, `in`, `lb`, `kg`, `km/h`, `m/s`, `kW.h`, `J`, `degC`, `degF`, `K`, `mm^2`, `m`, `s`. `degC` and `degF` in a `convert` task mean a temperature, not a temperature interval. Each adapter translates these spellings into the spelling its tool expects.
+Units are written in plain ASCII: `mm`, `in`, `lb`, `kg`, `km/h`, `m/s`, `kW.h`, `J`, `degC`, `degF`, `K`, `mm^2`, `m`, `s`, `ft`, `mi`, `mi/h`, `nmi` (nautical mile), `km`, `L`, `m^3`, `atm`, `kPa`, `bar`, `Pa`, `cal_th` (thermochemical calorie), `in^2`, `min`, `h`, `V`, `mV`, `A`, `W`, `ohm`, `m^2`. `degC` and `degF` in a `convert` task mean a temperature, not a temperature interval. Each adapter translates these spellings into the spelling its tool expects.
 
 ## Checking a file
 

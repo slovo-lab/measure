@@ -1,0 +1,1125 @@
+{
+  "date": "2026-11-24",
+  "pairs": 33,
+  "python": "3.13.18",
+  "reports": [
+    {
+      "results": [
+        {
+          "category": "unit-conversion",
+          "id": "conv-inch-mm",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.4210854715202005e-15,
+              "got": 25.4,
+              "name": "value",
+              "ok": true,
+              "reference": "25.4",
+              "relative_difference": -5.594824691024411e-17,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-pound-kg",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 1.1033989721909166e-14,
+              "got": 68.03885550000001,
+              "name": "value",
+              "ok": true,
+              "reference": "68.0388555",
+              "relative_difference": 1.6217188900111887e-16,
+              "unit": "kg"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kmh-ms",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 25.0,
+              "name": "value",
+              "ok": true,
+              "reference": "25",
+              "relative_difference": 0.0,
+              "unit": "m/s"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kwh-j",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 9000000.0,
+              "name": "value",
+              "ok": true,
+              "reference": "9000000",
+              "relative_difference": 0.0,
+              "unit": "J"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.2737367544323207e-14,
+              "got": 298.15,
+              "name": "value",
+              "ok": true,
+              "reference": "298.15",
+              "relative_difference": -7.626150442503172e-17,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-degc",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 5.684341886080802e-14,
+              "got": 37.00000000000006,
+              "name": "value",
+              "ok": true,
+              "reference": "37",
+              "relative_difference": 1.5363086178596762e-15,
+              "unit": "degC"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-five-readings",
+          "note": "no function for a Type A evaluation in Pint or uncertainties",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-rectangular-half-width",
+          "note": "no function for a Type B evaluation in Pint or uncertainties",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-uncorrelated",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 20.0,
+              "name": "value",
+              "ok": true,
+              "reference": "20",
+              "relative_difference": 0.0,
+              "unit": "W"
+            },
+            {
+              "difference": -4.201678524395902e-14,
+              "got": 0.447213595499958,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.447213595500",
+              "relative_difference": -9.395238800149362e-14,
+              "unit": "W"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-sum-with-covariance",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 80.0,
+              "name": "value",
+              "ok": true,
+              "reference": "80",
+              "relative_difference": 0.0,
+              "unit": "mm"
+            },
+            {
+              "difference": 1.457167719820518e-19,
+              "got": 0.007,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.007",
+              "relative_difference": 2.0816681711721685e-17,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-time",
+          "note": "refused: Cannot convert from 'meter' ([length]) to 'second' ([time])",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-foot-m",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.4087398742267396e-16,
+              "got": 1.8287999999999998,
+              "name": "value",
+              "ok": true,
+              "reference": "1.8288",
+              "relative_difference": -1.31711497934533e-16,
+              "unit": "m"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mile-km",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.8462742445990442e-17,
+              "got": 42.1648128,
+              "name": "value",
+              "ok": true,
+              "reference": "42.1648128",
+              "relative_difference": -4.378708505967906e-19,
+              "unit": "km"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mph-ms",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.7564616427989677e-15,
+              "got": 26.8224,
+              "name": "value",
+              "ok": true,
+              "reference": "26.8224",
+              "relative_difference": -6.548487990630845e-17,
+              "unit": "m/s"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-nautical-mile-km",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -4.263256414560601e-16,
+              "got": 18.52,
+              "name": "value",
+              "ok": true,
+              "reference": "18.52",
+              "relative_difference": -2.301974305918251e-17,
+              "unit": "km"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-litre-m3",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 5.551115123125783e-17,
+              "got": 0.25000000000000006,
+              "name": "value",
+              "ok": true,
+              "reference": "0.25",
+              "relative_difference": 2.220446049250313e-16,
+              "unit": "m^3"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-atm-kpa",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 2.842170943040401e-15,
+              "got": 101.325,
+              "name": "value",
+              "ok": true,
+              "reference": "101.325",
+              "relative_difference": 2.805004631670763e-17,
+              "unit": "kPa"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-bar-pa",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 250000.0,
+              "name": "value",
+              "ok": true,
+              "reference": "250000",
+              "relative_difference": 0.0,
+              "unit": "Pa"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-calth-j",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 2092.0,
+              "name": "value",
+              "ok": true,
+              "reference": "2092",
+              "relative_difference": 0.0,
+              "unit": "J"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-sqin-mm2",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -6.366462912410498e-14,
+              "got": 1290.32,
+              "name": "value",
+              "ok": true,
+              "reference": "1290.32",
+              "relative_difference": -4.934018625155386e-17,
+              "unit": "mm^2"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 5.684341886080802e-15,
+              "got": 233.15,
+              "name": "value",
+              "ok": true,
+              "reference": "233.15",
+              "relative_difference": 2.438062142861163e-17,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-min-h",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 1.5,
+              "name": "value",
+              "ok": true,
+              "reference": "1.5",
+              "relative_difference": 0.0,
+              "unit": "h"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-mass",
+          "note": "refused: Cannot convert from 'meter' ([length]) to 'kilogram' ([mass])",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-voltage-current",
+          "note": "refused: Cannot convert from 'volt' ([mass] * [length] ** 2 / [time] ** 3 / [current]) to 'ampere' ([current])",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-foot-inch",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -6.021849685566849e-17,
+              "got": 0.45719999999999994,
+              "name": "value",
+              "ok": true,
+              "reference": "0.4572",
+              "relative_difference": -1.31711497934533e-16,
+              "unit": "m"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-quotient-uncorrelated",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 4.0,
+              "name": "value",
+              "ok": true,
+              "reference": "4",
+              "relative_difference": 0.0,
+              "unit": "ohm"
+            },
+            {
+              "difference": -4.2127807546421534e-15,
+              "got": 0.04472135954999579,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.0447213595500",
+              "relative_difference": -9.420064141681832e-14,
+              "unit": "ohm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-difference-with-covariance",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 60.0,
+              "name": "value",
+              "ok": true,
+              "reference": "60",
+              "relative_difference": 0.0,
+              "unit": "mm"
+            },
+            {
+              "difference": -7.142721425904596e-16,
+              "got": 0.004242640687119286,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.00424264068712",
+              "relative_difference": -1.6835555854609118e-13,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-same-variable",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 4.0,
+              "name": "value",
+              "ok": true,
+              "reference": "4",
+              "relative_difference": 0.0,
+              "unit": "m^2"
+            },
+            {
+              "difference": 8.326672684688674e-19,
+              "got": 0.04,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.04",
+              "relative_difference": 2.0816681711721685e-17,
+              "unit": "m^2"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-mixed-units",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 2.0,
+              "name": "value",
+              "ok": true,
+              "reference": "2",
+              "relative_difference": 0.0,
+              "unit": "W"
+            },
+            {
+              "difference": -3.430191070220587e-14,
+              "got": 0.012806248474865698,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.0128062484749",
+              "relative_difference": -2.6785292171580893e-12,
+              "unit": "W"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-linear-combination",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 8.0,
+              "name": "value",
+              "ok": true,
+              "reference": "8",
+              "relative_difference": 0.0,
+              "unit": "m"
+            },
+            {
+              "difference": -3.2400662474537965e-13,
+              "got": 0.632455532033676,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.632455532034",
+              "relative_difference": -5.122994555891741e-13,
+              "unit": "m"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-four-readings",
+          "note": "no function for a Type A evaluation in Pint or uncertainties",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-triangular-half-width",
+          "note": "no function for a Type B evaluation in Pint or uncertainties",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-as-power",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 9.0,
+              "name": "value",
+              "ok": true,
+              "reference": "9",
+              "relative_difference": 0.0,
+              "unit": "m^2"
+            },
+            {
+              "difference": -4.440892098500626e-18,
+              "got": 0.12,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.12",
+              "relative_difference": -3.700743415417188e-17,
+              "unit": "m^2"
+            }
+          ],
+          "verdict": "pass"
+        }
+      ],
+      "summary": {
+        "error": 0,
+        "fail": 0,
+        "pass": 29,
+        "unsupported": 4
+      },
+      "tool": "Pint + uncertainties",
+      "versions": {
+        "numpy": "2.5.5",
+        "pint": "0.26.2",
+        "uncertainties": "3.2.3"
+      }
+    },
+    {
+      "results": [
+        {
+          "category": "unit-conversion",
+          "id": "conv-inch-mm",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.4210854715202005e-15,
+              "got": 25.4,
+              "name": "value",
+              "ok": true,
+              "reference": "25.4",
+              "relative_difference": -5.594824691024411e-17,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-pound-kg",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -3.1768649932928383e-15,
+              "got": 68.0388555,
+              "name": "value",
+              "ok": true,
+              "reference": "68.0388555",
+              "relative_difference": -4.6691922871819005e-17,
+              "unit": "kg"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kmh-ms",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 25.0,
+              "name": "value",
+              "ok": true,
+              "reference": "25",
+              "relative_difference": 0.0,
+              "unit": "m/s"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kwh-j",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 9000000.0,
+              "name": "value",
+              "ok": true,
+              "reference": "9000000",
+              "relative_difference": 0.0,
+              "unit": "J"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.2737367544323207e-14,
+              "got": 298.15,
+              "name": "value",
+              "ok": true,
+              "reference": "298.15",
+              "relative_difference": -7.626150442503172e-17,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-degc",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 37.0,
+              "name": "value",
+              "ok": true,
+              "reference": "37",
+              "relative_difference": 0.0,
+              "unit": "degC"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-five-readings",
+          "note": "has mean() and std() for arrays, but no function that returns the standard uncertainty of the mean",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-rectangular-half-width",
+          "note": "no function for a Type B evaluation",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-uncorrelated",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 20.0,
+              "name": "value",
+              "ok": true,
+              "reference": "20",
+              "relative_difference": 0.0,
+              "unit": "W"
+            },
+            {
+              "difference": -4.207229639519028e-14,
+              "got": 0.4472135954999579,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.447213595500",
+              "relative_difference": -9.407651470915598e-14,
+              "unit": "W"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-sum-with-covariance",
+          "note": "no way to state a covariance between inputs",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-time",
+          "note": "refused: Cannot add Numbers with different dimensions: Dimension(length) vs Dimension(time)",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-foot-m",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 2.0321522242738866e-16,
+              "got": 1.8288000000000002,
+              "name": "value",
+              "ok": true,
+              "reference": "1.8288",
+              "relative_difference": 1.1111943483562372e-16,
+              "unit": "m"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mile-km",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.8462742445990442e-17,
+              "got": 42.1648128,
+              "name": "value",
+              "ok": true,
+              "reference": "42.1648128",
+              "relative_difference": -4.378708505967906e-19,
+              "unit": "km"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mph-ms",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.7564616427989677e-15,
+              "got": 26.8224,
+              "name": "value",
+              "ok": true,
+              "reference": "26.8224",
+              "relative_difference": -6.548487990630845e-17,
+              "unit": "m/s"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-nautical-mile-km",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -4.263256414560601e-16,
+              "got": 18.52,
+              "name": "value",
+              "ok": true,
+              "reference": "18.52",
+              "relative_difference": -2.301974305918251e-17,
+              "unit": "km"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-litre-m3",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 0.25,
+              "name": "value",
+              "ok": true,
+              "reference": "0.25",
+              "relative_difference": 0.0,
+              "unit": "m^3"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-atm-kpa",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 2.842170943040401e-15,
+              "got": 101.325,
+              "name": "value",
+              "ok": true,
+              "reference": "101.325",
+              "relative_difference": 2.805004631670763e-17,
+              "unit": "kPa"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-bar-pa",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.9103830456733704e-11,
+              "got": 249999.99999999997,
+              "name": "value",
+              "ok": true,
+              "reference": "250000",
+              "relative_difference": -1.164153218269348e-16,
+              "unit": "Pa"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-calth-j",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 2092.0,
+              "name": "value",
+              "ok": true,
+              "reference": "2092",
+              "relative_difference": 0.0,
+              "unit": "J"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-sqin-mm2",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -6.366462912410498e-14,
+              "got": 1290.32,
+              "name": "value",
+              "ok": true,
+              "reference": "1290.32",
+              "relative_difference": -4.934018625155386e-17,
+              "unit": "mm^2"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.2737367544323207e-14,
+              "got": 233.14999999999998,
+              "name": "value",
+              "ok": true,
+              "reference": "233.15",
+              "relative_difference": -9.752248571444652e-17,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-min-h",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 1.5,
+              "name": "value",
+              "ok": true,
+              "reference": "1.5",
+              "relative_difference": 0.0,
+              "unit": "h"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-mass",
+          "note": "refused: Cannot add Numbers with different dimensions: Dimension(length) vs Dimension(mass)",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-voltage-current",
+          "note": "refused: Cannot add Numbers with different dimensions: Dimension(voltage) vs Dimension(current)",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-foot-inch",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 5.0803805606847164e-17,
+              "got": 0.45720000000000005,
+              "name": "value",
+              "ok": true,
+              "reference": "0.4572",
+              "relative_difference": 1.1111943483562372e-16,
+              "unit": "m"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-quotient-uncorrelated",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 4.0,
+              "name": "value",
+              "ok": true,
+              "reference": "4",
+              "relative_difference": 0.0,
+              "unit": "ohm"
+            },
+            {
+              "difference": -4.205841860738246e-15,
+              "got": 0.044721359549995794,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.0447213595500",
+              "relative_difference": -9.404548303224038e-14,
+              "unit": "ohm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-difference-with-covariance",
+          "note": "no way to state a covariance between inputs",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-same-variable",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 4.0,
+              "name": "value",
+              "ok": true,
+              "reference": "4",
+              "relative_difference": 0.0,
+              "unit": "m^2"
+            },
+            {
+              "difference": -0.0117157287525381,
+              "got": 0.0282842712474619,
+              "name": "combined_standard_uncertainty",
+              "ok": false,
+              "reference": "0.04",
+              "relative_difference": -0.2928932188134525,
+              "unit": "m^2"
+            }
+          ],
+          "verdict": "fail"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-mixed-units",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 2.0,
+              "name": "value",
+              "ok": true,
+              "reference": "2",
+              "relative_difference": 0.0,
+              "unit": "W"
+            },
+            {
+              "difference": -3.4300175978729896e-14,
+              "got": 0.0128062484748657,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.0128062484749",
+              "relative_difference": -2.67839375801255e-12,
+              "unit": "W"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-linear-combination",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 8.0,
+              "name": "value",
+              "ok": true,
+              "reference": "8",
+              "relative_difference": 0.0,
+              "unit": "m"
+            },
+            {
+              "difference": -3.2400662474537965e-13,
+              "got": 0.632455532033676,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.632455532034",
+              "relative_difference": -5.122994555891741e-13,
+              "unit": "m"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-four-readings",
+          "note": "has mean() and std() for arrays, but no function that returns the standard uncertainty of the mean",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-triangular-half-width",
+          "note": "no function for a Type B evaluation",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-as-power",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 9.0,
+              "name": "value",
+              "ok": true,
+              "reference": "9",
+              "relative_difference": 0.0,
+              "unit": "m^2"
+            },
+            {
+              "difference": -4.440892098500626e-18,
+              "got": 0.12,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.12",
+              "relative_difference": -3.700743415417188e-17,
+              "unit": "m^2"
+            }
+          ],
+          "verdict": "pass"
+        }
+      ],
+      "summary": {
+        "error": 0,
+        "fail": 1,
+        "pass": 26,
+        "unsupported": 6
+      },
+      "tool": "ucon",
+      "versions": {
+        "ucon": "2.4.2"
+      }
+    }
+  ]
+}

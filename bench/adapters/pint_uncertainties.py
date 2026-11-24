@@ -22,6 +22,13 @@ UNITS = {
     "degC": "degC", "degF": "degF", "K": "kelvin",
     "V": "volt", "A": "ampere", "W": "watt",
     "mm^2": "millimeter ** 2",
+    "ft": "foot", "mi": "mile", "mi/h": "mile / hour", "nmi": "nautical_mile",
+    "km": "kilometer", "L": "liter", "m^3": "meter ** 3", "m^2": "meter ** 2",
+    "in^2": "inch ** 2",
+    "atm": "standard_atmosphere", "kPa": "kilopascal", "bar": "bar", "Pa": "pascal",
+    "cal_th": "thermochemical_calorie",
+    "min": "minute", "h": "hour",
+    "mV": "millivolt", "ohm": "ohm",
 }
 
 

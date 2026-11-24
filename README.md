@@ -2,7 +2,17 @@
 
 *Русская версия: [README.ru.md](README.ru.md)*
 
-**Status: in progress. The data format ([FORMAT.md](FORMAT.md)) and the first 11 reference pairs ([pairs/pairs.json](pairs/pairs.json)) exist, and so does a runner with two adapters (Pint with `uncertainties`, and ucon). The first results table will be published at 30 pairs. The plan is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
+**Status: first release, version 0.1.0, 24 November 2026. 33 reference pairs and two tools tested; the results are in [RESULTS.md](RESULTS.md) and the plan for what comes next is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
+
+## First results
+
+| | Pint + uncertainties | ucon |
+|---|---|---|
+| Pairs the tool has a function for | 29 | 27 |
+| Passed | 29 | 26 |
+| Not offered by the tool | 4 | 6 |
+
+Versions: Pint 0.26.2 with uncertainties 3.2.3, and ucon 2.4.2, called as Python libraries. This is how the tools answered 33 questions on one date. It is not a ranking and not a certificate. The one answer that differed, and one more observation, are explained in [RESULTS.md](RESULTS.md).
 
 ## What changed on day one
 
@@ -42,6 +52,7 @@ python3 -m unittest discover -s tests        # checks the pairs and the runner
 pip install -r requirements-adapters.txt     # the tools under test
 python3 -m bench pint                        # puts every pair to Pint + uncertainties
 python3 -m bench ucon                        # the same for ucon
+python3 tools/make_results.py                # runs both and rewrites RESULTS.md
 ```
 
 The runner gives each pair one of four verdicts: `pass`, `fail`, `unsupported` (the tool has no function for that kind of task, which is not a failure) or `error`. An adapter only passes the question to the tool; it never does the calculation itself.

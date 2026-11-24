@@ -22,6 +22,14 @@ UNITS = {
     "degC": "degC", "degF": "degF", "K": "K",
     "V": "V", "A": "A", "W": "W",
     "mm^2": "mm^2",
+    # ucon reads "nmi" as nano-mile (prefix n + mi), so the nautical mile is
+    # given by ucon's own name for it. See results/2026-11-24-notes.md.
+    "ft": "ft", "mi": "mi", "mi/h": "mi/h", "nmi": "nautical_mile",
+    "km": "km", "L": "L", "m^3": "m^3", "m^2": "m^2", "in^2": "in^2",
+    "atm": "atm", "kPa": "kPa", "bar": "bar", "Pa": "Pa",
+    "cal_th": "cal_th",
+    "min": "min", "h": "h",
+    "mV": "mV", "ohm": "ohm",
 }
 
 

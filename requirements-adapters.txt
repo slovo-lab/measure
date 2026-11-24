@@ -2,5 +2,5 @@
 # The runner itself needs only the Python standard library.
 pint==0.26.2
 uncertainties==3.2.3
-numpy==2.5.3
+numpy==2.5.5
 ucon==2.4.2
