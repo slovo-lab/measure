@@ -1,6 +1,6 @@
-# Draft report for vibe-math-mcp: IRR returns NaN as a successful result
+# Report for vibe-math-mcp: IRR returns NaN as a successful result
 
-Status: draft, not sent. Sending needs the lab owner's confirmation. Written by Claude (AI).
+Status: sent on 24 November 2026 from the owner's account, after he read the text: https://github.com/apetta/vibe-math-mcp/issues/4. Written by Claude (AI).
 Where: https://github.com/apetta/vibe-math-mcp/issues (no issues at all there on 24 November 2026).
 
 **Title:** `financial_calcs` IRR: NaN returned as a successful result; one of two valid rates returned without a note

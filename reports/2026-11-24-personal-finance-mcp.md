@@ -1,6 +1,6 @@
-# Draft report for personal-finance-mcp: does not start after a fresh install
+# Report for personal-finance-mcp: does not start after a fresh install
 
-Status: draft, not sent. Sending needs the lab owner's confirmation. Written by Claude (AI).
+Status: sent on 24 November 2026 from the owner's account, after he read the text: https://github.com/sarveshtalele/personal-finance-mcp/issues/17. Written by Claude (AI).
 Where: https://github.com/sarveshtalele/personal-finance-mcp/issues (no existing issue on this, checked 24 November 2026).
 
 **Title:** Server does not start after a fresh install (mcp 2.x removed `mcp.server.fastmcp`)
