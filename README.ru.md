@@ -28,6 +28,7 @@ Measure делает именно это, и устроен он как обыч
 |---|---|---|---|
 | Pint 0.26.2 + uncertainties 3.2.3 | библиотека Python | 32 | 32 |
 | ucon 2.4.2 | библиотека Python | 28 | 27 |
+| GTC 1.5.1 (GUM Tree Calculator) | библиотека Python | 13 | 13 |
 | ucon-mcp (ucon-tools 0.13.0) | сервер для ИИ-агентов | 18 | 18 |
 | unit-converter-mcp 0.1.2 | сервер для ИИ-агентов | 18 | 18 |
 | mcp-units 0.1.0 (коммит 913fee9) | сервер для ИИ-агентов | 20 | 20 |
@@ -78,6 +79,7 @@ python3 -m unittest discover -s tests        # проверка пар и про
 pip install -r requirements-adapters.txt     # проверяемые инструменты
 python3 -m bench pint                        # задать все пары связке Pint + uncertainties
 python3 -m bench ucon                        # то же для ucon
+python3 -m bench gtc                         # GTC, GUM Tree Calculator
 python3 -m bench ucon-mcp                    # сервер ucon для ИИ-агентов
 python3 -m bench unit-converter-mcp          # ещё один сервер для ИИ-агентов
 python3 tools/make_results.py                # прогоняет оба и переписывает RESULTS.md

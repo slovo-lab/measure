@@ -1286,6 +1286,534 @@
         {
           "category": "unit-conversion",
           "id": "conv-inch-mm",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-pound-kg",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kmh-ms",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kwh-j",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-k",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-degc",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-five-readings",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -7.105427357601002e-16,
+              "got": 10.2,
+              "name": "mean",
+              "ok": true,
+              "reference": "10.2",
+              "relative_difference": -6.966105252550002e-17,
+              "unit": "mm"
+            },
+            {
+              "difference": -4.512337729375986e-14,
+              "got": 0.07071067811865488,
+              "name": "standard_uncertainty",
+              "ok": true,
+              "reference": "0.0707106781187",
+              "relative_difference": -6.381409214887252e-13,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-rectangular-half-width",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.87092837202556e-14,
+              "got": 0.02886751345948129,
+              "name": "standard_uncertainty",
+              "ok": true,
+              "reference": "0.0288675134595",
+              "relative_difference": -6.481085995336591e-13,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-uncorrelated",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 20.0,
+              "name": "value",
+              "ok": true,
+              "reference": "20",
+              "relative_difference": 0.0,
+              "unit": "W"
+            },
+            {
+              "difference": -4.201678524395902e-14,
+              "got": 0.447213595499958,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.447213595500",
+              "relative_difference": -9.395238800149362e-14,
+              "unit": "W"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-sum-with-covariance",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 80.0,
+              "name": "value",
+              "ok": true,
+              "reference": "80",
+              "relative_difference": 0.0,
+              "unit": "mm"
+            },
+            {
+              "difference": 1.457167719820518e-19,
+              "got": 0.007,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.007",
+              "relative_difference": 2.0816681711721685e-17,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-time",
+          "note": "GTC has no units of measurement, so it cannot tell whether terms are of the same kind",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-foot-m",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mile-km",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mph-ms",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-nautical-mile-km",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-litre-m3",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-atm-kpa",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-bar-pa",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-calth-j",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-sqin-mm2",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-k",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-min-h",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-mass",
+          "note": "GTC has no units of measurement, so it cannot tell whether terms are of the same kind",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-voltage-current",
+          "note": "GTC has no units of measurement, so it cannot tell whether terms are of the same kind",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-foot-inch",
+          "note": "GTC has no units of measurement, so it cannot tell whether terms are of the same kind",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-quotient-uncorrelated",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 4.0,
+              "name": "value",
+              "ok": true,
+              "reference": "4",
+              "relative_difference": 0.0,
+              "unit": "ohm"
+            },
+            {
+              "difference": -4.2127807546421534e-15,
+              "got": 0.04472135954999579,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.0447213595500",
+              "relative_difference": -9.420064141681832e-14,
+              "unit": "ohm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-difference-with-covariance",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 60.0,
+              "name": "value",
+              "ok": true,
+              "reference": "60",
+              "relative_difference": 0.0,
+              "unit": "mm"
+            },
+            {
+              "difference": -7.142721425904596e-16,
+              "got": 0.004242640687119286,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.00424264068712",
+              "relative_difference": -1.6835555854609118e-13,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-same-variable",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 4.0,
+              "name": "value",
+              "ok": true,
+              "reference": "4",
+              "relative_difference": 0.0,
+              "unit": "m^2"
+            },
+            {
+              "difference": 8.326672684688674e-19,
+              "got": 0.04,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.04",
+              "relative_difference": 2.0816681711721685e-17,
+              "unit": "m^2"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-mixed-units",
+          "note": "GTC has no units of measurement; this pair needs a unit conversion or a check of units on the way",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-linear-combination",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 8.0,
+              "name": "value",
+              "ok": true,
+              "reference": "8",
+              "relative_difference": 0.0,
+              "unit": "m"
+            },
+            {
+              "difference": -3.2400662474537965e-13,
+              "got": 0.632455532033676,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.632455532034",
+              "relative_difference": -5.122994555891741e-13,
+              "unit": "m"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-four-readings",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.1316282072803005e-16,
+              "got": 5.01,
+              "name": "mean",
+              "ok": true,
+              "reference": "5.01",
+              "relative_difference": -4.254746920719163e-17,
+              "unit": "V"
+            },
+            {
+              "difference": 4.634102914476728e-14,
+              "got": 0.010801234497346341,
+              "name": "standard_uncertainty",
+              "ok": true,
+              "reference": "0.0108012344973",
+              "relative_difference": 4.290345622655559e-12,
+              "unit": "V"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-triangular-half-width",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 3.178200524751844e-14,
+              "got": 0.024494897427831782,
+              "name": "standard_uncertainty",
+              "ok": true,
+              "reference": "0.0244948974278",
+              "relative_difference": 1.2974949309829761e-12,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-as-power",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 9.0,
+              "name": "value",
+              "ok": true,
+              "reference": "9",
+              "relative_difference": 0.0,
+              "unit": "m^2"
+            },
+            {
+              "difference": -4.440892098500626e-18,
+              "got": 0.12,
+              "name": "combined_standard_uncertainty",
+              "ok": true,
+              "reference": "0.12",
+              "relative_difference": -3.700743415417188e-17,
+              "unit": "m^2"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-interval-k",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-interval-k",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-convert-mass-length",
+          "note": "GTC has no units of measurement, so no conversion",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-9973-limits",
+          "note": "no Type B function for a normal distribution stated as an interval with a coverage probability found in GTC",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-95-interval",
+          "note": "no Type B function for a normal distribution stated as an interval with a coverage probability found in GTC",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-two",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 1.0722686856388464e-11,
+              "got": 12.835139760410723,
+              "name": "effective_degrees_of_freedom",
+              "ok": true,
+              "reference": "12.8351397604",
+              "relative_difference": 8.354164470784303e-13,
+              "unit": "1"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-three",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 4.6153299582510954e-11,
+              "got": 31.153846153846153,
+              "name": "effective_degrees_of_freedom",
+              "ok": true,
+              "reference": "31.1538461538",
+              "relative_difference": 1.4814639372185957e-12,
+              "unit": "1"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-odd-goes-up",
+          "note": "no function that rounds a plain number to a number of significant digits found in GTC",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-even-stays",
+          "note": "no function that rounds a plain number to a number of significant digits found in GTC",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-above-half-goes-up",
+          "note": "no function that rounds a plain number to a number of significant digits found in GTC",
+          "outputs": [],
+          "verdict": "unsupported"
+        }
+      ],
+      "summary": {
+        "error": 0,
+        "fail": 0,
+        "pass": 13,
+        "unsupported": 30
+      },
+      "tool": "GTC",
+      "versions": {
+        "GTC": "1.5.1",
+        "numpy": "2.5.5",
+        "scipy": "1.18.1"
+      }
+    },
+    {
+      "results": [
+        {
+          "category": "unit-conversion",
+          "id": "conv-inch-mm",
           "note": "",
           "outputs": [
             {

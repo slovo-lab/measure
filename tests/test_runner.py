@@ -294,6 +294,71 @@ class UconAdapterTests(unittest.TestCase):
         self.assertIn("ucon", report["versions"])
 
 
+try:
+    import GTC  # noqa: F401
+    HAVE_GTC = True
+except ImportError:
+    HAVE_GTC = False
+
+
+@unittest.skipUnless(HAVE_GTC, "GTC is not installed")
+class GtcAdapterTests(unittest.TestCase):
+    """Checks that the adapter is wired correctly, not that GTC is right."""
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.gtc_adapter import GtcAdapter
+        cls.adapter = GtcAdapter()
+
+    def test_tasks_that_need_units_are_unsupported(self):
+        for pair_id in ("conv-inch-mm", "dim-add-length-time", "dim-add-foot-inch",
+                        "dim-convert-mass-length", "round-half-even-stays"):
+            self.assertIsInstance(self.adapter.solve(BY_ID[pair_id]), Unsupported)
+
+    def test_a_pair_that_needs_a_conversion_is_not_sent(self):
+        self.assertFalse(self.adapter.needs_no_conversion(BY_ID["comb-product-mixed-units"]))
+        self.assertIsInstance(self.adapter.solve(BY_ID["comb-product-mixed-units"]), Unsupported)
+
+    def test_which_propagation_pairs_are_sent(self):
+        sent = {p["id"] for p in PAIRS
+                if p["task"] == "propagate" and self.adapter.needs_no_conversion(p)}
+        self.assertEqual(sent, {
+            "comb-product-uncorrelated", "comb-quotient-uncorrelated",
+            "comb-sum-with-covariance", "comb-difference-with-covariance",
+            "comb-square-same-variable", "comb-square-as-power", "comb-linear-combination"})
+
+    def test_one_shared_unit_is_not_enough_when_the_result_differs(self):
+        pair = {"task": "propagate",
+                "inputs": {"model": "a * b", "covariances": [], "variables": {
+                    "a": {"value": "1", "standard_uncertainty": "0.1", "unit": "mm"},
+                    "b": {"value": "1", "standard_uncertainty": "0.1", "unit": "mm"}}},
+                "reference": {"outputs": [{"name": "value", "unit": "mm^2"}]}}
+        self.assertFalse(self.adapter.needs_no_conversion(pair))
+
+    def test_normal_type_b_is_unsupported(self):
+        self.assertIsInstance(self.adapter.solve(BY_ID["typeb-normal-95-interval"]), Unsupported)
+
+    def test_answer_types(self):
+        for pair_id in ("typea-mean-five-readings", "typeb-rectangular-half-width",
+                        "typeb-triangular-half-width", "dof-welch-satterthwaite-two",
+                        "comb-sum-with-covariance"):
+            self.assertIsInstance(self.adapter.solve(BY_ID[pair_id]), Answer)
+
+    def test_covariance_reaches_the_tool(self):
+        # With the covariance left out the sum would have uncertainty 0.005, not 0.007.
+        answer = self.adapter.solve(BY_ID["comb-sum-with-covariance"])
+        self.assertAlmostEqual(answer.outputs["combined_standard_uncertainty"], 0.007, places=12)
+
+    def test_degrees_of_freedom_come_from_the_tool(self):
+        answer = self.adapter.solve(BY_ID["dof-welch-satterthwaite-two"])
+        self.assertTrue(12 < answer.outputs["effective_degrees_of_freedom"] < 13)
+
+    def test_run_has_no_errors(self):
+        report = runner.run(PAIRS, self.adapter)
+        self.assertEqual(report["summary"]["error"], 0)
+        self.assertIn("GTC", report["versions"])
+
+
 def _have(module, command):
     try:
         __import__(module)

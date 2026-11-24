@@ -4,6 +4,8 @@ pint==0.26.2
 uncertainties==3.2.3
 numpy==2.5.5
 ucon==2.4.2
+GTC==1.5.1
+scipy==1.18.1
 # Servers for AI agents, and the client used to call them.
 mcp==1.30.0
 ucon-tools[mcp]==0.13.0
