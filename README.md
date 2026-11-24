@@ -2,7 +2,7 @@
 
 *Русская версия: [README.ru.md](README.ru.md)*
 
-**Status: concept. No code yet.** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
+**Status: approved to build on 24 November 2026. No code yet; the plan is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
 
 ## What changed on day one
 
@@ -26,6 +26,14 @@ An independent test bench for these tools. In metrology an instrument is trusted
 3. A published table of results: where each tool agrees with the reference, where it differs, and by how much.
 
 It calculates nothing new. It checks the calculators that exist.
+
+## Why we decided to go ahead
+
+A second round of research on 24 November 2026 answered the open questions well enough to start.
+
+- **The method is established metrology.** Validating software with reference data sets and reference results ("reference pairs") is the approach of the European TraCIM project, which applies the calibration principle to software. Measure borrows that method. It does not invent one.
+- **Nobody seems to apply it to tools made for AI agents.** TraCIM certifies specific numerical algorithms as a service. We found no public, cross-tool check of the unit and uncertainty calculators that agents call. This is still "not found", not "does not exist".
+- **Reference examples need care.** The GUM documents are under JCGM copyright and may be reproduced only with written permission. So Measure will not copy their text. It starts from cases with exact answers (SI definitions, closed-form formulas) and from NIST publications, and cites GUM examples by number.
 
 ## Who it is for
 
