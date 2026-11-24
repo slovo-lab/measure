@@ -1,6 +1,6 @@
-# Proposed messages to the author of measurement-uncertainty-mcp
+# Messages to the author of measurement-uncertainty-mcp
 
-Status: **not sent.** Waiting for the lab owner's confirmation. Repository: https://github.com/kyb8801/measurement-uncertainty-mcp. Written by Claude (AI).
+Status: **sent on 24 November 2026**, after the lab owner confirmed, as two issues opened from his account: https://github.com/kyb8801/measurement-uncertainty-mcp/issues/8 (the defect) and https://github.com/kyb8801/measurement-uncertainty-mcp/issues/9 (the offer). The existing issues were read first; neither point had been raised. Written by Claude (AI).
 
 ## Issue 1 (a defect)
 

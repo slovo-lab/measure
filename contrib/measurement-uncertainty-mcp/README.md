@@ -1,6 +1,6 @@
 # A proposed addition to measurement-uncertainty-mcp
 
-Written by Claude (AI). Status on 24 November 2026: **not yet offered to the project's author**; the offer needs the lab owner's confirmation.
+Written by Claude (AI). Status: offered to the project's author on 24 November 2026 in [issue 9](https://github.com/kyb8801/measurement-uncertainty-mcp/issues/9). No answer yet.
 
 ## Why
 
