@@ -1280,6 +1280,979 @@
       "versions": {
         "ucon": "2.4.2"
       }
+    },
+    {
+      "results": [
+        {
+          "category": "unit-conversion",
+          "id": "conv-inch-mm",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.4210854715202005e-15,
+              "got": 25.4,
+              "name": "value",
+              "ok": true,
+              "reference": "25.4",
+              "relative_difference": -5.594824691024411e-17,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-pound-kg",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -3.1768649932928383e-15,
+              "got": 68.0388555,
+              "name": "value",
+              "ok": true,
+              "reference": "68.0388555",
+              "relative_difference": -4.6691922871819005e-17,
+              "unit": "kg"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kmh-ms",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 25.0,
+              "name": "value",
+              "ok": true,
+              "reference": "25",
+              "relative_difference": 0.0,
+              "unit": "m/s"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kwh-j",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 9000000.0,
+              "name": "value",
+              "ok": true,
+              "reference": "9000000",
+              "relative_difference": 0.0,
+              "unit": "J"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.2737367544323207e-14,
+              "got": 298.15,
+              "name": "value",
+              "ok": true,
+              "reference": "298.15",
+              "relative_difference": -7.626150442503172e-17,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-degc",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 37.0,
+              "name": "value",
+              "ok": true,
+              "reference": "37",
+              "relative_difference": 0.0,
+              "unit": "degC"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-five-readings",
+          "note": "no tool for the task 'type_a'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-rectangular-half-width",
+          "note": "no tool for the task 'type_b'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-uncorrelated",
+          "note": "no tool for the task 'propagate'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-sum-with-covariance",
+          "note": "no tool for the task 'propagate'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-time",
+          "note": "no tool for the task 'add'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-foot-m",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 2.0321522242738866e-16,
+              "got": 1.8288000000000002,
+              "name": "value",
+              "ok": true,
+              "reference": "1.8288",
+              "relative_difference": 1.1111943483562372e-16,
+              "unit": "m"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mile-km",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.8462742445990442e-17,
+              "got": 42.1648128,
+              "name": "value",
+              "ok": true,
+              "reference": "42.1648128",
+              "relative_difference": -4.378708505967906e-19,
+              "unit": "km"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mph-ms",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.7564616427989677e-15,
+              "got": 26.8224,
+              "name": "value",
+              "ok": true,
+              "reference": "26.8224",
+              "relative_difference": -6.548487990630845e-17,
+              "unit": "m/s"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-nautical-mile-km",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -4.263256414560601e-16,
+              "got": 18.52,
+              "name": "value",
+              "ok": true,
+              "reference": "18.52",
+              "relative_difference": -2.301974305918251e-17,
+              "unit": "km"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-litre-m3",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 0.25,
+              "name": "value",
+              "ok": true,
+              "reference": "0.25",
+              "relative_difference": 0.0,
+              "unit": "m^3"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-atm-kpa",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 2.842170943040401e-15,
+              "got": 101.325,
+              "name": "value",
+              "ok": true,
+              "reference": "101.325",
+              "relative_difference": 2.805004631670763e-17,
+              "unit": "kPa"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-bar-pa",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.9103830456733704e-11,
+              "got": 249999.99999999997,
+              "name": "value",
+              "ok": true,
+              "reference": "250000",
+              "relative_difference": -1.164153218269348e-16,
+              "unit": "Pa"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-calth-j",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 2092.0,
+              "name": "value",
+              "ok": true,
+              "reference": "2092",
+              "relative_difference": 0.0,
+              "unit": "J"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-sqin-mm2",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -6.366462912410498e-14,
+              "got": 1290.32,
+              "name": "value",
+              "ok": true,
+              "reference": "1290.32",
+              "relative_difference": -4.934018625155386e-17,
+              "unit": "mm^2"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.2737367544323207e-14,
+              "got": 233.14999999999998,
+              "name": "value",
+              "ok": true,
+              "reference": "233.15",
+              "relative_difference": -9.752248571444652e-17,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-min-h",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 1.5,
+              "name": "value",
+              "ok": true,
+              "reference": "1.5",
+              "relative_difference": 0.0,
+              "unit": "h"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-mass",
+          "note": "no tool for the task 'add'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-voltage-current",
+          "note": "no tool for the task 'add'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-foot-inch",
+          "note": "no tool for the task 'add'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-quotient-uncorrelated",
+          "note": "no tool for the task 'propagate'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-difference-with-covariance",
+          "note": "no tool for the task 'propagate'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-same-variable",
+          "note": "no tool for the task 'propagate'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-mixed-units",
+          "note": "no tool for the task 'propagate'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-linear-combination",
+          "note": "no tool for the task 'propagate'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-four-readings",
+          "note": "no tool for the task 'type_a'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-triangular-half-width",
+          "note": "no tool for the task 'type_b'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-as-power",
+          "note": "no tool for the task 'propagate'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-interval-k",
+          "note": "no unit for a temperature difference in degrees Fahrenheit",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-interval-k",
+          "note": "no unit for a temperature difference in degrees Celsius",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-convert-mass-length",
+          "note": "refused: Cannot convert 'kg' to 'm': mass is not compatible with length",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-9973-limits",
+          "note": "no tool for the task 'type_b'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-95-interval",
+          "note": "no tool for the task 'type_b'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-two",
+          "note": "no tool for the task 'effective_dof'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-three",
+          "note": "no tool for the task 'effective_dof'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-odd-goes-up",
+          "note": "no tool for the task 'round'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-even-stays",
+          "note": "no tool for the task 'round'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-above-half-goes-up",
+          "note": "no tool for the task 'round'; the server's tools convert, and multiply or divide by factors",
+          "outputs": [],
+          "verdict": "unsupported"
+        }
+      ],
+      "summary": {
+        "error": 0,
+        "fail": 0,
+        "pass": 18,
+        "unsupported": 25
+      },
+      "tool": "ucon-mcp (server)",
+      "versions": {
+        "mcp": "1.30.0",
+        "ucon": "2.4.2",
+        "ucon-tools": "0.13.0"
+      }
+    },
+    {
+      "results": [
+        {
+          "category": "unit-conversion",
+          "id": "conv-inch-mm",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.4210854715202005e-15,
+              "got": 25.4,
+              "name": "value",
+              "ok": true,
+              "reference": "25.4",
+              "relative_difference": -5.594824691024411e-17,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-pound-kg",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -3.1768649932928383e-15,
+              "got": 68.0388555,
+              "name": "value",
+              "ok": true,
+              "reference": "68.0388555",
+              "relative_difference": -4.6691922871819005e-17,
+              "unit": "kg"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kmh-ms",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 2.000177801164682e-11,
+              "got": 25.000000000020002,
+              "name": "value",
+              "ok": true,
+              "reference": "25",
+              "relative_difference": 8.000711204658728e-13,
+              "unit": "m/s"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kwh-j",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 9000000.0,
+              "name": "value",
+              "ok": true,
+              "reference": "9000000",
+              "relative_difference": 0.0,
+              "unit": "J"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.2737367544323207e-14,
+              "got": 298.15,
+              "name": "value",
+              "ok": true,
+              "reference": "298.15",
+              "relative_difference": -7.626150442503172e-17,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-degc",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 37.0,
+              "name": "value",
+              "ok": true,
+              "reference": "37",
+              "relative_difference": 0.0,
+              "unit": "degC"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-five-readings",
+          "note": "no tool for the task 'type_a'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-rectangular-half-width",
+          "note": "no tool for the task 'type_b'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-uncorrelated",
+          "note": "no tool for the task 'propagate'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-sum-with-covariance",
+          "note": "no tool for the task 'propagate'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-time",
+          "note": "no tool for the task 'add'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-foot-m",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 2.0321522242738866e-16,
+              "got": 1.8288000000000002,
+              "name": "value",
+              "ok": true,
+              "reference": "1.8288",
+              "relative_difference": 1.1111943483562372e-16,
+              "unit": "m"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mile-km",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.8462742445990442e-17,
+              "got": 42.1648128,
+              "name": "value",
+              "ok": true,
+              "reference": "42.1648128",
+              "relative_difference": -4.378708505967906e-19,
+              "unit": "km"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mph-ms",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.7564616427989677e-15,
+              "got": 26.8224,
+              "name": "value",
+              "ok": true,
+              "reference": "26.8224",
+              "relative_difference": -6.548487990630845e-17,
+              "unit": "m/s"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-nautical-mile-km",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -4.263256414560601e-16,
+              "got": 18.52,
+              "name": "value",
+              "ok": true,
+              "reference": "18.52",
+              "relative_difference": -2.301974305918251e-17,
+              "unit": "km"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-litre-m3",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 0.25,
+              "name": "value",
+              "ok": true,
+              "reference": "0.25",
+              "relative_difference": 0.0,
+              "unit": "m^3"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-atm-kpa",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 2.842170943040401e-15,
+              "got": 101.325,
+              "name": "value",
+              "ok": true,
+              "reference": "101.325",
+              "relative_difference": 2.805004631670763e-17,
+              "unit": "kPa"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-bar-pa",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 250000.0,
+              "name": "value",
+              "ok": true,
+              "reference": "250000",
+              "relative_difference": 0.0,
+              "unit": "Pa"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-calth-j",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 2092.0,
+              "name": "value",
+              "ok": true,
+              "reference": "2092",
+              "relative_difference": 0.0,
+              "unit": "J"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-sqin-mm2",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -6.366462912410498e-14,
+              "got": 1290.32,
+              "name": "value",
+              "ok": true,
+              "reference": "1290.32",
+              "relative_difference": -4.934018625155386e-17,
+              "unit": "mm^2"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-k",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.2737367544323207e-14,
+              "got": 233.14999999999998,
+              "name": "value",
+              "ok": true,
+              "reference": "233.15",
+              "relative_difference": -9.752248571444652e-17,
+              "unit": "K"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-min-h",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 0.0,
+              "got": 1.5,
+              "name": "value",
+              "ok": true,
+              "reference": "1.5",
+              "relative_difference": 0.0,
+              "unit": "h"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-mass",
+          "note": "no tool for the task 'add'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-voltage-current",
+          "note": "no tool for the task 'add'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-foot-inch",
+          "note": "no tool for the task 'add'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-quotient-uncorrelated",
+          "note": "no tool for the task 'propagate'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-difference-with-covariance",
+          "note": "no tool for the task 'propagate'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-same-variable",
+          "note": "no tool for the task 'propagate'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-mixed-units",
+          "note": "no tool for the task 'propagate'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-linear-combination",
+          "note": "no tool for the task 'propagate'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-four-readings",
+          "note": "no tool for the task 'type_a'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-triangular-half-width",
+          "note": "no tool for the task 'type_b'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-as-power",
+          "note": "no tool for the task 'propagate'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-interval-k",
+          "note": "the temperature tool converts temperatures only, not temperature differences",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-interval-k",
+          "note": "the temperature tool converts temperatures only, not temperature differences",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-convert-mass-length",
+          "note": "refused: 1 validation error for call[convert_mass] to_unit Input should be 'carat', 'decagram', 'hectogram', 'gram', 'milligram', 'microgram', 'nanogram', 'picogram', 'femtogram', 'grain', 'ounce', 'troy ounce",
+          "outputs": [],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-9973-limits",
+          "note": "no tool for the task 'type_b'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-95-interval",
+          "note": "no tool for the task 'type_b'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-two",
+          "note": "no tool for the task 'effective_dof'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-three",
+          "note": "no tool for the task 'effective_dof'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-odd-goes-up",
+          "note": "no tool for the task 'round'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-even-stays",
+          "note": "no tool for the task 'round'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-above-half-goes-up",
+          "note": "no tool for the task 'round'; every tool of this server converts one value between two units",
+          "outputs": [],
+          "verdict": "unsupported"
+        }
+      ],
+      "summary": {
+        "error": 0,
+        "fail": 0,
+        "pass": 18,
+        "unsupported": 25
+      },
+      "tool": "unit-converter-mcp (server)",
+      "versions": {
+        "mcp": "1.30.0",
+        "unit-converter-mcp": "0.1.2"
+      }
     }
   ]
 }

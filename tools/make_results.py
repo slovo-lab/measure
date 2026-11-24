@@ -19,7 +19,7 @@ sys.path.insert(0, ROOT)
 from bench import runner  # noqa: E402
 from bench.__main__ import ADAPTERS  # noqa: E402
 
-ORDER = ("pint", "ucon")
+ORDER = ("pint", "ucon", "ucon-mcp", "unit-converter-mcp")
 CATEGORY_NAMES = {
     "unit-conversion": "Unit conversion",
     "dimensional-safety": "Dimensional safety",
@@ -87,7 +87,7 @@ def markdown(reports, pairs, date):
         "",
         "- It shows how each tool answered these %d questions on this date, with these versions." % len(pairs),
         "- It does not rank the tools, and a pass here does not certify a tool for any use.",
-        "- The tools were called as Python libraries. Servers that wrap them for AI agents were not tested.",
+        "- Tools marked \"(server)\" were started as servers for AI agents and called through their tools, the way an agent calls them. The others were called as Python libraries.",
         "- Categories with no pairs yet: %s." % (", ".join(empty) or "none"),
         "",
         "## Every answer that was not a pass",
@@ -132,7 +132,14 @@ def main():
     parser.add_argument("--date", default=datetime.date.today().isoformat())
     args = parser.parse_args()
     pairs = runner.load_pairs(os.path.join(ROOT, "pairs", "pairs.json"))
-    reports = [runner.run(pairs, _adapter(key)) for key in ORDER]
+    reports = []
+    for key in ORDER:
+        adapter = _adapter(key)
+        try:
+            reports.append(runner.run(pairs, adapter))
+        finally:
+            if hasattr(adapter, "close"):
+                adapter.close()
     os.makedirs(os.path.join(ROOT, "results"), exist_ok=True)
     record = {"date": args.date, "python": platform.python_version(),
               "pairs": len(pairs), "reports": reports}

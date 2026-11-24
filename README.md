@@ -4,15 +4,33 @@
 
 **Status: first release, version 0.1.0, 24 November 2026. Version 0.1.0 has 33 reference pairs and two tools tested; 10 more pairs were added the same day, so the main branch has 43. The results are in [RESULTS.md](RESULTS.md) and the plan for what comes next is in [PLAN.md](PLAN.md).** Under the [slovo-lab manifesto](https://github.com/slovo-lab/manifesto), a project starts with a written statement, and this is it. Written by Claude (AI), curated by Anton Krugovov.
 
-## First results
+## In plain words
 
-| | Pint + uncertainties | ucon |
-|---|---|---|
-| Pairs the tool has a function for | 29 | 27 |
-| Passed | 29 | 26 |
-| Not offered by the tool | 4 | 6 |
+**Measure is a calibration check for the calculators that AI agents use.**
 
-Versions: Pint 0.26.2 with uncertainties 3.2.3, and ucon 2.4.2, called as Python libraries. This is how the tools answered 33 questions on one date. It is not a ranking and not a certificate. The one answer that differed, and one more observation, are explained in [RESULTS.md](RESULTS.md).
+Language models are poor at arithmetic with units of measurement and uncertainties. So they are given calculator programs to call: "convert miles to kilometres", "what is the uncertainty of this product". Many such programs exist. Nobody outside checks whether the programs themselves give right answers.
+
+Measure does that, in the way an instrument is checked in a laboratory:
+
+1. **A reference.** A set of questions with answers known in advance. Every answer names its source, mostly NIST publications, and is recomputed with exact fractions. There are 43 questions now.
+2. **A test.** The same questions are put to each calculator.
+3. **A report.** A public table shows where an answer matched the reference, where it differed and by how much, and what the calculator cannot do at all.
+
+Measure calculates nothing new. It only compares other tools' answers with the reference.
+
+**What it has found.** On the first day, two defects in the ucon library: a wrong uncertainty for a number multiplied by itself, and a unit name read in two different ways depending on the target unit. Both were reported to the authors.
+
+**Who it is for.** People choosing a calculator for their agent; authors of calculators, who get a free independent check; and agents themselves, which can read the table to decide which tool to trust.
+
+## Results so far
+
+| | Pint + uncertainties | ucon | ucon-mcp (server) | unit-converter-mcp (server) |
+|---|---|---|---|---|
+| Pairs the tool has a function for | 32 | 28 | 18 | 18 |
+| Passed | 32 | 27 | 18 | 18 |
+| Not offered by the tool | 11 | 15 | 25 | 25 |
+
+Versions: Pint 0.26.2 with uncertainties 3.2.3; ucon 2.4.2; ucon-tools 0.13.0; unit-converter-mcp 0.1.2. The first two were called as Python libraries. The two marked "(server)" were started as servers for AI agents and called through their tools, the way an agent calls them. This is how the tools answered 43 questions on one date. It is not a ranking and not a certificate. The one answer that differed, and the other observations, are explained in [RESULTS.md](RESULTS.md).
 
 ## What changed on day one
 
@@ -52,6 +70,8 @@ python3 -m unittest discover -s tests        # checks the pairs and the runner
 pip install -r requirements-adapters.txt     # the tools under test
 python3 -m bench pint                        # puts every pair to Pint + uncertainties
 python3 -m bench ucon                        # the same for ucon
+python3 -m bench ucon-mcp                    # ucon's server for AI agents
+python3 -m bench unit-converter-mcp          # another server for AI agents
 python3 tools/make_results.py                # runs both and rewrites RESULTS.md
 ```
 

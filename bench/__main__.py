@@ -11,6 +11,8 @@ from bench import runner
 ADAPTERS = {
     "pint": ("bench.adapters.pint_uncertainties", "PintUncertaintiesAdapter"),
     "ucon": ("bench.adapters.ucon_adapter", "UconAdapter"),
+    "ucon-mcp": ("bench.adapters.ucon_mcp", "UconMcpAdapter"),
+    "unit-converter-mcp": ("bench.adapters.unit_converter_mcp", "UnitConverterMcpAdapter"),
 }
 
 
@@ -24,7 +26,12 @@ def main(argv=None):
 
     module_name, class_name = ADAPTERS[args.adapter]
     module = __import__(module_name, fromlist=[class_name])
-    report = runner.run(runner.load_pairs(args.pairs), getattr(module, class_name)())
+    adapter = getattr(module, class_name)()
+    try:
+        report = runner.run(runner.load_pairs(args.pairs), adapter)
+    finally:
+        if hasattr(adapter, "close"):
+            adapter.close()
     print(json.dumps(report, indent=2) if args.json else runner.to_markdown(report))
     return 1 if report["summary"]["error"] else 0
 
