@@ -2253,6 +2253,400 @@
         "mcp": "1.30.0",
         "unit-converter-mcp": "0.1.2"
       }
+    },
+    {
+      "results": [
+        {
+          "category": "unit-conversion",
+          "id": "conv-inch-mm",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-pound-kg",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kmh-ms",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-kwh-j",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-k",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-degc",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-five-readings",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -7.105427357601002e-16,
+              "got": 10.2,
+              "name": "mean",
+              "ok": true,
+              "reference": "10.2",
+              "relative_difference": -6.966105252550002e-17,
+              "unit": "mm"
+            },
+            {
+              "difference": -4.512337729375986e-14,
+              "got": 0.07071067811865488,
+              "name": "standard_uncertainty",
+              "ok": true,
+              "reference": "0.0707106781187",
+              "relative_difference": -6.381409214887252e-13,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-rectangular-half-width",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -1.87092837202556e-14,
+              "got": 0.02886751345948129,
+              "name": "standard_uncertainty",
+              "ok": true,
+              "reference": "0.0288675134595",
+              "relative_difference": -6.481085995336591e-13,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-uncorrelated",
+          "note": "no tool for first-order propagation through a model: combine_uncertainty needs sensitivity coefficients from the caller, and monte_carlo_propagate uses random sampling",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-sum-with-covariance",
+          "note": "no tool for first-order propagation through a model: combine_uncertainty needs sensitivity coefficients from the caller, and monte_carlo_propagate uses random sampling",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-time",
+          "note": "no tool for the task 'add'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-foot-m",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mile-km",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-mph-ms",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-nautical-mile-km",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-litre-m3",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-atm-kpa",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-bar-pa",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-calth-j",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-sqin-mm2",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-k",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-min-h",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-length-mass",
+          "note": "no tool for the task 'add'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-voltage-current",
+          "note": "no tool for the task 'add'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-add-foot-inch",
+          "note": "no tool for the task 'add'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-quotient-uncorrelated",
+          "note": "no tool for first-order propagation through a model: combine_uncertainty needs sensitivity coefficients from the caller, and monte_carlo_propagate uses random sampling",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-difference-with-covariance",
+          "note": "no tool for first-order propagation through a model: combine_uncertainty needs sensitivity coefficients from the caller, and monte_carlo_propagate uses random sampling",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-same-variable",
+          "note": "no tool for first-order propagation through a model: combine_uncertainty needs sensitivity coefficients from the caller, and monte_carlo_propagate uses random sampling",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-product-mixed-units",
+          "note": "no tool for first-order propagation through a model: combine_uncertainty needs sensitivity coefficients from the caller, and monte_carlo_propagate uses random sampling",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "combined",
+          "id": "comb-linear-combination",
+          "note": "no tool for first-order propagation through a model: combine_uncertainty needs sensitivity coefficients from the caller, and monte_carlo_propagate uses random sampling",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-a",
+          "id": "typea-mean-four-readings",
+          "note": "",
+          "outputs": [
+            {
+              "difference": -2.1316282072803005e-16,
+              "got": 5.01,
+              "name": "mean",
+              "ok": true,
+              "reference": "5.01",
+              "relative_difference": -4.254746920719163e-17,
+              "unit": "V"
+            },
+            {
+              "difference": 4.634102914476728e-14,
+              "got": 0.010801234497346341,
+              "name": "standard_uncertainty",
+              "ok": true,
+              "reference": "0.0108012344973",
+              "relative_difference": 4.290345622655559e-12,
+              "unit": "V"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-triangular-half-width",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 3.178200524751844e-14,
+              "got": 0.024494897427831782,
+              "name": "standard_uncertainty",
+              "ok": true,
+              "reference": "0.0244948974278",
+              "relative_difference": 1.2974949309829761e-12,
+              "unit": "mm"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "combined",
+          "id": "comb-square-as-power",
+          "note": "no tool for first-order propagation through a model: combine_uncertainty needs sensitivity coefficients from the caller, and monte_carlo_propagate uses random sampling",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degf-interval-k",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "unit-conversion",
+          "id": "conv-degc-interval-k",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "dimensional-safety",
+          "id": "dim-convert-mass-length",
+          "note": "no tool for the task 'convert'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-9973-limits",
+          "note": "type_b_normal takes a coverage factor, not the coverage probability given in the pair",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "type-b",
+          "id": "typeb-normal-95-interval",
+          "note": "type_b_normal takes a coverage factor, not the coverage probability given in the pair",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-two",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 1.0722686856388464e-11,
+              "got": 12.835139760410723,
+              "name": "effective_degrees_of_freedom",
+              "ok": true,
+              "reference": "12.8351397604",
+              "relative_difference": 8.354164470784303e-13,
+              "unit": "1"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "degrees-of-freedom",
+          "id": "dof-welch-satterthwaite-three",
+          "note": "",
+          "outputs": [
+            {
+              "difference": 4.6153299582510954e-11,
+              "got": 31.153846153846153,
+              "name": "effective_degrees_of_freedom",
+              "ok": true,
+              "reference": "31.1538461538",
+              "relative_difference": 1.4814639372185957e-12,
+              "unit": "1"
+            }
+          ],
+          "verdict": "pass"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-odd-goes-up",
+          "note": "no tool for the task 'round'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-half-even-stays",
+          "note": "no tool for the task 'round'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        },
+        {
+          "category": "reporting",
+          "id": "round-above-half-goes-up",
+          "note": "no tool for the task 'round'; the server has no units",
+          "outputs": [],
+          "verdict": "unsupported"
+        }
+      ],
+      "summary": {
+        "error": 0,
+        "fail": 0,
+        "pass": 6,
+        "unsupported": 37
+      },
+      "tool": "measurement-uncertainty-mcp (server)",
+      "versions": {
+        "mcp": "1.30.0",
+        "measurement-uncertainty-mcp": "0.1.0"
+      }
     }
   ]
 }

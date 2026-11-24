@@ -8,3 +8,5 @@ ucon==2.4.2
 mcp==1.30.0
 ucon-tools[mcp]==0.13.0
 unit-converter-mcp==0.1.2
+# Not on the package index; installed from its repository at the commit tested.
+measurement-uncertainty-mcp @ git+https://github.com/kyb8801/measurement-uncertainty-mcp@fe254e0e32023606841547e7be234797385884b4

@@ -10,19 +10,20 @@ Each tool was given the 43 reference pairs in [`pairs/pairs.json`](pairs/pairs.j
 - **ucon**: ucon 2.4.2
 - **ucon-mcp (server)**: mcp 1.30.0, ucon 2.4.2, ucon-tools 0.13.0
 - **unit-converter-mcp (server)**: mcp 1.30.0, unit-converter-mcp 0.1.2
+- **measurement-uncertainty-mcp (server)**: mcp 1.30.0, measurement-uncertainty-mcp 0.1.0
 
 ## Summary
 
-| Category | Pairs | Pint + uncertainties | ucon | ucon-mcp (server) | unit-converter-mcp (server) |
-|---|---|---|---|---|---|
-| Unit conversion | 19 | 19 of 19 pass | 17 of 17 pass, 2 not offered | 17 of 17 pass, 2 not offered | 17 of 17 pass, 2 not offered |
-| Dimensional safety | 5 | 5 of 5 pass | 5 of 5 pass | 1 of 1 pass, 4 not offered | 1 of 1 pass, 4 not offered |
-| Combined uncertainty | 8 | 8 of 8 pass | 5 of 6 pass, 2 not offered | not offered (8) | not offered (8) |
-| Type A evaluation | 2 | not offered (2) | not offered (2) | not offered (2) | not offered (2) |
-| Type B evaluation | 4 | not offered (4) | not offered (4) | not offered (4) | not offered (4) |
-| Degrees of freedom | 2 | not offered (2) | not offered (2) | not offered (2) | not offered (2) |
-| Reporting | 3 | not offered (3) | not offered (3) | not offered (3) | not offered (3) |
-| **All** | 43 | 32 of 32 pass, 11 not offered | 27 of 28 pass, 15 not offered | 18 of 18 pass, 25 not offered | 18 of 18 pass, 25 not offered |
+| Category | Pairs | Pint + uncertainties | ucon | ucon-mcp (server) | unit-converter-mcp (server) | measurement-uncertainty-mcp (server) |
+|---|---|---|---|---|---|---|
+| Unit conversion | 19 | 19 of 19 pass | 17 of 17 pass, 2 not offered | 17 of 17 pass, 2 not offered | 17 of 17 pass, 2 not offered | not offered (19) |
+| Dimensional safety | 5 | 5 of 5 pass | 5 of 5 pass | 1 of 1 pass, 4 not offered | 1 of 1 pass, 4 not offered | not offered (5) |
+| Combined uncertainty | 8 | 8 of 8 pass | 5 of 6 pass, 2 not offered | not offered (8) | not offered (8) | not offered (8) |
+| Type A evaluation | 2 | not offered (2) | not offered (2) | not offered (2) | not offered (2) | 2 of 2 pass |
+| Type B evaluation | 4 | not offered (4) | not offered (4) | not offered (4) | not offered (4) | 2 of 2 pass, 2 not offered |
+| Degrees of freedom | 2 | not offered (2) | not offered (2) | not offered (2) | not offered (2) | 2 of 2 pass |
+| Reporting | 3 | not offered (3) | not offered (3) | not offered (3) | not offered (3) | not offered (3) |
+| **All** | 43 | 32 of 32 pass, 11 not offered | 27 of 28 pass, 15 not offered | 18 of 18 pass, 25 not offered | 18 of 18 pass, 25 not offered | 6 of 6 pass, 37 not offered |
 
 "Not offered" means the tool has no function for that kind of task (the runner's verdict `unsupported`). It is not counted as a failure.
 
@@ -76,6 +77,10 @@ The run was repeated the same day with 43 pairs. Of the ten new pairs, the two l
 
 Two tools were also tested the way an AI agent uses them: started as servers and called through their tools. Both `ucon-mcp` and `unit-converter-mcp` passed every conversion pair they have a tool for, and both turned down the request to convert a mass into a length. Neither has a tool for adding quantities or for uncertainty, so those pairs are marked "not offered".
 
+A third server, `measurement-uncertainty-mcp`, covers the other half of the reference set: it has no units, and it has tools for Type A and Type B evaluation and for effective degrees of freedom. It passed all 6 pairs it has a tool for. It is not on the Python package index, so it was installed from its repository at commit `fe254e0`; the lab's owner approved running it. Two kinds of pair were not put to it, to keep the adapter from doing the calculation itself: Type B with a normal distribution (the tool wants a coverage factor, the pair gives a coverage probability) and propagation through a model (one tool needs the sensitivity coefficients from the caller, the other answers by random sampling, which is a different method from the one our references use).
+
+So far no server for AI agents has been found that takes a measurement model and returns the first-order combined uncertainty. The eight pairs in that category can only be run against the Python libraries.
+
 One detail: the server `ucon-mcp` converts `10 nmi` to 18.52 km, the right answer, while the ucon library called directly gives the nano-mile answer described above. The adapter sends `nautical_mile` in both cases; the `nmi` spelling was tried by hand.
 
 ### Reporting to the authors
@@ -84,50 +89,50 @@ Under this project's fairness rule, both points were reported to ucon's authors 
 
 ## All results
 
-| Pair | Pint + uncertainties | ucon | ucon-mcp (server) | unit-converter-mcp (server) |
-|---|---|---|---|---|
-| `conv-inch-mm` | pass | pass | pass | pass |
-| `conv-pound-kg` | pass | pass | pass | pass |
-| `conv-kmh-ms` | pass | pass | pass | pass |
-| `conv-kwh-j` | pass | pass | pass | pass |
-| `conv-degc-k` | pass | pass | pass | pass |
-| `conv-degf-degc` | pass | pass | pass | pass |
-| `typea-mean-five-readings` | not offered | not offered | not offered | not offered |
-| `typeb-rectangular-half-width` | not offered | not offered | not offered | not offered |
-| `comb-product-uncorrelated` | pass | pass | not offered | not offered |
-| `comb-sum-with-covariance` | pass | not offered | not offered | not offered |
-| `dim-add-length-time` | pass | pass | not offered | not offered |
-| `conv-foot-m` | pass | pass | pass | pass |
-| `conv-mile-km` | pass | pass | pass | pass |
-| `conv-mph-ms` | pass | pass | pass | pass |
-| `conv-nautical-mile-km` | pass | pass | pass | pass |
-| `conv-litre-m3` | pass | pass | pass | pass |
-| `conv-atm-kpa` | pass | pass | pass | pass |
-| `conv-bar-pa` | pass | pass | pass | pass |
-| `conv-calth-j` | pass | pass | pass | pass |
-| `conv-sqin-mm2` | pass | pass | pass | pass |
-| `conv-degf-k` | pass | pass | pass | pass |
-| `conv-min-h` | pass | pass | pass | pass |
-| `dim-add-length-mass` | pass | pass | not offered | not offered |
-| `dim-add-voltage-current` | pass | pass | not offered | not offered |
-| `dim-add-foot-inch` | pass | pass | not offered | not offered |
-| `comb-quotient-uncorrelated` | pass | pass | not offered | not offered |
-| `comb-difference-with-covariance` | pass | not offered | not offered | not offered |
-| `comb-square-same-variable` | pass | fail | not offered | not offered |
-| `comb-product-mixed-units` | pass | pass | not offered | not offered |
-| `comb-linear-combination` | pass | pass | not offered | not offered |
-| `typea-mean-four-readings` | not offered | not offered | not offered | not offered |
-| `typeb-triangular-half-width` | not offered | not offered | not offered | not offered |
-| `comb-square-as-power` | pass | pass | not offered | not offered |
-| `conv-degf-interval-k` | pass | not offered | not offered | not offered |
-| `conv-degc-interval-k` | pass | not offered | not offered | not offered |
-| `dim-convert-mass-length` | pass | pass | pass | pass |
-| `typeb-normal-9973-limits` | not offered | not offered | not offered | not offered |
-| `typeb-normal-95-interval` | not offered | not offered | not offered | not offered |
-| `dof-welch-satterthwaite-two` | not offered | not offered | not offered | not offered |
-| `dof-welch-satterthwaite-three` | not offered | not offered | not offered | not offered |
-| `round-half-odd-goes-up` | not offered | not offered | not offered | not offered |
-| `round-half-even-stays` | not offered | not offered | not offered | not offered |
-| `round-above-half-goes-up` | not offered | not offered | not offered | not offered |
+| Pair | Pint + uncertainties | ucon | ucon-mcp (server) | unit-converter-mcp (server) | measurement-uncertainty-mcp (server) |
+|---|---|---|---|---|---|
+| `conv-inch-mm` | pass | pass | pass | pass | not offered |
+| `conv-pound-kg` | pass | pass | pass | pass | not offered |
+| `conv-kmh-ms` | pass | pass | pass | pass | not offered |
+| `conv-kwh-j` | pass | pass | pass | pass | not offered |
+| `conv-degc-k` | pass | pass | pass | pass | not offered |
+| `conv-degf-degc` | pass | pass | pass | pass | not offered |
+| `typea-mean-five-readings` | not offered | not offered | not offered | not offered | pass |
+| `typeb-rectangular-half-width` | not offered | not offered | not offered | not offered | pass |
+| `comb-product-uncorrelated` | pass | pass | not offered | not offered | not offered |
+| `comb-sum-with-covariance` | pass | not offered | not offered | not offered | not offered |
+| `dim-add-length-time` | pass | pass | not offered | not offered | not offered |
+| `conv-foot-m` | pass | pass | pass | pass | not offered |
+| `conv-mile-km` | pass | pass | pass | pass | not offered |
+| `conv-mph-ms` | pass | pass | pass | pass | not offered |
+| `conv-nautical-mile-km` | pass | pass | pass | pass | not offered |
+| `conv-litre-m3` | pass | pass | pass | pass | not offered |
+| `conv-atm-kpa` | pass | pass | pass | pass | not offered |
+| `conv-bar-pa` | pass | pass | pass | pass | not offered |
+| `conv-calth-j` | pass | pass | pass | pass | not offered |
+| `conv-sqin-mm2` | pass | pass | pass | pass | not offered |
+| `conv-degf-k` | pass | pass | pass | pass | not offered |
+| `conv-min-h` | pass | pass | pass | pass | not offered |
+| `dim-add-length-mass` | pass | pass | not offered | not offered | not offered |
+| `dim-add-voltage-current` | pass | pass | not offered | not offered | not offered |
+| `dim-add-foot-inch` | pass | pass | not offered | not offered | not offered |
+| `comb-quotient-uncorrelated` | pass | pass | not offered | not offered | not offered |
+| `comb-difference-with-covariance` | pass | not offered | not offered | not offered | not offered |
+| `comb-square-same-variable` | pass | fail | not offered | not offered | not offered |
+| `comb-product-mixed-units` | pass | pass | not offered | not offered | not offered |
+| `comb-linear-combination` | pass | pass | not offered | not offered | not offered |
+| `typea-mean-four-readings` | not offered | not offered | not offered | not offered | pass |
+| `typeb-triangular-half-width` | not offered | not offered | not offered | not offered | pass |
+| `comb-square-as-power` | pass | pass | not offered | not offered | not offered |
+| `conv-degf-interval-k` | pass | not offered | not offered | not offered | not offered |
+| `conv-degc-interval-k` | pass | not offered | not offered | not offered | not offered |
+| `dim-convert-mass-length` | pass | pass | pass | pass | not offered |
+| `typeb-normal-9973-limits` | not offered | not offered | not offered | not offered | not offered |
+| `typeb-normal-95-interval` | not offered | not offered | not offered | not offered | not offered |
+| `dof-welch-satterthwaite-two` | not offered | not offered | not offered | not offered | pass |
+| `dof-welch-satterthwaite-three` | not offered | not offered | not offered | not offered | pass |
+| `round-half-odd-goes-up` | not offered | not offered | not offered | not offered | not offered |
+| `round-half-even-stays` | not offered | not offered | not offered | not offered | not offered |
+| `round-above-half-goes-up` | not offered | not offered | not offered | not offered | not offered |
 
 Every number behind this table is in [`results/2026-11-24.json`](results/2026-11-24.json).

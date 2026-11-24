@@ -38,7 +38,9 @@ Every reference answer must be derivable by a reader from the stated source. No 
 - [x] Add pairs for the two empty categories: degrees of freedom and reporting. Each needs a source that has been read first. Done 24 November 2026, after the 0.1.0 tag: 10 new pairs (43 in all). Degrees of freedom: NIST TN 1297, Appendix B.3, equation (B-1). Rounding: NIST SP 811, Appendix B.7.1. Also added: two temperature differences, a conversion that must be refused, two Type B pairs for a normal distribution. Neither tested library offers the new kinds of task, so these pairs wait for the tools that do (the agent-facing uncertainty server).
 - [ ] Run the tests automatically on every change (a GitHub Actions workflow). Not set up yet; tests are run by hand.
 - [x] Add adapters for tools that run as servers for AI agents. First two done 24 November 2026: `ucon-mcp` (from ucon-tools 0.13.0) and `unit-converter-mcp` 0.1.2, both started as local servers and called through `bench/mcp_client.py`. Both passed all 18 conversion pairs they have a tool for.
-- [ ] More servers for AI agents: mcp-units and mcp-gnu-units (install from their repositories), measurement-uncertainty-mcp (hosted; needs an account, so ask the owner first).
+- [x] measurement-uncertainty-mcp added on 24 November 2026 (installed from its repository at commit fe254e0, with the owner's approval; it needs no account when run locally). It passed all 6 pairs it has a tool for.
+- [ ] More servers for AI agents: mcp-units and mcp-gnu-units (install from their repositories; running code from a repository needs the owner's approval each time).
+- [ ] Open question: no server found so far takes a measurement model and returns the first-order combined uncertainty. Look for one; if none exists, say so plainly in the results, because that is where the one library failure was.
 
 ## Open points
 
