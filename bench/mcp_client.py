@@ -20,7 +20,17 @@ class ServerError(RuntimeError):
 
 
 def find_command(name):
-    """Path of a console script installed next to this Python, or on PATH."""
+    """Path of a server's command.
+
+    Looked for, in order: the environment variable MEASURE_SERVER_<NAME>
+    (upper case, hyphens as underscores), for a server installed in an
+    environment of its own; next to this Python; on PATH.
+    """
+    override = os.environ.get("MEASURE_SERVER_" + name.upper().replace("-", "_"))
+    if override:
+        if not os.path.exists(override):
+            raise ServerError("%s does not exist" % override)
+        return override
     beside = os.path.join(os.path.dirname(sys.executable), name)
     if os.path.exists(beside):
         return beside
