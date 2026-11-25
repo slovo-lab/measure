@@ -621,8 +621,114 @@ class QuantitiesAdapterTests(unittest.TestCase):
     def test_numbers_come_from_the_library(self):
         """The adapter hands the library's own number back, right or wrong."""
         import quantities as pq
-        own = float(pq.Quantity(25.0, "degC").rescale("K").magnitude)
-        self.assertEqual(self.adapter.solve(BY_ID["conv-degc-k"]).outputs["value"], own)
+        own = float(pq.Quantity(150.0, "lb").rescale("kg").magnitude)
+        self.assertEqual(self.adapter.solve(BY_ID["conv-pound-kg"]).outputs["value"], own)
+
+    def test_a_temperature_is_not_offered_but_a_difference_is(self):
+        """The package documents its degC as a difference with no offset."""
+        self.assertIsInstance(self.adapter.solve(BY_ID["conv-degc-k"]), Unsupported)
+        self.assertEqual(self.adapter.solve(BY_ID["conv-degc-interval-k"]).outputs["value"], 15.0)
+
+
+def _node_ready():
+    try:
+        from bench.node_client import library_version
+        library_version("mathjs")
+        library_version("js-quantities")
+        return True
+    except Exception:
+        return False
+
+
+@unittest.skipUnless(_node_ready(), "node, mathjs or js-quantities is not installed")
+class NodeAdapterTests(unittest.TestCase):
+    """Checks that the two JavaScript adapters are wired correctly."""
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters import js_quantities_adapter, mathjs_adapter
+        cls.adapters = [mathjs_adapter.MathjsAdapter(),
+                        js_quantities_adapter.JsQuantitiesAdapter()]
+
+    def test_know_every_unit_in_the_pairs_file(self):
+        used = set()
+        for pair in PAIRS:
+            used.update(units_in(pair))
+        for adapter in self.adapters:
+            self.assertEqual(used - set(adapter.units) - set(adapter.no_unit), set(), adapter.name)
+
+    def test_every_pair_gets_an_answer_without_an_error(self):
+        for adapter in self.adapters:
+            report = runner.run(PAIRS, adapter)
+            self.assertEqual(report["summary"]["error"], 0, adapter.name)
+
+    def test_refuse_to_add_a_length_and_a_time(self):
+        for adapter in self.adapters:
+            self.assertIsInstance(adapter.solve(BY_ID["dim-add-length-time"]), Refusal, adapter.name)
+
+    def test_the_number_and_the_unit_come_from_the_library(self):
+        from bench.node_client import ask
+        own = ask({"library": "js-quantities", "op": "convert", "value": 150.0,
+                   "unit": "lb", "to_unit": "kg"})
+        answer = self.adapters[1].solve(BY_ID["conv-pound-kg"])
+        self.assertEqual(answer.outputs["value"], own["value"])
+        self.assertEqual(answer.stated["unit"], own["unit"])
+
+    def test_js_quantities_is_asked_about_a_temperature_not_a_difference(self):
+        adapter = self.adapters[1]
+        self.assertEqual(adapter._names(None, ["degC", "K"]), ["tempC", "tempK"])
+        self.assertEqual(adapter._names(None, ["delta_degC", "K"]), ["degC", "degK"])
+
+    def test_versions_name_the_library_and_node(self):
+        for adapter in self.adapters:
+            self.assertEqual(set(adapter.versions()), {adapter.library, "node"})
+
+
+def _calculator_ready():
+    try:
+        from bench.mcp_client import find_command
+        import mcp  # noqa: F401
+        find_command("p6plab-mcp-calculator")
+        return True
+    except Exception:
+        return False
+
+
+@unittest.skipUnless(_calculator_ready(), "p6plab-mcp-calculator is not installed")
+class P6plabCalculatorAdapterTests(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.p6plab_calculator import P6plabCalculatorAdapter
+        cls.adapter = P6plabCalculatorAdapter()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.adapter.close()
+
+    def test_every_pair_gets_an_answer_without_an_error(self):
+        report = runner.run(PAIRS, self.adapter)
+        self.assertEqual(report["summary"]["error"], 0)
+
+    def test_rounding_is_answered_by_the_server(self):
+        answer = self.adapter.solve(BY_ID["round-above-half-goes-up"])
+        self.assertIsInstance(answer.outputs["value"], float)
+
+    def test_a_conversion_is_not_offered_and_the_note_quotes_the_server(self):
+        answer = self.adapter.solve(BY_ID["conv-inch-mm"])
+        self.assertIsInstance(answer, Unsupported)
+        self.assertIn("not yet implemented", answer.reason)
+
+
+class DecimalPlaces(unittest.TestCase):
+    """Significant digits restated as decimal places, for a tool that takes those."""
+
+    def test_examples(self):
+        from bench.adapters.p6plab_calculator import decimal_places
+        self.assertEqual(decimal_places("2.675", 3), 2)
+        self.assertEqual(decimal_places("1.2501", 2), 1)
+        self.assertEqual(decimal_places("0.01234", 2), 3)
+        self.assertEqual(decimal_places("1234", 2), -2)
 
 
 class VersionTwo(unittest.TestCase):
