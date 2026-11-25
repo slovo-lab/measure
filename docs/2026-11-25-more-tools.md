@@ -51,6 +51,8 @@ Adapters were written for MetroloPy and quantities (`bench/adapters/metrolopy_ad
 
 **Before anything is said to the authors of quantities, its documentation has to be read.** Both behaviours may be stated there as known limits; if so, they are limits of the tool that the bench shows, not defects to report. Either way an agent that calls the package gets these numbers.
 
+*Corrected the same afternoon: see the section "Afternoon of 25 November" at the end. The three temperature failures of quantities were the adapter's mistake.*
+
 ## More servers tried by hand
 
 | Tool | Version | First look |
@@ -73,3 +75,27 @@ Asked by hand: Pint, GNU units (through its server), MetroloPy, quantities, math
 | ton | 907 kg (US short ton) | 1016 kg (long ton), 1000 kg (tonne) |
 
 Every tool chose the United States reading, and none said so in its answer. They agree with each other, so no tool is wrong against another. An agent answering someone in Britain would be wrong by 20% on a pint. See the decision in `FORMAT.md`.
+
+## Afternoon of 25 November: a correction, and three more through the runner
+
+**A correction about quantities.** Its documentation was read (the page "Known Issues"). It says that the package treats temperatures as temperature differences, and that Celsius and Fahrenheit scales would need an offset that its conversions do not support. So the three "failed" temperature conversions in the table above were the adapter's mistake: it handed a temperature to a unit that the package documents as a difference. The adapter now reports temperatures as not offered and uses the package's `degC` where the pair means a difference. The corrected line: **26 pass, 1 fail, 16 not offered**. What an agent should know stays true: the package answers 25 for "25 °C in kelvin" without an error.
+
+The one failure left is `s * s`: combined uncertainty 0.0283 where 0.04 is right, and `s ** 2` gives 0.04. The package has no way to state that two inputs are correlated, and no page was found that says a variable multiplied by itself is treated as two independent ones. This is a candidate for a report; the lab's owner decides.
+
+| Tool | Pass | Fail | Not offered | Notes |
+|---|---|---|---|---|
+| js-quantities 1.8.0 (JavaScript) | 24 | 0 | 19 | Every conversion and addition right to 1e-12, every refusal made. It keeps temperatures (`tempC`) and differences (`degC`) apart by name. |
+| mathjs 15.3.0 (JavaScript) | 20 | 0 | 23 | Right on all it offers. No unit for the nautical mile, the calorie, or a temperature difference. |
+| p6plab-mcp-calculator 2.0.1 (server) | 1 | 2 | 40 | See below. |
+
+The JavaScript tools are asked through a small Node program (`bench/adapters/node/ask.js`) that, like every adapter, does no arithmetic.
+
+**p6plab-mcp-calculator**, a server with 70 tools:
+
+- `round`: 2.675 to two decimal places gives **2.67**. Every rounding rule gives 2.68 (the discarded part is exactly 5 and the kept digit is odd). 2.665 also gives 2.67, where the rule of NIST SP 811 gives 2.66. The server rounds the binary number nearest to what was typed, not the decimal number that was typed; sending the number as text changes nothing.
+- `convert_units`: every request is answered with `"success": true` and the text "Unit conversion not yet implemented". The tool is in the list an agent sees. The runner records these pairs as not offered and quotes the server.
+- It has `mean` and `std_dev` (the sample one) but nothing that gives the standard uncertainty of a mean.
+
+**unit-converter-ai-mcp is not for the bench.** After the hand questions of this morning it answered: "Rate limit reached (10/day on free tier)", with a link to pay. Ten answers a day are fewer than one run of the pairs, the lab spends no money, and a limit is not something to work around. What was seen by hand stays in the table above as seen by hand.
+
+**One more look at js-quantities.** By hand in the morning it gave a US gallon as 3.7854118 L, the exact value being 3.785411784. The published pairs have no gallon, so the runner did not ask. A pair for the gallon needs a read source first.

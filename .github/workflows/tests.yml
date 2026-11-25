@@ -32,6 +32,11 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install -r requirements-adapters.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+        working-directory: bench/adapters/node
       - run: python3 -m unittest discover -s tests -v
       - name: Every adapter must have run, not been skipped
         run: |

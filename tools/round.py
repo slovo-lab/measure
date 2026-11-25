@@ -53,7 +53,8 @@ CLIENT_MCP = "mcp==1.30.0"
 # Adapters that exist but are not in the announced round. The tools of a round
 # are fixed by its announcement; an adapter written afterwards waits here and
 # joins the next announcement.
-WAITING_FOR_THE_NEXT_ROUND = ("metrolopy", "quantities")
+WAITING_FOR_THE_NEXT_ROUND = ("metrolopy", "quantities", "mathjs", "js-quantities",
+                               "p6plab-mcp-calculator")
 
 TOOLS = [
     {"key": "pint", "name": "Pint + uncertainties", "kind": "library",

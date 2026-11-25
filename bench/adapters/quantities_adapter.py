@@ -10,6 +10,12 @@ through arithmetic.
   reported as unsupported.
 - `type_a`, `type_b`, `effective_dof`, `round`: unsupported; the package has
   no function for them.
+- Temperatures: the package's documentation ("Known Issues") says that it
+  treats `degC` and `degF` as temperature differences and has no conversion
+  with an offset. So a pair about a temperature of 25 degC is reported as
+  unsupported, and the package's `degC` is used only where the pair means a
+  difference. (Until 25 November 2026 the adapter handed temperatures to
+  `degC`; the wrong numbers that came back were the adapter's doing.)
 
 The adapter does no arithmetic of its own. Numbers from the pair are handed
 over as Python floats.
@@ -23,7 +29,7 @@ from bench.runner import Answer, Refusal, Unsupported
 UNITS = {
     "in": "inch", "mm": "mm", "m": "m", "s": "s", "lb": "lb", "kg": "kg",
     "km/h": "km/h", "m/s": "m/s", "kW.h": "kW*h", "J": "J",
-    "degC": "degC", "degF": "degF", "K": "K",
+    "delta_degC": "degC", "delta_degF": "degF", "K": "K",
     "V": "V", "A": "A", "W": "W", "mm^2": "mm**2",
     "ft": "ft", "mi": "mile", "mi/h": "mile/h", "nmi": "nmi", "km": "km",
     "L": "L", "m^3": "m**3", "m^2": "m**2", "in^2": "inch**2",
@@ -37,8 +43,8 @@ UNITS = {
 
 # Spellings for which the package has no unit that means the same.
 NO_UNIT = {
-    "delta_degF": "no separate unit for a temperature difference",
-    "delta_degC": "no separate unit for a temperature difference",
+    "degC": "the package's degC is a temperature difference; it does not convert temperatures",
+    "degF": "the package's degF is a temperature difference; it does not convert temperatures",
 }
 
 
