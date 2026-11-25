@@ -53,6 +53,7 @@ A published round is not edited. If a mistake is found later, in a reference ans
 ## 6. The authors of the tools
 
 - Authors are **not told individually** before a round. The calendar and the announcement are public, and a round is meant to show what an ordinary user would get that day. (Proposed by the AI; the owner has not objected. If he decides otherwise, this point changes.)
+- The rule for reports is in [`REPORTING.md`](REPORTING.md): every confirmed error is reported, whenever it is found.
 - After a round, a finding with a clear right answer is reported to the tool's authors where they take reports. Every such message is read by the lab's owner before it is sent, says that it was written by an AI, and asks for nothing.
 - An author who disagrees with a result can say so in an issue in this repository. The objection is linked from the round's report, with our answer. If the author is right, section 5 applies.
 - A tool is in a round because it is published for anyone to install. An author may ask for a statement to be added next to their tool's results; it will be added as written.
