@@ -28,6 +28,8 @@ UNITS = {
     "km": "km", "L": "L", "m^3": "m^3", "m^2": "m^2", "in^2": "in^2",
     "atm": "atm", "kPa": "kPa", "bar": "bar", "Pa": "Pa",
     "cal_th": "cal_th",
+    # The bare word, for the question that does not say which calorie is meant.
+    "cal": "cal",
     "min": "min", "h": "h",
     "mV": "mV", "ohm": "ohm",
     "1": "1",
@@ -85,7 +87,11 @@ class UconAdapter:
             if task == "convert":
                 number = self._number(inputs["value"], inputs["unit"])
                 converted = number.to(self._unit(inputs["to_unit"]))
-                return Answer({"value": float(converted.quantity)})
+                # What ucon itself says: the unit of the result, and the name
+                # it gave the unit it was asked to convert from.
+                return Answer({"value": float(converted.quantity)},
+                              stated={"unit": getattr(converted.unit, "shorthand", None),
+                                      "reading": getattr(number.unit, "name", None)})
             if task == "add":
                 return self._add(pair)
             if task == "propagate":

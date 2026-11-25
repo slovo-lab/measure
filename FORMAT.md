@@ -61,7 +61,7 @@ More tasks will be added when the first pair that needs them is written, and the
 
 ## Version 2 (a proposal, 25 November 2026)
 
-The published pairs stay at version 1. Version 2 is proposed here, the checker accepts it, and four examples are in [`pairs/proposed-v2.json`](pairs/proposed-v2.json). **The runner and the adapters do not understand it yet**, so nothing in version 2 is asked of any tool, and none of it is in the round of 1 December 2026. A file says which version it uses in `format_version`; everything in version 1 means the same in version 2.
+The published pairs stay at version 1. Version 2 is proposed here, the checker accepts it, and four examples are in [`pairs/proposed-v2.json`](pairs/proposed-v2.json). The runner understands it since the afternoon of 25 November, and two adapters (Pint, ucon) report what their tool states; the first trial of the four examples is in [`docs/2026-11-25-v2-first-run.md`](docs/2026-11-25-v2-first-run.md). **None of it is in the round of 1 December 2026**, whose questions were announced before. A file says which version it uses in `format_version`; everything in version 1 means the same in version 2.
 
 Version 2 adds three kinds of question and two optional fields. They come from what the lab's trials of 24 November found: tools whose arithmetic is right but which answer a question that has two answers with one, give two different answers to one question, or leave out what the number means. What was searched before proposing them is in [`docs/2026-11-24-new-checks-prior-art.md`](docs/2026-11-24-new-checks-prior-art.md).
 
@@ -103,7 +103,7 @@ A question with *no* right answer needs nothing new: it is a pair whose referenc
 
 `must_state` lists what the answer has to carry besides the number. `what` is one of `unit`, `time_zone`, `method`, `datum`, `reading`, `not_unique`. With `accept`, the tool's own words must be one of those listed; without it, saying anything at all for that label is enough.
 
-The adapter reports what the tool said, word for word, and never fills a label in for the tool. A label that is missing makes the verdict `incomplete`. A label that is present and wrong (a time in New York marked as UTC) makes it `fail`.
+The adapter reports what the tool said, word for word, and never fills a label in for the tool. An adapter that does not report this at all gets the verdict `unsupported` on such a question, with a note that the gap is in the adapter: a tool is never marked `incomplete` for something the bench did not look at. A label that is missing makes the verdict `incomplete`. A label that is present and wrong (a time in New York marked as UTC) makes it `fail`.
 
 ### 3. A relation between a tool's own answers
 

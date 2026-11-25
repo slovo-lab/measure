@@ -287,6 +287,10 @@ def _check_any_of(errors, where, task, reference):
         _text(errors, awhere, answer, "reading")
         _strings(errors, awhere, "stated_as", answer.get("stated_as"))
         _check_outputs(errors, awhere, task, answer.get("outputs"), 2)
+    shapes = {tuple((o.get("name"), o.get("unit")) for o in a.get("outputs") or [])
+              for a in answers if isinstance(a, dict)}
+    if len(shapes) > 1:
+        errors.append("%s: every answer must give the same outputs in the same units" % where)
 
 
 # ---- relations (format version 2) ------------------------------------------
