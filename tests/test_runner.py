@@ -677,11 +677,48 @@ class AstropyAndUnytAdapterTests(unittest.TestCase):
         self.assertEqual(self.adapters[1].solve(BY_ID["conv-pound-kg"]).outputs["value"], own)
 
 
+@unittest.skipUnless(_importable("suncal"), "suncal is not installed")
+class SuncalAdapterTests(unittest.TestCase):
+    """Checks that the adapter is wired correctly, not that Suncal is right."""
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.suncal_adapter import SuncalAdapter
+        cls.adapter = SuncalAdapter()
+
+    def test_every_pair_gets_an_answer_without_an_error(self):
+        report = runner.run(PAIRS, self.adapter)
+        self.assertEqual(report["summary"]["error"], 0)
+
+    def test_conversion_is_not_offered(self):
+        self.assertIsInstance(self.adapter.solve(BY_ID["conv-inch-mm"]), Unsupported)
+
+    def test_the_covariance_reaches_the_library(self):
+        """With and without the covariance the library must give different answers."""
+        import copy
+        pair = BY_ID["comb-sum-with-covariance"]
+        without = copy.deepcopy(pair)
+        without["inputs"]["covariances"] = []
+        with_cov = self.adapter.solve(pair).outputs["combined_standard_uncertainty"]
+        no_cov = self.adapter.solve(without).outputs["combined_standard_uncertainty"]
+        self.assertNotAlmostEqual(with_cov, no_cov, places=6)
+
+    def test_type_a_numbers_come_from_the_library(self):
+        import numpy
+        import suncal
+        variable = suncal.Model("f = a").var("a")
+        variable.measure(numpy.array([10.1, 10.3, 10.2, 10.4, 10.0]), units="mm", autocor=False)
+        answer = self.adapter.solve(BY_ID["typea-mean-five-readings"])
+        self.assertEqual(answer.outputs["standard_uncertainty"],
+                         float(variable.uncertainty.magnitude))
+
+
 def _node_ready():
     try:
         from bench.node_client import library_version
         library_version("mathjs")
         library_version("js-quantities")
+        library_version("convert-units")
         return True
     except Exception:
         return False
@@ -693,9 +730,10 @@ class NodeAdapterTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        from bench.adapters import js_quantities_adapter, mathjs_adapter
+        from bench.adapters import convert_units_adapter, js_quantities_adapter, mathjs_adapter
         cls.adapters = [mathjs_adapter.MathjsAdapter(),
-                        js_quantities_adapter.JsQuantitiesAdapter()]
+                        js_quantities_adapter.JsQuantitiesAdapter(),
+                        convert_units_adapter.ConvertUnitsAdapter()]
 
     def test_know_every_unit_in_the_pairs_file(self):
         used = set()
@@ -710,8 +748,21 @@ class NodeAdapterTests(unittest.TestCase):
             self.assertEqual(report["summary"]["error"], 0, adapter.name)
 
     def test_refuse_to_add_a_length_and_a_time(self):
-        for adapter in self.adapters:
+        for adapter in self.adapters[:2]:
             self.assertIsInstance(adapter.solve(BY_ID["dim-add-length-time"]), Refusal, adapter.name)
+
+    def test_convert_units_refuses_mass_to_length_and_does_not_add(self):
+        adapter = self.adapters[2]
+        self.assertIsInstance(adapter.solve(BY_ID["dim-convert-mass-length"]), Refusal)
+        self.assertIsInstance(adapter.solve(BY_ID["dim-add-length-time"]), Unsupported)
+
+    def test_convert_units_number_comes_from_the_library(self):
+        from bench.node_client import ask
+        own = ask({"library": "convert-units", "op": "convert", "value": 1.0,
+                   "unit": "in", "to_unit": "mm"})
+        answer = self.adapters[2].solve(BY_ID["conv-inch-mm"])
+        self.assertEqual(answer.outputs["value"], own["value"])
+        self.assertEqual(answer.stated["reading"], own["reading"])
 
     def test_the_number_and_the_unit_come_from_the_library(self):
         from bench.node_client import ask

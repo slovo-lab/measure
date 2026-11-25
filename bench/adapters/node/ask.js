@@ -1,7 +1,7 @@
 // Puts one question to a JavaScript library and prints its answer as JSON.
 //
 // Started by bench/node_client.py with the request on standard input:
-//   {"library": "mathjs" | "js-quantities", "op": "convert" | "add", ...}
+//   {"library": "mathjs" | "js-quantities" | "convert-units", "op": "convert" | "add", ...}
 // The program does no arithmetic of its own: it builds the library's
 // quantities, calls the library's own conversion or addition, and reports
 // the number and the unit the library gives back.
@@ -37,6 +37,18 @@ function jsQuantities(request) {
   return { value: result.scalar, unit: result.units() };
 }
 
+function convertUnits(request) {
+  const convert = require('convert-units');
+  if (request.op !== 'convert') {
+    throw new Error('convert-units has no addition');
+  }
+  const value = convert(request.value).from(request.unit).to(request.to_unit);
+  // The library's own description of the two units: name and system.
+  const from = convert().describe(request.unit);
+  const to = convert().describe(request.to_unit);
+  return { value: value, unit: to.plural, reading: from.plural + ' (' + from.system + ')' };
+}
+
 function version(name) {
   // Some packages do not let their package.json be required; read the file.
   const fs = require('fs');
@@ -66,6 +78,8 @@ process.stdin.on('end', () => {
       reply = Object.assign({ ok: true }, mathjs(request));
     } else if (request.library === 'js-quantities') {
       reply = Object.assign({ ok: true }, jsQuantities(request));
+    } else if (request.library === 'convert-units') {
+      reply = Object.assign({ ok: true }, convertUnits(request));
     } else {
       reply = { ok: false, error: 'unknown library ' + request.library, kind: 'adapter' };
     }

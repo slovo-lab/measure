@@ -54,7 +54,8 @@ CLIENT_MCP = "mcp==1.30.0"
 # are fixed by its announcement; an adapter written afterwards waits here and
 # joins the next announcement.
 WAITING_FOR_THE_NEXT_ROUND = ("metrolopy", "quantities", "mathjs", "js-quantities",
-                               "p6plab-mcp-calculator", "astropy", "unyt")
+                               "p6plab-mcp-calculator", "astropy", "unyt",
+                               "suncal", "convert-units")
 
 TOOLS = [
     {"key": "pint", "name": "Pint + uncertainties", "kind": "library",
