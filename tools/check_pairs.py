@@ -6,12 +6,18 @@ Uses only the Python standard library. Written by Claude (AI).
 Usage: python3 tools/check_pairs.py [pairs/pairs.json]
 Exit status 0 if the file is valid, 1 otherwise.
 """
+import ast
 import json
 import re
 import sys
 from fractions import Fraction
 
-FORMAT_VERSION = 1
+FORMAT_VERSION = 1            # the version of the published pairs
+FORMAT_VERSIONS = (1, 2)      # version 2 is a proposal; see FORMAT.md
+
+# Version 2 only.
+V2_CATEGORIES = {"ambiguous-input", "self-consistency", "labelling"}
+LABELS = {"unit", "time_zone", "method", "datum", "reading", "not_unique"}
 
 CATEGORIES = {
     "unit-conversion",
@@ -174,20 +180,36 @@ def _check_inputs(errors, where, task, inputs):
                     errors.append("%s: |covariance| exceeds u1*u2, which is impossible" % cwhere)
 
 
-def _check_reference(errors, where, task, reference):
+def _check_reference(errors, where, task, reference, version=1):
     if not isinstance(reference, dict):
         errors.append("%s: 'reference' must be an object" % where)
         return
-    if "outcome" in reference and reference["outcome"] != "refuse":
-        errors.append("%s: the only known 'outcome' is 'refuse'" % where)
+    outcome = reference.get("outcome")
+    if outcome == "any_of" and version >= 2:
+        _check_any_of(errors, where, task, reference)
+        if "must_state" in reference:
+            _check_must_state(errors, where, reference["must_state"])
+        return
+    if "outcome" in reference and outcome != "refuse":
+        errors.append("%s: unknown 'outcome' %r for format version %d"
+                      % (where, outcome, version))
         return
     if reference.get("outcome") == "refuse":
         if "outputs" in reference:
             errors.append("%s: a 'refuse' reference has no outputs" % where)
         return
-    outputs = reference.get("outputs")
+    if version >= 2 and "must_state" in reference:
+        _check_must_state(errors, where, reference["must_state"])
+    elif "must_state" in reference:
+        errors.append("%s: 'must_state' needs format version 2" % where)
+    _check_outputs(errors, where, task, reference.get("outputs"), version)
+
+
+def _check_outputs(errors, where, task, outputs, version, values=True):
+    """Check a list of outputs. With values=False only names and units are
+    expected (the outputs a call in a relation asks for)."""
     if not isinstance(outputs, list) or not outputs:
-        errors.append("%s: 'reference.outputs' must be a non-empty list" % where)
+        errors.append("%s: 'outputs' must be a non-empty list" % where)
         return
     names = []
     for out in outputs:
@@ -197,21 +219,167 @@ def _check_reference(errors, where, task, reference):
         name = out.get("name")
         names.append(name)
         owhere = "%s output %s" % (where, name)
-        _num(errors, owhere, out, "value")
         _text(errors, owhere, out, "unit")
+        if not values:
+            continue
+        _num(errors, owhere, out, "value")
         if not isinstance(out.get("exact"), bool):
             errors.append("%s: 'exact' must be true or false" % owhere)
-        tol = out.get("tolerance")
-        if not isinstance(tol, dict) or tol.get("kind") not in ("relative", "absolute"):
-            errors.append("%s: 'tolerance.kind' must be 'relative' or 'absolute'" % owhere)
-        else:
-            t = _num(errors, owhere + " tolerance", tol, "value")
-            if t is not None and t <= 0:
-                errors.append("%s: tolerance must be positive" % owhere)
+        _check_tolerance(errors, owhere, out.get("tolerance"))
+        for key, least in (("reference_accuracy", 0), ("sensitivity", 1)):
+            if key not in out:
+                continue
+            if version < 2:
+                errors.append("%s: '%s' needs format version 2" % (owhere, key))
+                continue
+            number = _num(errors, owhere, out, key)
+            if number is not None and number < least:
+                errors.append("%s: '%s' must be at least %d" % (owhere, key, least))
     expected = TASK_OUTPUTS.get(task)
     if expected is not None and (set(names) != expected or len(names) != len(expected)):
         errors.append("%s: task '%s' needs exactly the outputs %s, got %s"
                       % (where, task, sorted(expected), names))
+
+
+def _check_tolerance(errors, where, tol):
+    if not isinstance(tol, dict) or tol.get("kind") not in ("relative", "absolute"):
+        errors.append("%s: 'tolerance.kind' must be 'relative' or 'absolute'" % where)
+        return
+    t = _num(errors, where + " tolerance", tol, "value")
+    if t is not None and t <= 0:
+        errors.append("%s: tolerance must be positive" % where)
+
+
+def _strings(errors, where, key, value):
+    if (not isinstance(value, list) or not value
+            or any(not isinstance(v, str) or not v.strip() for v in value)):
+        errors.append("%s: '%s' must be a non-empty list of non-empty strings" % (where, key))
+
+
+def _check_must_state(errors, where, must_state):
+    if not isinstance(must_state, list) or not must_state:
+        errors.append("%s: 'must_state' must be a non-empty list" % where)
+        return
+    for i, item in enumerate(must_state):
+        iwhere = "%s must_state[%d]" % (where, i)
+        if not isinstance(item, dict) or item.get("what") not in LABELS:
+            errors.append("%s: 'what' must be one of %s" % (iwhere, sorted(LABELS)))
+            continue
+        if "accept" in item:
+            _strings(errors, iwhere, "accept", item["accept"])
+
+
+def _check_any_of(errors, where, task, reference):
+    """A question with more than one right answer."""
+    if "outputs" in reference:
+        errors.append("%s: an 'any_of' reference has 'answers', not 'outputs'" % where)
+    if not isinstance(reference.get("refusal_passes"), bool):
+        errors.append("%s: 'refusal_passes' must be true or false" % where)
+    answers = reference.get("answers")
+    if not isinstance(answers, list) or len(answers) < 2:
+        errors.append("%s: 'answers' must be a list of at least 2" % where)
+        return
+    for i, answer in enumerate(answers):
+        awhere = "%s answers[%d]" % (where, i)
+        if not isinstance(answer, dict):
+            errors.append("%s: must be an object" % awhere)
+            continue
+        _text(errors, awhere, answer, "reading")
+        _strings(errors, awhere, "stated_as", answer.get("stated_as"))
+        _check_outputs(errors, awhere, task, answer.get("outputs"), 2)
+
+
+# ---- relations (format version 2) ------------------------------------------
+
+_REF_RE = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)$")
+_EXPR_OPS = (ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Pow)
+
+
+def expression_references(expression):
+    """Return the (call, output) pairs an expression such as
+    'b.value - 2 * a.value' uses. Raises ValueError for anything but
+    arithmetic over such references and plain numbers."""
+    try:
+        tree = ast.parse(expression, mode="eval")
+    except (SyntaxError, TypeError) as exc:
+        raise ValueError("cannot parse %r: %s" % (expression, exc))
+    found = []
+
+    def walk(node):
+        if isinstance(node, ast.BinOp) and isinstance(node.op, _EXPR_OPS):
+            walk(node.left)
+            walk(node.right)
+        elif isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+            walk(node.operand)
+        elif isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name):
+            found.append((node.value.id, node.attr))
+        elif isinstance(node, ast.Constant) and type(node.value) in (int, float):
+            pass
+        else:
+            raise ValueError("not allowed in an expression: %s" % type(node).__name__)
+
+    walk(tree.body)
+    return found
+
+
+def _resolve_from(errors, where, value, known):
+    """Replace {"from": "a.value"} by a placeholder number, after checking that
+    it names an output of an earlier call."""
+    if isinstance(value, dict) and set(value) == {"from"}:
+        match = _REF_RE.match(value["from"]) if isinstance(value["from"], str) else None
+        if not match or match.group(2) not in known.get(match.group(1), ()):
+            errors.append("%s: 'from' must name an output of an earlier call, got %r"
+                          % (where, value["from"]))
+        return "1"
+    if isinstance(value, dict):
+        return {k: _resolve_from(errors, where, v, known) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_resolve_from(errors, where, v, known) for v in value]
+    return value
+
+
+def _check_relation(errors, where, item):
+    calls = item.get("calls")
+    known = {}
+    if not isinstance(calls, list) or not calls:
+        errors.append("%s: 'calls' must be a non-empty list" % where)
+        calls = []
+    for i, call in enumerate(calls):
+        cwhere = "%s calls[%d]" % (where, i)
+        if not isinstance(call, dict):
+            errors.append("%s: must be an object" % cwhere)
+            continue
+        name = call.get("name")
+        if not isinstance(name, str) or not NAME_RE.match(name) or name in known:
+            errors.append("%s: 'name' must be a new plain name" % cwhere)
+            continue
+        task = call.get("task")
+        if task not in TASK_OUTPUTS:
+            errors.append("%s: unknown task %r" % (cwhere, task))
+        else:
+            _check_inputs(errors, cwhere, task,
+                          _resolve_from(errors, cwhere, call.get("inputs"), known))
+            _check_outputs(errors, cwhere, task, call.get("outputs"), 2, values=False)
+        known[name] = TASK_OUTPUTS.get(task, set())
+    relation = item.get("relation")
+    if not isinstance(relation, dict) or relation.get("kind") != "equal":
+        errors.append("%s: 'relation.kind' must be 'equal'" % where)
+        return
+    used = set()
+    for side in ("left", "right"):
+        try:
+            references = expression_references(relation.get(side))
+        except ValueError as exc:
+            errors.append("%s: relation %s: %s" % (where, side, exc))
+            continue
+        for call_name, output in references:
+            if output not in known.get(call_name, ()):
+                errors.append("%s: relation %s uses unknown '%s.%s'"
+                              % (where, side, call_name, output))
+            used.add(call_name)
+    if not used:
+        errors.append("%s: a relation must use at least one call" % where)
+    _check_tolerance(errors, where + " relation", relation.get("tolerance"))
 
 
 def check_document(doc):
@@ -219,8 +387,10 @@ def check_document(doc):
     errors = []
     if not isinstance(doc, dict):
         return ["top level must be an object"]
-    if doc.get("format_version") != FORMAT_VERSION:
-        errors.append("format_version must be %d" % FORMAT_VERSION)
+    version = doc.get("format_version")
+    if version not in FORMAT_VERSIONS:
+        errors.append("format_version must be one of %s" % (FORMAT_VERSIONS,))
+        version = FORMAT_VERSION
     pairs = doc.get("pairs")
     if not isinstance(pairs, list) or not pairs:
         errors.append("'pairs' must be a non-empty list")
@@ -238,16 +408,23 @@ def check_document(doc):
             errors.append("%s: duplicate id" % where)
         else:
             seen.add(pid)
-        if pair.get("category") not in CATEGORIES:
+        categories = CATEGORIES | V2_CATEGORIES if version >= 2 else CATEGORIES
+        if pair.get("category") not in categories:
             errors.append("%s: unknown category %r" % (where, pair.get("category")))
         _text(errors, where, pair, "question")
         _text(errors, where, pair, "derivation")
-        task = pair.get("task")
-        if task not in TASK_OUTPUTS:
-            errors.append("%s: unknown task %r" % (where, task))
+        kind = pair.get("kind", "pair")
+        if kind == "relation" and version >= 2:
+            _check_relation(errors, where, pair)
+        elif kind != "pair":
+            errors.append("%s: unknown 'kind' %r for format version %d" % (where, kind, version))
         else:
-            _check_inputs(errors, where, task, pair.get("inputs"))
-        _check_reference(errors, where, task, pair.get("reference"))
+            task = pair.get("task")
+            if task not in TASK_OUTPUTS:
+                errors.append("%s: unknown task %r" % (where, task))
+            else:
+                _check_inputs(errors, where, task, pair.get("inputs"))
+            _check_reference(errors, where, task, pair.get("reference"), version)
         sources = pair.get("sources")
         if not isinstance(sources, list) or not sources:
             errors.append("%s: at least one source is required" % where)

@@ -303,11 +303,106 @@ class CheckerRejectsBrokenFiles(unittest.TestCase):
             lambda d: by_id(d, "dim-add-length-time")["inputs"]["terms"].pop()))
 
     def test_wrong_format_version(self):
-        self.assertTrue(self.broken(lambda d: d.update(format_version=2)))
+        self.assertTrue(self.broken(lambda d: d.update(format_version=3)))
 
     def test_refuse_reference_is_accepted(self):
         self.assertEqual(self.broken(
             lambda d: d["pairs"][0].update(reference={"outcome": "refuse"})), [])
+
+
+class ProposedVersionTwo(unittest.TestCase):
+    """The proposal in FORMAT.md, with its example file pairs/proposed-v2.json."""
+
+    PATH = os.path.join(ROOT, "pairs", "proposed-v2.json")
+
+    def doc(self):
+        with open(self.PATH, encoding="utf-8") as handle:
+            return json.load(handle)
+
+    def broken(self, change):
+        doc = self.doc()
+        change(doc)
+        return check_pairs.check_document(doc)
+
+    def item(self, doc, pid):
+        return next(p for p in doc["pairs"] if p["id"] == pid)
+
+    def test_example_file_is_valid(self):
+        self.assertEqual(check_pairs.check_document(self.doc()), [])
+
+    def test_published_pairs_stay_at_version_one(self):
+        self.assertEqual(load()["format_version"], 1)
+
+    def test_new_things_are_refused_under_version_one(self):
+        for pid in ("amb-calorie-joule", "lab-inch-mm-states-unit", "rel-inch-mm-round-trip"):
+            doc = self.doc()
+            doc["format_version"] = 1
+            doc["pairs"] = [self.item(doc, pid)]
+            self.assertTrue(check_pairs.check_document(doc), pid)
+
+    def test_any_of_needs_two_answers(self):
+        self.assertTrue(self.broken(
+            lambda d: self.item(d, "amb-calorie-joule")["reference"]["answers"].pop()))
+
+    def test_any_of_must_say_whether_a_refusal_passes(self):
+        self.assertTrue(self.broken(
+            lambda d: self.item(d, "amb-calorie-joule")["reference"].pop("refusal_passes")))
+
+    def test_any_of_answer_needs_stated_as(self):
+        self.assertTrue(self.broken(
+            lambda d: self.item(d, "amb-calorie-joule")["reference"]["answers"][0].pop("stated_as")))
+
+    def test_any_of_answers_are_recomputed(self):
+        """Both readings follow from the factors in the source: 1 x factor."""
+        answers = self.item(self.doc(), "amb-calorie-joule")["reference"]["answers"]
+        values = sorted(F(a["outputs"][0]["value"]) for a in answers)
+        self.assertEqual(values, [F("4.184"), F("4.1868")])
+
+    def test_unknown_label(self):
+        self.assertTrue(self.broken(
+            lambda d: self.item(d, "lab-inch-mm-states-unit")["reference"]["must_state"][0]
+            .update(what="colour")))
+
+    def test_relation_cannot_use_a_later_call(self):
+        def change(d):
+            calls = self.item(d, "rel-inch-mm-round-trip")["calls"]
+            calls.reverse()
+        self.assertTrue(self.broken(change))
+
+    def test_relation_cannot_use_an_unknown_output(self):
+        self.assertTrue(self.broken(
+            lambda d: self.item(d, "rel-square-two-ways")["relation"].update(left="product.area")))
+
+    def test_relation_expression_is_arithmetic_only(self):
+        self.assertTrue(self.broken(
+            lambda d: self.item(d, "rel-inch-mm-round-trip")["relation"]
+            .update(left="__import__('os').getcwd()")))
+
+    def test_relation_needs_a_tolerance(self):
+        self.assertTrue(self.broken(
+            lambda d: self.item(d, "rel-inch-mm-round-trip")["relation"].pop("tolerance")))
+
+    def test_relation_needs_a_source(self):
+        self.assertTrue(self.broken(
+            lambda d: self.item(d, "rel-square-two-ways").update(sources=[])))
+
+    def test_round_trip_holds_in_exact_arithmetic(self):
+        self.assertEqual(F(7) * F("25.4") / F("25.4"), 7)
+
+    def test_optional_accuracy_fields(self):
+        def add(d):
+            out = self.item(d, "lab-inch-mm-states-unit")["reference"]["outputs"][0]
+            out.update(reference_accuracy="0", sensitivity="1")
+        self.assertEqual(self.broken(add), [])
+        self.assertTrue(self.broken(
+            lambda d: self.item(d, "lab-inch-mm-states-unit")["reference"]["outputs"][0]
+            .update(sensitivity="0.5")))
+
+    def test_expression_references(self):
+        self.assertEqual(check_pairs.expression_references("b.value - 2 * a.value"),
+                         [("b", "value"), ("a", "value")])
+        with self.assertRaises(ValueError):
+            check_pairs.expression_references("open('x')")
 
 
 class RoundingHelper(unittest.TestCase):

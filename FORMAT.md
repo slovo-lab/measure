@@ -1,6 +1,6 @@
 # Reference pairs: data format
 
-Written by Claude (AI). Format version 1, 24 November 2026.
+Written by Claude (AI). Format version 1, 24 November 2026. A version 2 is proposed further down (25 November 2026); the published pairs use version 1.
 
 A reference pair is one question with a known answer and the source of that answer. All pairs live in one file, [`pairs/pairs.json`](pairs/pairs.json). The file is plain JSON so that any language can read it without extra libraries.
 
@@ -58,6 +58,98 @@ More tasks will be added when the first pair that needs them is written, and the
 - `exact: true` means the stated value is the whole answer. `exact: false` means it is rounded to 12 significant digits.
 - `tolerance` says how far a tool's answer may be from the reference and still pass: `relative` (a fraction of the reference value) or `absolute` (in the output unit). Almost all tolerances only allow for ordinary double-precision arithmetic: `1e-12` for exact answers and `1e-9` for rounded ones. Two Type B pairs use `1e-4`, because the divisor printed in their source (3, or 1.960) is itself rounded and a tool that uses the exact normal quantile must not fail for that; each such pair says so in its derivation. Tolerances are not a judgment about how much error is acceptable in practice.
 - A pair where the correct behaviour is to refuse (for example, adding a length to a time) has `"reference": { "outcome": "refuse" }` and no outputs. A tool passes if it reports an error or declines, and fails if it returns any number. The first such pair, `dim-add-length-time`, was added on 24 November 2026. The pair `dim-add-foot-inch` is the opposite control: a sum of two lengths in different units, which has an answer, so that a tool cannot pass this category by refusing every sum.
+
+## Version 2 (a proposal, 25 November 2026)
+
+The published pairs stay at version 1. Version 2 is proposed here, the checker accepts it, and four examples are in [`pairs/proposed-v2.json`](pairs/proposed-v2.json). **The runner and the adapters do not understand it yet**, so nothing in version 2 is asked of any tool, and none of it is in the round of 1 December 2026. A file says which version it uses in `format_version`; everything in version 1 means the same in version 2.
+
+Version 2 adds three kinds of question and two optional fields. They come from what the lab's trials of 24 November found: tools whose arithmetic is right but which answer a question that has two answers with one, give two different answers to one question, or leave out what the number means. What was searched before proposing them is in [`docs/2026-11-24-new-checks-prior-art.md`](docs/2026-11-24-new-checks-prior-art.md).
+
+### 1. A question with more than one right answer
+
+```json
+"reference": { "outcome": "any_of", "refusal_passes": true, "answers": [
+  { "reading": "thermochemical calorie", "stated_as": ["thermochemical", "cal_th"],
+    "outputs": [ { "name": "value", "value": "4.184", "unit": "J", "exact": true,
+                   "tolerance": { "kind": "relative", "value": "1e-12" } } ] },
+  { "reading": "International Table calorie", "stated_as": ["international table", "cal_it"],
+    "outputs": [ ... ] } ] }
+```
+
+- `answers` lists every answer that is right, two or more, each with the `reading` of the question that leads to it and its own `outputs`. Every answer needs a source, like any other.
+- `stated_as` lists the words by which a tool may say that it took this reading. They are compared without regard to capitals.
+- `refusal_passes` says whether declining, with a request to say which reading is meant, counts as right. It has no default, so that every such pair says it.
+
+What a tool's answer earns:
+
+| The tool | Verdict |
+|---|---|
+| gives one of the answers and says which reading it took | pass |
+| gives all the answers | pass |
+| declines, and `refusal_passes` is true | pass |
+| gives one of the answers and says nothing about which | **incomplete** |
+| gives a number that is none of the answers, or names a reading that does not go with its number | fail |
+
+`incomplete` is a new verdict. It means: the number is right, and something the answer had to say is missing. It is reported apart from pass and from fail and is counted with neither.
+
+A question with *no* right answer needs nothing new: it is a pair whose reference is `"outcome": "refuse"`, as in version 1.
+
+### 2. What an answer must say
+
+```json
+"reference": { "outputs": [ ... ],
+  "must_state": [ { "what": "unit", "accept": ["mm", "millimetre", "millimeter"] } ] }
+```
+
+`must_state` lists what the answer has to carry besides the number. `what` is one of `unit`, `time_zone`, `method`, `datum`, `reading`, `not_unique`. With `accept`, the tool's own words must be one of those listed; without it, saying anything at all for that label is enough.
+
+The adapter reports what the tool said, word for word, and never fills a label in for the tool. A label that is missing makes the verdict `incomplete`. A label that is present and wrong (a time in New York marked as UTC) makes it `fail`.
+
+### 3. A relation between a tool's own answers
+
+```json
+{ "id": "rel-inch-mm-round-trip", "category": "self-consistency", "kind": "relation",
+  "question": "Convert 7 inches to millimetres, then convert the result back to inches. The second result must be 7.",
+  "calls": [
+    { "name": "there", "task": "convert", "inputs": { "value": "7", "unit": "in", "to_unit": "mm" },
+      "outputs": [ { "name": "value", "unit": "mm" } ] },
+    { "name": "back", "task": "convert",
+      "inputs": { "value": { "from": "there.value" }, "unit": "mm", "to_unit": "in" },
+      "outputs": [ { "name": "value", "unit": "in" } ] } ],
+  "relation": { "kind": "equal", "left": "back.value", "right": "7",
+                "tolerance": { "kind": "relative", "value": "1e-12" } },
+  "sources": [ ... ], "derivation": "..." }
+```
+
+This is metamorphic testing (T. Y. Chen, S. C. Cheung and S. M. Yiu, 1998): when no reference value is at hand, or to test something a reference value cannot, check a relation that must hold between answers.
+
+- An item with `"kind": "relation"` has `calls` in place of `task`, `inputs` and `reference`. Each call is a task from the table above with its `inputs`, and the `outputs` it is asked for by name and unit, with no values.
+- An input may be `{ "from": "there.value" }`: the tool's own output from an earlier call, passed on as the tool gave it.
+- `relation` has `kind` (only `equal` so far), a `left` and a `right` side, and a `tolerance`. A side is plain arithmetic over numbers and outputs written as `call.output`. A relative tolerance is taken against the larger of the two sides.
+- **Rule 1 becomes: every relation has a source.** The source and the `derivation` must say why the relation holds, in the same detail as for an answer.
+- Verdicts: pass if the relation holds; fail if it does not, or if the tool refuses one of the calls; unsupported if the tool lacks a function for any of the calls.
+
+A relation says nothing about which of the answers is right. It says the tool must not disagree with itself.
+
+### 4. How good the reference is (optional fields)
+
+An output may carry two more numbers:
+
+- `reference_accuracy`: a bound on how far the stored reference value is from the true value, in the output's unit. `"0"` for an exact answer.
+- `sensitivity`: how strongly the answer reacts to the last digits of the input, 1 or more. 1 for a well-conditioned question.
+
+They follow the way reference data for metrology software is described by A. B. Forbes, I. M. Smith and G. J. P. Kok ("Generation of reference data for software validation", XXI IMEKO World Congress, 2015); see [`docs/2026-11-25-reading-notes.md`](docs/2026-11-25-reading-notes.md). In version 2 they are recorded only. They change no verdict. A reported "digits lost", computed from them as in that paper, is intended, and waits until the paper has been read in full and its formula checked.
+
+### New categories
+
+`ambiguous-input`, `self-consistency`, `labelling`.
+
+### What is still open
+
+- Whether `incomplete` is the right single word for "right number, something unsaid", and whether one such verdict is enough.
+- Whether giving all the answers should pass when the question, read plainly, asks for one.
+- How an adapter reports what a tool stated when the tool's answer is free text.
+- No task exists yet for time or for positions; the first pairs in those fields will add them.
 
 ## Units
 
