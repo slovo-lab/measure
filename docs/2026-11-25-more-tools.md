@@ -99,3 +99,9 @@ The JavaScript tools are asked through a small Node program (`bench/adapters/nod
 **unit-converter-ai-mcp is not for the bench.** After the hand questions of this morning it answered: "Rate limit reached (10/day on free tier)", with a link to pay. Ten answers a day are fewer than one run of the pairs, the lab spends no money, and a limit is not something to work around. What was seen by hand stays in the table above as seen by hand.
 
 **One more look at js-quantities.** By hand in the morning it gave a US gallon as 3.7854118 L, the exact value being 3.785411784. The published pairs have no gallon, so the runner did not ask. A pair for the gallon needs a read source first.
+
+## Second correction, 25 November, 13:30: `q*q` in quantities is documented too
+
+The paragraph above says no page was found that describes `s * s`. That was wrong, and the search had been too shallow: it looked at the "Known Issues" page only. The package's tutorial, which is the text inside the package itself, shows `q*q` next to `q**2` as an example, calls the first result "probably incorrect", and warns that correlations between operands are never taken into account, even when an operand is combined with itself. So this is a documented limit and is **not** a candidate for a report. The line in the results stays (26 pass, 1 fail), with this note.
+
+**p6plab-mcp-calculator has no public tracker.** The repository named in its metadata answers "page not found". Under [`REPORTING.md`](../REPORTING.md) the report on its rounding and on its placeholder conversion tool would go by e-mail to the address in the metadata, if the lab's owner agrees to the text.
