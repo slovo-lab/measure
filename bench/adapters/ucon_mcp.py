@@ -15,6 +15,11 @@ from bench.mcp_client import StdioServer
 from bench.runner import Answer, Refusal, Unsupported
 
 
+# Bare words the engine has no unit for; they are still put to the server, to
+# record what it answers.
+BARE_WORDS = {"ton": "ton"}
+
+
 class UconMcpAdapter:
     name = "ucon-mcp (server)"
 
@@ -35,20 +40,28 @@ class UconMcpAdapter:
             return Unsupported("no tool for the task '%s'; the server's tools convert, "
                                "and multiply or divide by factors" % pair["task"])
         for unit in units_used(pair):
-            if unit in NO_UNIT:
+            if unit in NO_UNIT and unit not in BARE_WORDS:
                 return Unsupported(NO_UNIT[unit])
         inputs = pair["inputs"]
+        names = {**UNITS, **BARE_WORDS}
         is_error, payload, text = self._server.call("convert", {
             "value": float(Fraction(inputs["value"])),
-            "from_unit": UNITS[inputs["unit"]],
-            "to_unit": UNITS[inputs["to_unit"]],
+            "from_unit": names[inputs["unit"]],
+            "to_unit": names[inputs["to_unit"]],
         })
         if not isinstance(payload, dict):
             raise RuntimeError("unreadable answer from the server: %r" % text[:200])
         if "error" in payload:
             if payload.get("error_type") == "dimension_mismatch":
                 return Refusal(payload["error"])
+            if payload.get("error_type") == "unknown_unit" and inputs["unit"] in BARE_WORDS:
+                # The server turns the bare word down and names the units it has.
+                hints = "; ".join(payload.get("hints") or [])
+                return Refusal(("%s. %s" % (payload["error"], hints))[:300])
             raise RuntimeError("server error: %s" % payload["error"])
         if is_error:
             raise RuntimeError("server error: %s" % text[:200])
-        return Answer({"value": float(payload["quantity"])})
+        # What the server itself says: the unit of the result. Its reply has no
+        # field for how it read the unit it was asked to convert from.
+        return Answer({"value": float(payload["quantity"])},
+                      stated={"unit": payload.get("unit")})

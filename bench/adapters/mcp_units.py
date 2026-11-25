@@ -44,4 +44,7 @@ class McpUnitsAdapter:
             if "dimension" in flat.lower() or "cannot convert" in flat.lower():
                 return Refusal(flat[:200])
             raise RuntimeError("server error: %s" % flat[:200])
-        return Answer({"value": float(payload["output_value"])})
+        # What the server itself says: its names for the two units.
+        return Answer({"value": float(payload["output_value"])},
+                      stated={"unit": payload.get("output_unit"),
+                              "reading": payload.get("input_unit")})

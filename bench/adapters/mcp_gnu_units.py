@@ -31,6 +31,8 @@ UNITS = {
     "K": "K",
     # Temperature differences are plain units in this database.
     "delta_degC": "degC", "delta_degF": "degF",
+    # Bare words, for the questions that do not say which reading is meant.
+    "cal": "calorie", "gal": "gallon", "pt": "pint", "ton": "ton",
 }
 
 # Temperatures (not differences) are functions in this database.
@@ -89,4 +91,9 @@ class McpGnuUnitsAdapter:
             raise RuntimeError("server error: %s" % flat[:200])
         if not isinstance(payload, dict) or "value" not in payload:
             raise RuntimeError("unreadable answer from the server: %r" % flat[:200])
-        return Answer({"value": float(payload["value"])})
+        # What the server itself says: the result with its unit, and the
+        # expression it was given back as it read it.
+        result_words = str(payload.get("result", "")).split(None, 1)
+        return Answer({"value": float(payload["value"])},
+                      stated={"unit": result_words[1] if len(result_words) > 1 else None,
+                              "reading": payload.get("from")})

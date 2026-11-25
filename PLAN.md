@@ -64,7 +64,9 @@ Work that belongs to a date. On that date it comes before the steps below; on an
 - [x] Report on p6plab-mcp-calculator (rounding; placeholder `convert_units`). Sent by e-mail on 25 November 2026 after the owner's yes; see `reports/2026-11-25-p6plab-mcp-calculator.md`.
 - [x] Adapters for astropy.units and unyt. Done 25 November 2026: astropy 8.0.3 passes 22 of 22 offered, unyt 3.2.0 passes 24 of 24. Both wait for the round of 4 January. 178 tests.
 - [x] Questions for the gallon, the pint and the ton, every reading with a read source, in `pairs/proposed-v2.json`. Done 25 November 2026. Two findings: astropy and js-quantities define the gallon through rounded figures (1.4e-9 and 4e-9 from exact). Reported on 25 November 2026 after the owner's yes: astropy issue 20948, js-quantities issue 153.
-- [ ] More tools, continued: Suncal; convert-units (JavaScript). Let the five server adapters report what the server states, so the questions with several readings can be put to them.
+- [x] Four converting server adapters report what the server states (the fifth, measurement-uncertainty-mcp, does not convert). Done 25 November 2026. On the bare-word questions: two servers decline "ton" and show the choices; none says which gallon, pint or calorie it took.
+- [ ] Move the tried examples from `pairs/proposed-v2.json` into the published file for the round of 4 January (the announcement is due by 29 December), after the owner has had a chance to object to the open format questions.
+- [ ] More tools, continued: Suncal; convert-units (JavaScript).
 - [ ] Coordinates: read the Australian manual and a definition of UTM zones (including the Norway exception) in full, check their reuse terms, then write the first pairs for lengths, areas and conversions.
 - [ ] Read the documentation of `mcp-assert` and the suites repository linked from `mcp-test-harness`; decide whether and how to give Measure's pairs in a form such a framework can run. Look for a numeric tolerance and for "must refuse".
 - [ ] When a released server has first-order propagation, add the task to its adapter. The server has no units, so decide first how pairs that mix units are put to it.
