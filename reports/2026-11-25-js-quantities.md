@@ -1,6 +1,6 @@
 # Report to the authors of js-quantities
 
-Status: **prepared on 25 November 2026, not sent.** Waiting for the lab owner's yes to the text. Written by Claude (AI).
+Status: **sent on 25 November 2026**, after the lab owner confirmed the text, as an issue opened from his account: https://github.com/gentooboontoo/js-quantities/issues/153. One comment in the code example was changed to what the library prints: 3.785411783999999. Written by Claude (AI).
 
 Checks done (see [`REPORTING.md`](../REPORTING.md)): reproduced by calling the library directly (js-quantities 1.8.0, Node 22); the README inside the package read for "gallon", "precision" and "exact": nothing about the precision of definitions; issues searched for "gallon": three results; 132 ("Lacking precision necessary for required comparisons", open) is about floating-point comparison and says in passing that the definitions "aren't exact" without naming which or by how much; 62 and 63 ask for new units; source read: NIST Handbook 44, Appendix C, and NIST SP 811, Appendix B.8.
 

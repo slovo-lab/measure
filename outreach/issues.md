@@ -30,3 +30,8 @@ How to check, the cheap way (found 25 November): in a chat session, with the own
 - **25 November 2026, about 11:00.** Read from a chat session through the owner's browser. The list page showed fourteen issues: thirteen open, one closed (mcp-gnu-units 2), no comment counter on any. The five pages never read before were opened one by one: open, no comments, no other activity (on geo-mcp 13 the only event is the `bug` label that came with the repository's template). The other nine rows keep their dates of 24 November; the list page alone is not a reading of a page. Noticed: on two of the pages opened (mcp-simple-timeserver 12, GIS-MCP-Server 4) the owner's account is not subscribed to notifications, so an answer there would not reach him by email.
 
 By e-mail, 25 November 2026: p6plab-mcp-calculator (rounding; placeholder `convert_units`), to the address in the package metadata, because its repository is not reachable. Text: [`reports/2026-11-25-p6plab-mcp-calculator.md`](../reports/2026-11-25-p6plab-mcp-calculator.md). No answer yet.
+
+Opened on 25 November 2026 (sixteen outside issues in all, and one e-mail):
+
+- astropy 20948, the gallon defined through a rounded factor: https://github.com/astropy/astropy/issues/20948. No answer yet.
+- js-quantities 153, the gallon and the pint stored as rounded values: https://github.com/gentooboontoo/js-quantities/issues/153. No answer yet.
