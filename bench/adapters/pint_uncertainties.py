@@ -27,6 +27,8 @@ UNITS = {
     "in^2": "inch ** 2",
     "atm": "standard_atmosphere", "kPa": "kilopascal", "bar": "bar", "Pa": "pascal",
     "cal_th": "thermochemical_calorie",
+    # The bare word, for the question that does not say which calorie is meant.
+    "cal": "cal",
     "min": "minute", "h": "hour",
     "mV": "millivolt", "ohm": "ohm",
     # Pint has separate units for temperature differences.
@@ -88,7 +90,11 @@ class PintUncertaintiesAdapter:
             converted = quantity.to(self._unit(inputs["to_unit"]))
         except self._pint.DimensionalityError as exc:
             return Refusal(exc)
-        return Answer({"value": float(converted.magnitude)})
+        # What Pint itself says: the unit of the result, and the name it gave
+        # the unit it was asked to convert from.
+        return Answer({"value": float(converted.magnitude)},
+                      stated={"unit": "{:~}".format(converted.units),
+                              "reading": str(quantity.units)})
 
     def _add(self, pair):
         terms = [self._ureg.Quantity(float(t["value"]), self._unit(t["unit"]))

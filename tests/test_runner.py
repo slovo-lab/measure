@@ -3,6 +3,8 @@
 Run: python3 -m unittest discover -s tests -v
 Written by Claude (AI).
 """
+import copy
+import json
 import os
 import sys
 import unittest
@@ -529,6 +531,140 @@ class McpClient(unittest.TestCase):
         from bench.mcp_client import ServerError, find_command
         with self.assertRaises(ServerError):
             find_command("no-such-server-command-for-measure")
+
+
+
+class VersionTwo(unittest.TestCase):
+    """The proposed format version 2: several right answers, labels, relations."""
+
+    @classmethod
+    def setUpClass(cls):
+        with open(os.path.join(ROOT, "pairs", "proposed-v2.json"), encoding="utf-8") as handle:
+            cls.items = {item["id"]: item for item in json.load(handle)["pairs"]}
+
+    class Fixed:
+        """An adapter that gives prepared answers, by task and inputs."""
+        name = "fixed"
+
+        def __init__(self, answer):
+            self.answer = answer
+            self.seen = []
+
+        def versions(self):
+            return {}
+
+        def solve(self, pair):
+            self.seen.append(pair)
+            return self.answer(pair) if callable(self.answer) else self.answer
+
+    def verdict(self, pid, answer):
+        report = runner.run([self.items[pid]], self.Fixed(answer))
+        return report["results"][0]["verdict"], report
+
+    def test_one_answer_with_its_reading_passes(self):
+        verdict, _ = self.verdict("amb-calorie-joule",
+                                  runner.Answer({"value": 4.184}, stated={"reading": "Thermochemical calorie"}))
+        self.assertEqual(verdict, "pass")
+
+    def test_one_answer_without_a_word_is_incomplete(self):
+        verdict, report = self.verdict("amb-calorie-joule", runner.Answer({"value": 4.1868}, stated={}))
+        self.assertEqual(verdict, "incomplete")
+        self.assertEqual(report["summary"]["incomplete"], 1)
+
+    def test_one_answer_with_an_unhelpful_word_is_incomplete(self):
+        verdict, _ = self.verdict("amb-calorie-joule",
+                                  runner.Answer({"value": 4.184}, stated={"reading": "calorie"}))
+        self.assertEqual(verdict, "incomplete")
+
+    def test_one_answer_naming_the_other_reading_fails(self):
+        verdict, _ = self.verdict("amb-calorie-joule",
+                                  runner.Answer({"value": 4.184}, stated={"reading": "International Table"}))
+        self.assertEqual(verdict, "fail")
+
+    def test_all_answers_pass(self):
+        verdict, _ = self.verdict("amb-calorie-joule",
+                                  runner.Answer({"value": 4.184}, also=[{"value": 4.1868}]))
+        self.assertEqual(verdict, "pass")
+
+    def test_a_number_that_is_no_answer_fails(self):
+        verdict, _ = self.verdict("amb-calorie-joule", runner.Answer({"value": 4.19}, stated={}))
+        self.assertEqual(verdict, "fail")
+
+    def test_declining_passes_when_the_pair_says_so(self):
+        verdict, _ = self.verdict("amb-calorie-joule", runner.Refusal("which calorie?"))
+        self.assertEqual(verdict, "pass")
+        item = copy.deepcopy(self.items["amb-calorie-joule"])
+        item["reference"]["refusal_passes"] = False
+        report = runner.run([item], self.Fixed(runner.Refusal("which calorie?")))
+        self.assertEqual(report["results"][0]["verdict"], "fail")
+
+    def test_adapter_that_reports_no_statements_is_not_blamed_on_the_tool(self):
+        verdict, report = self.verdict("amb-calorie-joule", runner.Answer({"value": 4.184}))
+        self.assertEqual(verdict, "unsupported")
+        self.assertIn("adapter", report["results"][0]["note"])
+
+    def test_adapter_never_sees_the_answers(self):
+        adapter = self.Fixed(runner.Answer({"value": 4.184}, stated={}))
+        runner.run([self.items["amb-calorie-joule"]], adapter)
+        self.assertNotIn("4.184", json.dumps(adapter.seen))
+        self.assertEqual(adapter.seen[0]["reference"], {"outputs": [{"name": "value", "unit": "J"}]})
+
+    def test_label_present_and_right(self):
+        verdict, _ = self.verdict("lab-inch-mm-states-unit",
+                                  runner.Answer({"value": 25.4}, stated={"unit": "MM"}))
+        self.assertEqual(verdict, "pass")
+
+    def test_label_missing_is_incomplete(self):
+        verdict, _ = self.verdict("lab-inch-mm-states-unit", runner.Answer({"value": 25.4}, stated={}))
+        self.assertEqual(verdict, "incomplete")
+
+    def test_label_wrong_fails(self):
+        verdict, _ = self.verdict("lab-inch-mm-states-unit",
+                                  runner.Answer({"value": 25.4}, stated={"unit": "cm"}))
+        self.assertEqual(verdict, "fail")
+
+    def test_wrong_number_fails_whatever_the_label(self):
+        verdict, _ = self.verdict("lab-inch-mm-states-unit",
+                                  runner.Answer({"value": 2.54}, stated={"unit": "mm"}))
+        self.assertEqual(verdict, "fail")
+
+    def test_round_trip_feeds_the_tools_own_answer_back(self):
+        def answer(pair):
+            value = float(pair["inputs"]["value"])
+            return runner.Answer({"value": value * 25.4 if pair["inputs"]["unit"] == "in" else value / 25.4})
+        adapter = self.Fixed(answer)
+        report = runner.run([self.items["rel-inch-mm-round-trip"]], adapter)
+        self.assertEqual(report["results"][0]["verdict"], "pass")
+        self.assertEqual(float(adapter.seen[1]["inputs"]["value"]), 7 * 25.4)
+
+    def test_round_trip_with_two_different_factors_fails(self):
+        def answer(pair):
+            value = float(pair["inputs"]["value"])
+            return runner.Answer({"value": value * 25.4 if pair["inputs"]["unit"] == "in" else value / 25.0})
+        verdict, _ = self.verdict("rel-inch-mm-round-trip", answer)
+        self.assertEqual(verdict, "fail")
+
+    def test_relation_between_two_calls(self):
+        def same(pair):
+            return runner.Answer({"value": 4.0, "combined_standard_uncertainty": 0.04})
+        def differs(pair):
+            u = 0.04 if "**" in pair["inputs"]["model"] else 0.0282842712474619
+            return runner.Answer({"value": 4.0, "combined_standard_uncertainty": u})
+        self.assertEqual(self.verdict("rel-square-two-ways", same)[0], "pass")
+        self.assertEqual(self.verdict("rel-square-two-ways", differs)[0], "fail")
+
+    def test_relation_unsupported_and_refused(self):
+        self.assertEqual(self.verdict("rel-square-two-ways", runner.Unsupported("no"))[0], "unsupported")
+        self.assertEqual(self.verdict("rel-square-two-ways", runner.Refusal("no"))[0], "fail")
+
+    def test_relation_with_a_crashing_tool_is_an_error(self):
+        def crash(pair):
+            raise RuntimeError("boom")
+        self.assertEqual(self.verdict("rel-inch-mm-round-trip", crash)[0], "error")
+
+    def test_version_one_report_has_the_same_four_counts(self):
+        report = runner.run(PAIRS, Fake(echo))
+        self.assertEqual(sorted(report["summary"]), sorted(runner.VERDICTS))
 
 
 if __name__ == "__main__":
