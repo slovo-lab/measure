@@ -36,3 +36,5 @@ Opened on 25 November 2026 (sixteen outside issues in all, and one e-mail):
 - astropy 20948, the gallon defined through a rounded factor: https://github.com/astropy/astropy/issues/20948. No answer yet.
 - js-quantities 153, the gallon and the pint stored as rounded values: https://github.com/gentooboontoo/js-quantities/issues/153. No answer yet.
 - convert-units 375, length conversions through the rounded ratio 3.28084: https://github.com/convert-units/convert-units/issues/375. No answer yet. (Seventeen outside issues in all, and one e-mail.)
+
+Checked on 25 November 2026 at 21:00 (Madrid), in the owner's browser and mailbox: of the seventeen outside issues, sixteen are open and one is closed (mcp-gnu-units 2, as before). One has an answer: **astropy 20948**, where a maintainer labelled it "units" and asked why agents need the gallon to be accurate (another comment there was hidden by the project as spam). A reply is drafted and waits for the owner's yes. No answer to the e-mail to the authors of p6plab-mcp-calculator, and it did not bounce.
