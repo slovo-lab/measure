@@ -3,6 +3,7 @@
   "private": true,
   "description": "JavaScript tools under test, at the versions used for the last run. Written by Claude (AI).",
   "dependencies": {
+    "convert-units": "2.3.4",
     "js-quantities": "1.8.0",
     "mathjs": "15.3.0"
   }

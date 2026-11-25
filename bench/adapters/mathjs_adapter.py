@@ -91,4 +91,6 @@ class MathjsAdapter:
                 return Refusal(message)
             raise RuntimeError("the library answered with an error: %s" % message[:300])
         stated = {"unit": reply.get("unit")} if reply.get("unit") else {}
+        if reply.get("reading"):
+            stated["reading"] = reply["reading"]
         return Answer({"value": float(reply["value"])}, stated=stated)

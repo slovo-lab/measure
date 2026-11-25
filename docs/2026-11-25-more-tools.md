@@ -151,3 +151,26 @@ Four server adapters now report what the server's reply says about units, so the
 All numbers are exact. Two servers handle "ton" the way a careful person would: they do not guess, and their reply shows the choices. That is counted as a pass. A library that only says "unknown unit" is counted as not offering the unit, because its reply does not show what it has instead (written into `FORMAT.md`).
 
 Across all twelve tools asked: "gallon" was read as the US gallon by every tool that knows the word, and one (quantities) said so. No tool gave or mentioned the imperial gallon unasked.
+
+## Suncal and convert-units (25 November, late afternoon)
+
+| Tool | Pass | Fail | Not offered | Notes |
+|---|---|---|---|---|
+| Suncal 1.7.1 (Sandia National Laboratories) | 16 | 0 | 27 | Every uncertainty question right: Type A, Type B for three distributions, propagation with and without covariance, a variable multiplied by itself, effective degrees of freedom. It leaves units to Pint and has no conversion of its own. |
+| convert-units 2.3.4 (JavaScript) | 10 | 5 | 28 | See below. |
+
+Seventeen tools now. Both wait for the round of 4 January.
+
+**convert-units** gives 1 inch as 25.3999991872 mm. The five failures:
+
+| Asked | Came back | Exact | Relative difference |
+|---|---|---|---|
+| 1 in to mm | 25.3999991872 | 25.4 | 3.2e-8 |
+| 6 ft to m | 1.82879994148 | 1.8288 | 3.2e-8 |
+| 26.2 mi to km | 42.1648114507 | 42.1648128 | 3.2e-8 |
+| 150 lb to kg | 68.0388 | 68.0388555 | 8.2e-7 |
+| 2 in² to mm² | 1290.32124870 | 1290.32 | 9.7e-7 |
+
+The cause is in the library's definitions: metric and imperial units are joined by one stored ratio per kind of quantity, and the ratios are rounded: 3.28084 feet per metre (exact: 1/0.3048), 453.592 grams per pound (exact: 453.59237), 10.7639 square feet per square metre. On the bare-word questions it gives a gallon of 3.7854117954 L and a ton of 907.184 kg, which match no reading. Temperatures, metric conversions and the refusal are right.
+
+What the checks found. The README shows `convert(1).from('lb').to('kg')` with the comment "0.4536... (tested to 4 significant figures)", so the authors say how far imperial-to-metric results are tested. An earlier report of the area ratio (issue 281) was closed as completed. The beta of version 3 (3.0.0-beta.8, tried by hand) has the pound exact and the length, area and volume ratios unchanged. Nobody has reported the length ratio. A report is prepared in `reports/2026-11-25-convert-units.md`; whether a README comment makes this a documented limit is for the lab's owner to judge.
