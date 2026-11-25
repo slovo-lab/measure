@@ -38,11 +38,12 @@ UNITS = {
     "min": "min", "h": "h", "mV": "mV", "ohm": "ohm",
     "1": "dimensionless",
     # The bare word, for the question that does not say which calorie is meant.
-    "cal": "cal",
+    "cal": "cal", "gal": "gallon", "pt": "pint",
 }
 
 # Spellings for which the package has no unit that means the same.
 NO_UNIT = {
+    "ton": "no unit named ton",
     "degC": "the package's degC is a temperature difference; it does not convert temperatures",
     "degF": "the package's degF is a temperature difference; it does not convert temperatures",
 }

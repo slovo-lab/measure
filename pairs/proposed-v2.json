@@ -1,252 +1,506 @@
 {
- "format_version": 2,
- "pairs": [
-  {
-   "id": "amb-calorie-joule",
-   "category": "ambiguous-input",
-   "question": "Convert 1 calorie to joules.",
-   "task": "convert",
-   "inputs": {
-    "value": "1",
-    "unit": "cal",
-    "to_unit": "J"
-   },
-   "reference": {
-    "outcome": "any_of",
-    "refusal_passes": true,
-    "answers": [
-     {
-      "reading": "thermochemical calorie",
-      "stated_as": [
-       "thermochemical",
-       "cal_th",
-       "calth"
-      ],
-      "outputs": [
-       {
-        "name": "value",
-        "value": "4.184",
-        "unit": "J",
-        "exact": true,
-        "tolerance": {
-         "kind": "relative",
-         "value": "1e-12"
+  "format_version": 2,
+  "pairs": [
+    {
+      "id": "amb-calorie-joule",
+      "category": "ambiguous-input",
+      "question": "Convert 1 calorie to joules.",
+      "task": "convert",
+      "inputs": {
+        "value": "1",
+        "unit": "cal",
+        "to_unit": "J"
+      },
+      "reference": {
+        "outcome": "any_of",
+        "refusal_passes": true,
+        "answers": [
+          {
+            "reading": "thermochemical calorie",
+            "stated_as": [
+              "thermochemical",
+              "cal_th",
+              "calth"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "4.184",
+                "unit": "J",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          },
+          {
+            "reading": "International Table calorie",
+            "stated_as": [
+              "international table",
+              "cal_it",
+              "calit",
+              "(it)"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "4.1868",
+                "unit": "J",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "locator": "Appendix B.8, rows 'calorie_th (cal_th)' to joule: 4.184 E+00 and 'calorie_IT (cal_IT)' to joule: 4.1868 E+00, both printed in bold (exact)",
+          "checked": "2026-11-25"
         }
-       }
-      ]
-     },
-     {
-      "reading": "International Table calorie",
-      "stated_as": [
-       "international table",
-       "cal_it",
-       "calit",
-       "(it)"
       ],
-      "outputs": [
-       {
-        "name": "value",
-        "value": "4.1868",
-        "unit": "J",
-        "exact": true,
-        "tolerance": {
-         "kind": "relative",
-         "value": "1e-12"
-        }
-       }
-      ]
-     }
-    ]
-   },
-   "sources": [
-    {
-     "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
-     "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
-     "locator": "Appendix B.8, rows 'calorie_th (cal_th)' to joule: 4.184 E+00 and 'calorie_IT (cal_IT)' to joule: 4.1868 E+00, both printed in bold (exact)",
-     "checked": "2026-11-25"
-    }
-   ],
-   "derivation": "The word 'calorie' alone does not say which calorie is meant. The source lists the thermochemical calorie, 4.184 J, and the International Table calorie, 4.1868 J, both exact (and further calories that are not exact, which are not accepted here). A tool is right if it gives one of the two and says which, gives both, or declines and asks which is meant. One of the two numbers with no word about which calorie is incomplete."
-  },
-  {
-   "id": "lab-inch-mm-states-unit",
-   "category": "labelling",
-   "question": "Convert 1 inch to millimetres.",
-   "task": "convert",
-   "inputs": {
-    "value": "1",
-    "unit": "in",
-    "to_unit": "mm"
-   },
-   "reference": {
-    "outputs": [
-     {
-      "name": "value",
-      "value": "25.4",
-      "unit": "mm",
-      "exact": true,
-      "tolerance": {
-       "kind": "relative",
-       "value": "1e-12"
-      }
-     }
-    ],
-    "must_state": [
-     {
-      "what": "unit",
-      "accept": [
-       "mm",
-       "millimetre",
-       "millimetres",
-       "millimeter",
-       "millimeters"
-      ]
-     }
-    ]
-   },
-   "sources": [
-    {
-     "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
-     "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
-     "locator": "Appendix B.8, row 'inch (in)' to metre: 2.54 E-02, printed in bold (exact)",
-     "checked": "2026-11-24"
-    }
-   ],
-   "derivation": "1 in = 0.0254 m exactly = 25.4 mm. The number 25.4 alone is not the answer to a question about a quantity; the answer the agent receives must carry the unit."
-  },
-  {
-   "id": "rel-inch-mm-round-trip",
-   "category": "self-consistency",
-   "kind": "relation",
-   "question": "Convert 7 inches to millimetres, then convert the result back to inches. The second result must be 7.",
-   "calls": [
-    {
-     "name": "there",
-     "task": "convert",
-     "inputs": {
-      "value": "7",
-      "unit": "in",
-      "to_unit": "mm"
-     },
-     "outputs": [
-      {
-       "name": "value",
-       "unit": "mm"
-      }
-     ]
+      "derivation": "The word 'calorie' alone does not say which calorie is meant. The source lists the thermochemical calorie, 4.184 J, and the International Table calorie, 4.1868 J, both exact (and further calories that are not exact, which are not accepted here). A tool is right if it gives one of the two and says which, gives both, or declines and asks which is meant. One of the two numbers with no word about which calorie is incomplete."
     },
     {
-     "name": "back",
-     "task": "convert",
-     "inputs": {
-      "value": {
-       "from": "there.value"
+      "id": "amb-gallon-litre",
+      "category": "ambiguous-input",
+      "question": "Convert 1 gallon to litres.",
+      "task": "convert",
+      "inputs": {
+        "value": "1",
+        "unit": "gal",
+        "to_unit": "L"
       },
-      "unit": "mm",
-      "to_unit": "in"
-     },
-     "outputs": [
-      {
-       "name": "value",
-       "unit": "in"
-      }
-     ]
-    }
-   ],
-   "relation": {
-    "kind": "equal",
-    "left": "back.value",
-    "right": "7",
-    "tolerance": {
-     "kind": "relative",
-     "value": "1e-12"
-    }
-   },
-   "sources": [
-    {
-     "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
-     "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
-     "locator": "Appendix B.8, row 'inch (in)' to metre: 2.54 E-02, printed in bold (exact). One exact factor relates the two units, so converting there and back is multiplying and dividing by the same number",
-     "checked": "2026-11-24"
-    }
-   ],
-   "derivation": "7 in x 25.4 = 177.8 mm; 177.8 mm / 25.4 = 7 in. The relation holds for any exact factor; it needs no knowledge of the factor's value, only that the tool uses the same one in both directions."
-  },
-  {
-   "id": "rel-square-two-ways",
-   "category": "self-consistency",
-   "kind": "relation",
-   "question": "The side of a square is s = 2.000 m with standard uncertainty 0.010 m. Compute the area once as s * s and once as s ** 2. The two combined standard uncertainties must be the same.",
-   "calls": [
-    {
-     "name": "product",
-     "task": "propagate",
-     "inputs": {
-      "model": "s * s",
-      "variables": {
-       "s": {
-        "value": "2.000",
-        "standard_uncertainty": "0.010",
-        "unit": "m"
-       }
+      "reference": {
+        "outcome": "any_of",
+        "refusal_passes": true,
+        "answers": [
+          {
+            "reading": "US gallon",
+            "stated_as": [
+              "u.s.",
+              "us gallon",
+              "us_gallon",
+              "us liquid",
+              "us_liquid",
+              "customary"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "3.785411784",
+                "unit": "L",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          },
+          {
+            "reading": "imperial gallon",
+            "stated_as": [
+              "imperial",
+              "british",
+              "uk ",
+              " uk",
+              "uk_"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "4.54609",
+                "unit": "L",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          }
+        ]
       },
-      "covariances": []
-     },
-     "outputs": [
-      {
-       "name": "value",
-       "unit": "m^2"
-      },
-      {
-       "name": "combined_standard_uncertainty",
-       "unit": "m^2"
-      }
-     ]
+      "sources": [
+        {
+          "document": "NIST Handbook 44 (2008 edition), Appendix C, General Tables of Units of Measurement",
+          "url": "https://www.nist.gov/document/appendc-08-hb44-finalpdf",
+          "checked": "2026-11-25",
+          "locator": "Units of Liquid Volume: '4 quarts = 1 gallon (gal) = 231 cubic inches'"
+        },
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-25",
+          "locator": "Appendix B.8, row 'gallon [Canadian and U.K. (Imperial)] (gal)' to cubic meter: 4.546 09 E-03, printed in bold (exact); row 'gallon (U.S.) (gal)': 3.785 412 E-03, not bold (rounded); the inch is 2.54 E-02 m, exact"
+        }
+      ],
+      "derivation": "The word 'gallon' alone does not say which gallon. The US gallon is 231 cubic inches, and the inch is exactly 25.4 mm, so it is 231 x 16.387064 mL = 3.785411784 L exactly. The imperial gallon is 4.54609 L exactly. A tool is right if it gives one and says which, gives both, or declines and asks. One number with no word about which gallon is incomplete."
     },
     {
-     "name": "power",
-     "task": "propagate",
-     "inputs": {
-      "model": "s ** 2",
-      "variables": {
-       "s": {
-        "value": "2.000",
-        "standard_uncertainty": "0.010",
-        "unit": "m"
-       }
+      "id": "amb-pint-litre",
+      "category": "ambiguous-input",
+      "question": "Convert 1 pint to litres.",
+      "task": "convert",
+      "inputs": {
+        "value": "1",
+        "unit": "pt",
+        "to_unit": "L"
       },
-      "covariances": []
-     },
-     "outputs": [
-      {
-       "name": "value",
-       "unit": "m^2"
+      "reference": {
+        "outcome": "any_of",
+        "refusal_passes": true,
+        "answers": [
+          {
+            "reading": "US liquid pint",
+            "stated_as": [
+              "u.s.",
+              "us pint",
+              "us_pint",
+              "us liquid",
+              "us_liquid",
+              "liquid",
+              "customary"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "0.473176473",
+                "unit": "L",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          },
+          {
+            "reading": "imperial pint",
+            "stated_as": [
+              "imperial",
+              "british",
+              "uk ",
+              " uk",
+              "uk_"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "0.56826125",
+                "unit": "L",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          },
+          {
+            "reading": "US dry pint",
+            "stated_as": [
+              "dry"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "0.5506104713575",
+                "unit": "L",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          }
+        ]
       },
-      {
-       "name": "combined_standard_uncertainty",
-       "unit": "m^2"
-      }
-     ]
-    }
-   ],
-   "relation": {
-    "kind": "equal",
-    "left": "product.combined_standard_uncertainty",
-    "right": "power.combined_standard_uncertainty",
-    "tolerance": {
-     "kind": "relative",
-     "value": "1e-9"
-    }
-   },
-   "sources": [
+      "sources": [
+        {
+          "document": "NIST Handbook 44 (2008 edition), Appendix C, General Tables of Units of Measurement",
+          "url": "https://www.nist.gov/document/appendc-08-hb44-finalpdf",
+          "checked": "2026-11-25",
+          "locator": "Units of Liquid Volume: '16 fluid ounces = 1 pint (pt) = 28.875 cubic inches'; Units of Dry Volume: '4 pecks = 1 bushel (bu) = 2150.42 cubic inches = 32 quarts', '2 pints (pt) = 1 quart (qt)'; British measures of capacity: '8 pints = 1 gallon'"
+        },
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-25",
+          "locator": "Appendix B.8, row 'gallon [Canadian and U.K. (Imperial)] (gal)': 4.546 09 E-03 cubic meter, bold (exact); rows 'pint (U.S. liquid)': 4.731 765 E-04 and 'pint (U.S. dry)': 5.506 105 E-04, not bold (rounded)"
+        }
+      ],
+      "derivation": "Three pints are in use. US liquid: 28.875 cubic inches x 16.387064 mL = 0.473176473 L exactly. Imperial: one eighth of the imperial gallon, 4.54609 / 8 = 0.56826125 L exactly. US dry: one sixty-fourth of the bushel of 2150.42 cubic inches, 33.6003125 cubic inches x 16.387064 mL = 0.5506104713575 L. A tool is right if it gives one and says which, gives all, or declines and asks."
+    },
     {
-     "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
-     "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty)",
-     "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
-     "checked": "2026-11-24"
+      "id": "amb-ton-kilogram",
+      "category": "ambiguous-input",
+      "question": "Convert 1 ton to kilograms.",
+      "task": "convert",
+      "inputs": {
+        "value": "1",
+        "unit": "ton",
+        "to_unit": "kg"
+      },
+      "reference": {
+        "outcome": "any_of",
+        "refusal_passes": true,
+        "answers": [
+          {
+            "reading": "short ton (2000 lb)",
+            "stated_as": [
+              "short"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "907.18474",
+                "unit": "kg",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          },
+          {
+            "reading": "long ton (2240 lb)",
+            "stated_as": [
+              "long"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "1016.0469088",
+                "unit": "kg",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          },
+          {
+            "reading": "tonne (metric ton)",
+            "stated_as": [
+              "tonne",
+              "metric"
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "value": "1000",
+                "unit": "kg",
+                "exact": true,
+                "tolerance": {
+                  "kind": "relative",
+                  "value": "1e-12"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "checked": "2026-11-25",
+          "locator": "Appendix B.8, rows 'ton, short (2000 lb)': 9.071 847 E+02 kg and 'ton, long (2240 lb)': 1.016 047 E+03 kg, not bold (rounded); 'ton, metric (t)': 1.0 E+03 kg, bold (exact); Appendix B.9, the pound is 4.535 923 7 E-01 kg, exact"
+        }
+      ],
+      "derivation": "Three tons are in use. Short: 2000 lb x 0.45359237 kg = 907.18474 kg exactly. Long: 2240 lb x 0.45359237 kg = 1016.0469088 kg exactly. Metric: 1000 kg. A tool is right if it gives one and says which, gives all, or declines and asks."
+    },
+    {
+      "id": "lab-inch-mm-states-unit",
+      "category": "labelling",
+      "question": "Convert 1 inch to millimetres.",
+      "task": "convert",
+      "inputs": {
+        "value": "1",
+        "unit": "in",
+        "to_unit": "mm"
+      },
+      "reference": {
+        "outputs": [
+          {
+            "name": "value",
+            "value": "25.4",
+            "unit": "mm",
+            "exact": true,
+            "tolerance": {
+              "kind": "relative",
+              "value": "1e-12"
+            }
+          }
+        ],
+        "must_state": [
+          {
+            "what": "unit",
+            "accept": [
+              "mm",
+              "millimetre",
+              "millimetres",
+              "millimeter",
+              "millimeters"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "locator": "Appendix B.8, row 'inch (in)' to metre: 2.54 E-02, printed in bold (exact)",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "1 in = 0.0254 m exactly = 25.4 mm. The number 25.4 alone is not the answer to a question about a quantity; the answer the agent receives must carry the unit."
+    },
+    {
+      "id": "rel-inch-mm-round-trip",
+      "category": "self-consistency",
+      "kind": "relation",
+      "question": "Convert 7 inches to millimetres, then convert the result back to inches. The second result must be 7.",
+      "calls": [
+        {
+          "name": "there",
+          "task": "convert",
+          "inputs": {
+            "value": "7",
+            "unit": "in",
+            "to_unit": "mm"
+          },
+          "outputs": [
+            {
+              "name": "value",
+              "unit": "mm"
+            }
+          ]
+        },
+        {
+          "name": "back",
+          "task": "convert",
+          "inputs": {
+            "value": {
+              "from": "there.value"
+            },
+            "unit": "mm",
+            "to_unit": "in"
+          },
+          "outputs": [
+            {
+              "name": "value",
+              "unit": "in"
+            }
+          ]
+        }
+      ],
+      "relation": {
+        "kind": "equal",
+        "left": "back.value",
+        "right": "7",
+        "tolerance": {
+          "kind": "relative",
+          "value": "1e-12"
+        }
+      },
+      "sources": [
+        {
+          "document": "NIST Special Publication 811 (2008 edition), Guide for the Use of the International System of Units (SI)",
+          "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8",
+          "locator": "Appendix B.8, row 'inch (in)' to metre: 2.54 E-02, printed in bold (exact). One exact factor relates the two units, so converting there and back is multiplying and dividing by the same number",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "7 in x 25.4 = 177.8 mm; 177.8 mm / 25.4 = 7 in. The relation holds for any exact factor; it needs no knowledge of the factor's value, only that the tool uses the same one in both directions."
+    },
+    {
+      "id": "rel-square-two-ways",
+      "category": "self-consistency",
+      "kind": "relation",
+      "question": "The side of a square is s = 2.000 m with standard uncertainty 0.010 m. Compute the area once as s * s and once as s ** 2. The two combined standard uncertainties must be the same.",
+      "calls": [
+        {
+          "name": "product",
+          "task": "propagate",
+          "inputs": {
+            "model": "s * s",
+            "variables": {
+              "s": {
+                "value": "2.000",
+                "standard_uncertainty": "0.010",
+                "unit": "m"
+              }
+            },
+            "covariances": []
+          },
+          "outputs": [
+            {
+              "name": "value",
+              "unit": "m^2"
+            },
+            {
+              "name": "combined_standard_uncertainty",
+              "unit": "m^2"
+            }
+          ]
+        },
+        {
+          "name": "power",
+          "task": "propagate",
+          "inputs": {
+            "model": "s ** 2",
+            "variables": {
+              "s": {
+                "value": "2.000",
+                "standard_uncertainty": "0.010",
+                "unit": "m"
+              }
+            },
+            "covariances": []
+          },
+          "outputs": [
+            {
+              "name": "value",
+              "unit": "m^2"
+            },
+            {
+              "name": "combined_standard_uncertainty",
+              "unit": "m^2"
+            }
+          ]
+        }
+      ],
+      "relation": {
+        "kind": "equal",
+        "left": "product.combined_standard_uncertainty",
+        "right": "power.combined_standard_uncertainty",
+        "tolerance": {
+          "kind": "relative",
+          "value": "1e-9"
+        }
+      },
+      "sources": [
+        {
+          "document": "NIST Technical Note 1297 (1994 edition), Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+          "locator": "Appendix A, A.3, equation (A-3) (law of propagation of uncertainty)",
+          "url": "https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-appendix-law-propagation-uncertainty",
+          "checked": "2026-11-24"
+        }
+      ],
+      "derivation": "s * s and s ** 2 are the same function of the one measured quantity s, so the cited equation gives the same combined standard uncertainty for both (0.04 m^2; see the pair comb-square-same-variable). The relation says nothing about which value is right; it says the tool must not give two different answers to one question."
     }
-   ],
-   "derivation": "s * s and s ** 2 are the same function of the one measured quantity s, so the cited equation gives the same combined standard uncertainty for both (0.04 m^2; see the pair comb-square-same-variable). The relation says nothing about which value is right; it says the tool must not give two different answers to one question."
-  }
- ]
+  ]
 }

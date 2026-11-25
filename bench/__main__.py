@@ -14,6 +14,8 @@ ADAPTERS = {
     "gtc": ("bench.adapters.gtc_adapter", "GtcAdapter"),
     "metrolopy": ("bench.adapters.metrolopy_adapter", "MetrolopyAdapter"),
     "quantities": ("bench.adapters.quantities_adapter", "QuantitiesAdapter"),
+    "astropy": ("bench.adapters.astropy_adapter", "AstropyAdapter"),
+    "unyt": ("bench.adapters.unyt_adapter", "UnytAdapter"),
     "mathjs": ("bench.adapters.mathjs_adapter", "MathjsAdapter"),
     "js-quantities": ("bench.adapters.js_quantities_adapter", "JsQuantitiesAdapter"),
     "p6plab-mcp-calculator": ("bench.adapters.p6plab_calculator", "P6plabCalculatorAdapter"),

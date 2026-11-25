@@ -24,6 +24,7 @@ UNITS = {
     "atm": "atm", "kPa": "kPa", "bar": "bar", "Pa": "Pa",
     # The library's "cal" is 4.184 J, the thermochemical calorie.
     "cal_th": "cal", "cal": "cal",
+    "gal": "gallon", "pt": "pint", "ton": "ton",
     "min": "min", "h": "h", "mV": "mV", "ohm": "ohm",
 }
 

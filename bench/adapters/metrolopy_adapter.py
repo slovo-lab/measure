@@ -46,7 +46,7 @@ UNITS = {
     "delta_degF": "degF-i", "delta_degC": "degC-i",
     "1": "1",
     # The bare word, for the question that does not say which calorie is meant.
-    "cal": "cal",
+    "cal": "cal", "gal": "gallon", "pt": "pint",
 }
 
 
@@ -73,6 +73,9 @@ class MetrolopyAdapter:
 
     def solve(self, pair):
         task, inputs = pair["task"], pair["inputs"]
+        if task == "convert" and "ton" in (inputs["unit"], inputs["to_unit"]):
+            # The library has `tn` and `long ton`, but nothing named "ton".
+            return Unsupported("no unit named ton")
         try:
             if task == "convert":
                 asked = self._gummy(inputs["value"], inputs["unit"])
