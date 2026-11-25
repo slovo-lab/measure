@@ -144,9 +144,17 @@ They follow the way reference data for metrology software is described by A. B. 
 
 `ambiguous-input`, `self-consistency`, `labelling`.
 
+### Decided on 25 November 2026: what `incomplete` means for a bare unit name
+
+The lab's owner left this to the AI. Six tools were asked by hand what they take "calorie", "gallon", "pint" and "ton" to mean ([`docs/2026-11-25-more-tools.md`](docs/2026-11-25-more-tools.md)). All six chose the same reading, the one usual in the United States, and none said so in its answer.
+
+1. **The verdict stays `incomplete`.** It describes the answer truthfully: one of the right numbers, and no word about which reading was taken. A convention that every tool shares is still a convention the reader of the answer cannot see.
+2. **An `incomplete` is never reported to a tool's authors as a defect on its own.** It is a choice, usually a documented one. In a round it is shown in its own column and summed over tools ("six of six took the US gallon and did not say so"), which is where it tells something.
+3. **A question of this kind is published only with a source for each reading**, and preferably where the readings are both in daily use (the gallon, the pint) more than where one is a specialist's distinction (the calorie). The calorie stays as the example in the proposal file.
+4. A tool that names its reading in the answer, or gives both, passes. A tool whose name for the unit is the bare word again ("calorie") has not named its reading.
+
 ### What is still open
 
-- Whether `incomplete` is the right single word for "right number, something unsaid", and whether one such verdict is enough.
 - Whether giving all the answers should pass when the question, read plainly, asks for one.
 - How an adapter reports what a tool stated when the tool's answer is free text.
 - No task exists yet for time or for positions; the first pairs in those fields will add them.

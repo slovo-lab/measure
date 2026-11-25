@@ -50,6 +50,11 @@ CLIENT_MCP = "mcp==1.30.0"
 # "server" (started by its command; the runner runs in the client's environment).
 # show: packages whose resolved versions go into the line.
 # workaround: extra pip arguments for a second, labelled environment.
+# Adapters that exist but are not in the announced round. The tools of a round
+# are fixed by its announcement; an adapter written afterwards waits here and
+# joins the next announcement.
+WAITING_FOR_THE_NEXT_ROUND = ("metrolopy", "quantities")
+
 TOOLS = [
     {"key": "pint", "name": "Pint + uncertainties", "kind": "library",
      "install": ["pint", "uncertainties", "numpy"], "imports": ["pint", "uncertainties"],

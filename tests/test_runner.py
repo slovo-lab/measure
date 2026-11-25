@@ -37,6 +37,17 @@ def echo(pair):
                    for o in pair["reference"]["outputs"]})
 
 
+def units_in(pair):
+    """Every unit spelling a pair uses, in its inputs and its reference."""
+    inputs = pair["inputs"]
+    used = [inputs[key] for key in ("unit", "to_unit") if key in inputs]
+    used += [t["unit"] for t in inputs.get("terms", [])]
+    used += [v["unit"] for v in inputs.get("variables", {}).values()]
+    used += [c["unit"] for c in inputs.get("covariances", [])]
+    used += [o["unit"] for o in pair["reference"].get("outputs", [])]
+    return used
+
+
 def numeric_output(value, tolerance="1e-9", kind="relative"):
     return {"name": "value", "value": value, "unit": "x", "exact": True,
             "tolerance": {"kind": kind, "value": tolerance}}
@@ -532,6 +543,86 @@ class McpClient(unittest.TestCase):
         with self.assertRaises(ServerError):
             find_command("no-such-server-command-for-measure")
 
+
+
+try:
+    import metrolopy  # noqa: F401
+    HAVE_METROLOPY = True
+except ImportError:
+    HAVE_METROLOPY = False
+
+
+@unittest.skipUnless(HAVE_METROLOPY, "metrolopy is not installed")
+class MetrolopyAdapterTests(unittest.TestCase):
+    """Checks that the adapter is wired correctly, not that MetroloPy is right."""
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.metrolopy_adapter import MetrolopyAdapter, UNITS
+        cls.adapter = MetrolopyAdapter()
+        cls.units = UNITS
+
+    def test_knows_every_unit_in_the_pairs_file(self):
+        used = set()
+        for pair in PAIRS:
+            used.update(units_in(pair))
+        self.assertEqual(used - set(self.units), set())
+
+    def test_every_pair_gets_an_answer_without_an_error(self):
+        report = runner.run(PAIRS, self.adapter)
+        self.assertEqual(report["summary"]["error"], 0)
+
+    def test_only_rounding_is_unsupported(self):
+        report = runner.run(PAIRS, self.adapter)
+        unsupported = {r["id"] for r in report["results"] if r["verdict"] == "unsupported"}
+        self.assertEqual(unsupported, {p["id"] for p in PAIRS if p["task"] == "round"})
+
+    def test_refuses_to_add_a_length_and_a_time(self):
+        self.assertIsInstance(self.adapter.solve(BY_ID["dim-add-length-time"]), Refusal)
+
+    def test_reports_what_the_library_states(self):
+        answer = self.adapter.solve(BY_ID["conv-inch-mm"])
+        self.assertEqual(answer.stated["unit"], "mm")
+
+
+try:
+    import quantities  # noqa: F401
+    HAVE_QUANTITIES = True
+except ImportError:
+    HAVE_QUANTITIES = False
+
+
+@unittest.skipUnless(HAVE_QUANTITIES, "quantities is not installed")
+class QuantitiesAdapterTests(unittest.TestCase):
+    """Checks that the adapter is wired correctly, not that quantities is right."""
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.quantities_adapter import NO_UNIT, QuantitiesAdapter, UNITS
+        cls.adapter = QuantitiesAdapter()
+        cls.known = set(UNITS) | set(NO_UNIT)
+
+    def test_knows_every_unit_in_the_pairs_file(self):
+        used = set()
+        for pair in PAIRS:
+            used.update(units_in(pair))
+        self.assertEqual(used - self.known, set())
+
+    def test_every_pair_gets_an_answer_without_an_error(self):
+        report = runner.run(PAIRS, self.adapter)
+        self.assertEqual(report["summary"]["error"], 0)
+
+    def test_covariance_is_unsupported_not_ignored(self):
+        self.assertIsInstance(self.adapter.solve(BY_ID["comb-sum-with-covariance"]), Unsupported)
+
+    def test_refuses_to_add_a_length_and_a_time(self):
+        self.assertIsInstance(self.adapter.solve(BY_ID["dim-add-length-time"]), Refusal)
+
+    def test_numbers_come_from_the_library(self):
+        """The adapter hands the library's own number back, right or wrong."""
+        import quantities as pq
+        own = float(pq.Quantity(25.0, "degC").rescale("K").magnitude)
+        self.assertEqual(self.adapter.solve(BY_ID["conv-degc-k"]).outputs["value"], own)
 
 
 class VersionTwo(unittest.TestCase):
