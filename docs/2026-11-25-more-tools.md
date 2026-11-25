@@ -105,3 +105,34 @@ The JavaScript tools are asked through a small Node program (`bench/adapters/nod
 The paragraph above says no page was found that describes `s * s`. That was wrong, and the search had been too shallow: it looked at the "Known Issues" page only. The package's tutorial, which is the text inside the package itself, shows `q*q` next to `q**2` as an example, calls the first result "probably incorrect", and warns that correlations between operands are never taken into account, even when an operand is combined with itself. So this is a documented limit and is **not** a candidate for a report. The line in the results stays (26 pass, 1 fail), with this note.
 
 **p6plab-mcp-calculator has no public tracker.** The repository named in its metadata answers "page not found". Under [`REPORTING.md`](../REPORTING.md) the report on its rounding and on its placeholder conversion tool would go by e-mail to the address in the metadata, if the lab's owner agrees to the text.
+
+## Evening work, 25 November: astropy, unyt, and three questions about bare unit names
+
+| Tool | Pass | Fail | Not offered | Notes |
+|---|---|---|---|---|
+| unyt 3.2.0 | 24 | 0 | 19 | Right on all it offers; keeps temperatures and differences apart (`degC`, `delta_degC`). |
+| astropy.units 8.0.3 | 22 | 0 | 21 | Right on all it offers. Temperatures need the equivalency its documentation names; the adapter passes it. |
+
+Both wait for the round of 4 January.
+
+**Three new questions** in `pairs/proposed-v2.json`, each with every reading in daily use and a read source (NIST Handbook 44, Appendix C; NIST SP 811, Appendix B.8): "1 gallon in litres" (US 3.785411784, imperial 4.54609), "1 pint in litres" (US liquid 0.473176473, imperial 0.56826125, US dry 0.5506104713575), "1 ton in kilograms" (short 907.18474, long 1016.0469088, metric 1000). All values are exact.
+
+| Tool | gallon | pint | ton |
+|---|---|---|---|
+| Pint 0.26.2 | US, unsaid | US liquid, unsaid | short, unsaid |
+| ucon 2.4.2 | US, unsaid | US liquid, unsaid | no unit named ton |
+| MetroloPy 1.1.1 | US, unsaid | US liquid, unsaid | no unit named ton |
+| quantities 0.17.0 | US, **and says so** (`US_liquid_gallon`) | US liquid, unsaid | no unit named ton |
+| mathjs 15.3.0 | US, unsaid | US liquid, unsaid | short, unsaid |
+| unyt 3.2.0 | no such unit | no such unit | short, unsaid |
+| astropy.units 8.0.3 | **3.7854117891** | **0.47317647364** | short, unsaid |
+| js-quantities 1.8.0 | **3.7854118** | **0.473176475** | short, unsaid |
+
+No tool gave the imperial reading, and none declined. Not offering a bare "ton" at all (three tools) is a sound answer to an unclear word.
+
+**Two findings.** The numbers in bold are no reading of the unit:
+
+- astropy defines the gallon as one litre divided by 0.264172052, a rounded factor. Its US gallon is 1.4 parts in a billion larger than 231 cubic inches. Quart, pint, cup, fluid ounce, tablespoon and teaspoon are derived from it.
+- js-quantities defines the gallon as 0.0037854118 cubic metres and the pint as 0.000473176475, both rounded; 4 parts in a billion.
+
+For most uses the difference does not matter. Both libraries give the inch, the pound and the mile exactly, and the gallon is exact by definition too. Existing issues were searched: astropy has none about the gallon's value; js-quantities has an open one about precision in comparisons (132) that does not name the rounded definitions. Reports are prepared in `reports/` and wait for the owner's yes to each text.

@@ -23,6 +23,7 @@ UNITS = {
     "L": "L", "m^3": "m^3", "m^2": "m^2", "in^2": "in^2",
     "atm": "atm", "kPa": "kPa", "bar": "bar", "Pa": "Pa",
     "min": "min", "h": "h", "mV": "mV", "ohm": "ohm",
+    "gal": "gallon", "pt": "pint", "ton": "ton",
 }
 
 # Spellings for which the library has no unit.

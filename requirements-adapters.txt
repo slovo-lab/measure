@@ -7,6 +7,8 @@ ucon==2.4.2
 GTC==1.5.1
 metrolopy==1.1.1
 quantities==0.17.0
+astropy==8.0.3
+unyt==3.2.0
 scipy==1.18.1
 # Servers for AI agents, and the client used to call them.
 mcp==1.30.0

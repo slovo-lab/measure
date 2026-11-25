@@ -28,7 +28,7 @@ UNITS = {
     "atm": "standard_atmosphere", "kPa": "kilopascal", "bar": "bar", "Pa": "pascal",
     "cal_th": "thermochemical_calorie",
     # The bare word, for the question that does not say which calorie is meant.
-    "cal": "cal",
+    "cal": "cal", "gal": "gallon", "pt": "pint", "ton": "ton",
     "min": "minute", "h": "hour",
     "mV": "millivolt", "ohm": "ohm",
     # Pint has separate units for temperature differences.

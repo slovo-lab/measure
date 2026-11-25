@@ -630,6 +630,53 @@ class QuantitiesAdapterTests(unittest.TestCase):
         self.assertEqual(self.adapter.solve(BY_ID["conv-degc-interval-k"]).outputs["value"], 15.0)
 
 
+def _importable(*modules):
+    import importlib.util
+    return all(importlib.util.find_spec(m) is not None for m in modules)
+
+
+@unittest.skipUnless(_importable("astropy", "unyt"), "astropy and unyt are not installed")
+class AstropyAndUnytAdapterTests(unittest.TestCase):
+    """Checks that the two adapters are wired correctly, not that the packages are right."""
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.astropy_adapter import AstropyAdapter
+        from bench.adapters.unyt_adapter import UnytAdapter
+        cls.adapters = [AstropyAdapter(), UnytAdapter()]
+
+    def test_know_every_unit_in_the_pairs_file(self):
+        used = set()
+        for pair in PAIRS:
+            used.update(units_in(pair))
+        for adapter in self.adapters:
+            self.assertEqual(used - set(adapter.units) - set(adapter.no_unit), set(), adapter.name)
+
+    def test_every_pair_gets_an_answer_without_an_error(self):
+        for adapter in self.adapters:
+            report = runner.run(PAIRS, adapter)
+            self.assertEqual(report["summary"]["error"], 0, adapter.name)
+
+    def test_refuse_to_add_a_length_and_a_time(self):
+        for adapter in self.adapters:
+            self.assertIsInstance(adapter.solve(BY_ID["dim-add-length-time"]), Refusal, adapter.name)
+
+    def test_astropy_number_comes_from_the_library(self):
+        import astropy.units as u
+        own = float((150.0 * u.imperial.lb).to(u.kg).value)
+        self.assertEqual(self.adapters[0].solve(BY_ID["conv-pound-kg"]).outputs["value"], own)
+
+    def test_astropy_temperature_uses_the_documented_equivalency(self):
+        import astropy.units as u
+        own = float((25.0 * u.deg_C).to(u.K, equivalencies=u.temperature()).value)
+        self.assertEqual(self.adapters[0].solve(BY_ID["conv-degc-k"]).outputs["value"], own)
+
+    def test_unyt_number_comes_from_the_library(self):
+        import unyt
+        own = float(unyt.unyt_quantity(150.0, "lb").to("kg"))
+        self.assertEqual(self.adapters[1].solve(BY_ID["conv-pound-kg"]).outputs["value"], own)
+
+
 def _node_ready():
     try:
         from bench.node_client import library_version

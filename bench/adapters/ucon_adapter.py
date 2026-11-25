@@ -29,7 +29,7 @@ UNITS = {
     "atm": "atm", "kPa": "kPa", "bar": "bar", "Pa": "Pa",
     "cal_th": "cal_th",
     # The bare word, for the question that does not say which calorie is meant.
-    "cal": "cal",
+    "cal": "cal", "gal": "gallon", "pt": "pint",
     "min": "min", "h": "h",
     "mV": "mV", "ohm": "ohm",
     "1": "1",
@@ -38,6 +38,7 @@ UNITS = {
 # Spellings in the pairs file for which we found no unit in ucon 2.4.2.
 # A pair that uses one of them is reported as unsupported, with this reason.
 NO_UNIT = {
+    "ton": "no unit named ton",
     "delta_degF": "no unit for a temperature difference in degrees Fahrenheit",
     "delta_degC": "no unit for a temperature difference in degrees Celsius",
 }
