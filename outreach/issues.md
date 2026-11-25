@@ -35,3 +35,4 @@ Opened on 25 November 2026 (sixteen outside issues in all, and one e-mail):
 
 - astropy 20948, the gallon defined through a rounded factor: https://github.com/astropy/astropy/issues/20948. No answer yet.
 - js-quantities 153, the gallon and the pint stored as rounded values: https://github.com/gentooboontoo/js-quantities/issues/153. No answer yet.
+- convert-units 375, length conversions through the rounded ratio 3.28084: https://github.com/convert-units/convert-units/issues/375. No answer yet. (Seventeen outside issues in all, and one e-mail.)
