@@ -84,6 +84,7 @@ python3 -m bench ucon-mcp                    # ucon's server for AI agents
 python3 -m bench unit-converter-mcp          # another server for AI agents
 python3 -m bench mcp-units                   # likewise; also mcp-gnu-units, measurement-uncertainty-mcp
 python3 tools/make_results.py                # runs both and rewrites RESULTS.md
+python3 tools/round.py --help                # a monthly round: fresh installs, then the questions (see ROUNDS.md)
 ```
 
 The runner gives each pair one of four verdicts: `pass`, `fail`, `unsupported` (the tool has no function for that kind of task, which is not a failure) or `error`. An adapter only passes the question to the tool; it never does the calculation itself.

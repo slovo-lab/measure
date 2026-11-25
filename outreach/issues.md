@@ -26,3 +26,4 @@ How to check: the session cannot read other people's issues through the API. Pag
 ## Log
 
 - **24 November 2026, evening.** First pass, a few hours after the issues were opened. Nine pages read, five refused by github.com's request limit after three tries (ucon 395, mcp-simple-timeserver 12, mcp-time 17, geo-mcp 13, GIS-MCP-Server 4). One reaction: the author of mcp-gnu-units closed our note as completed. That note reported a pass and said it could be closed once read, so this is the expected outcome; it is the first sign that an author outside the lab has read a Measure report. It is counted as "read by an author", not as "uses the results".
+- **25 November 2026, 10:30.** No page read. The scheduled session ran with nobody present, and reading pages outside the lab needed a permission that was not answered; one request was made and, as told, not repeated. All fourteen stay as in the table: the dates in "Last read" are the last real readings.

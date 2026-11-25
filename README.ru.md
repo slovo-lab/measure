@@ -83,6 +83,7 @@ python3 -m bench gtc                         # GTC, GUM Tree Calculator
 python3 -m bench ucon-mcp                    # сервер ucon для ИИ-агентов
 python3 -m bench unit-converter-mcp          # ещё один сервер для ИИ-агентов
 python3 tools/make_results.py                # прогоняет оба и переписывает RESULTS.md
+python3 tools/round.py --help                # ежемесячный раунд: чистые установки, затем вопросы (см. ROUNDS.ru.md)
 ```
 
 Каждой паре программа прогона ставит один из четырёх вердиктов: `pass` (сошлось), `fail` (не сошлось), `unsupported` (у инструмента нет функции для такой задачи; это не ошибка) или `error` (сбой). Адаптер только передаёт вопрос инструменту и сам ничего не вычисляет.

@@ -28,6 +28,13 @@ Every reference answer must be derivable by a reader from the stated source. No 
 - Effective degrees of freedom (Welch-Satterthwaite).
 - Reporting: rounding of the uncertainty and the result.
 
+## Calendar
+
+Work that belongs to a date. On that date it comes before the steps below; on any other day, skip it and take the first unchecked step.
+
+- [ ] **On Tuesday 1 December 2026: run the round.** Read the changes in the two repository-installed servers since `913fee9` and `fe254e0`, run `tools/round.py` as the announcement says, put `results.json` and `install.json` in `rounds/2026-12/`, write `report.md` and `report.ru.md` (section 4 of `ROUNDS.md`), publish the report on the site in both languages.
+- Every later round: publish the announcement at least three working days before the first working day of the month (for January 2027: the round is on Monday 4 January, because 1 January is a public holiday; the announcement is due by Tuesday 29 December 2026).
+
 ## Steps
 
 - [x] Define the data format for reference pairs and write the first 10 pairs with sources. Done 24 November 2026: `FORMAT.md`, `pairs/pairs.json`, `tools/check_pairs.py`, `tests/test_pairs.py`. An 11th pair, for dimensional safety, was added the same day. Not covered yet: degrees of freedom, reporting.
@@ -45,7 +52,7 @@ Every reference answer must be derivable by a reader from the stated source. No 
 - [x] Search for what exists before building the new kinds of check and the kit for authors. Done 24 November 2026, evening: [`docs/2026-11-24-new-checks-prior-art.md`](docs/2026-11-24-new-checks-prior-art.md). Result: no kit and no audit of our own (both exist); kinds 1, 3 and 4 go into the format; kind 2 goes into the rules of a round.
 - [x] Add an adapter for the GUM Tree Calculator. Done 24 November 2026, evening: `bench/adapters/gtc_adapter.py`, GTC 1.5.1 from the package index. 13 of 13 pairs it has a function for; 105 tests. It has no units, so the rule for such a tool is now written down in the adapter: a propagation pair is sent only when its numbers can be handed over as they stand.
 - [x] Write the rules of a monthly round. Done 25 November 2026: [`ROUNDS.md`](ROUNDS.md) with a Russian version. The standard for proficiency testing is sold, not free to read, so only the generally known shape of a round was used and the rules say plainly that this is not proficiency testing in that sense.
-- [ ] Publish the announcement for the round of 1 December 2026 in `rounds/2026-12/announcement.md` **by Thursday 26 November**: the commit of `pairs/pairs.json`, the eight tools and where each is installed from, the commands. Then prepare a script that does the fresh installs and writes the install-and-start lines, and try it once before the day.
+- [x] Publish the announcement for the round of 1 December 2026, and prepare the script for the day. Done 25 November 2026: [`rounds/2026-12/announcement.md`](rounds/2026-12/announcement.md) with a Russian version (the commit of the pairs, the eight tools and where each comes from, the commands), and `tools/round.py` with `tests/test_round.py`. The script was tried once on all eight tools: seven installed and started; measurement-uncertainty-mcp installed and did not start (pip resolved mcp 2.3.0), then started in a second environment with `mcp<2`; the answers were the same as on 24 November. Decided on the way: one empty environment per tool, and one client with a fixed `mcp` version for all servers, as the bench's own equipment.
 - [ ] Propose format version 2 in `FORMAT.md`, once, for three kinds of pair: a question with two answers (the "no answer" half exists as `refuse`); a relation between a tool's own answers, called metamorphic testing, where the source says why the relation holds; and a list of labels an answer must carry (unit, zone, method). Write the checker and its tests with the proposal.
 - [ ] Coordinates: read the Australian manual and a definition of UTM zones (including the Norway exception) in full, check their reuse terms, then write the first pairs for lengths, areas and conversions.
 - [ ] Read the documentation of `mcp-assert` and the suites repository linked from `mcp-test-harness`; decide whether and how to give Measure's pairs in a form such a framework can run. Look for a numeric tolerance and for "must refuse".
