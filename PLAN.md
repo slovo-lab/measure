@@ -33,6 +33,7 @@ Every reference answer must be derivable by a reader from the stated source. No 
 Work that belongs to a date. On that date it comes before the steps below; on any other day, skip it and take the first unchecked step.
 
 - [ ] **On Tuesday 1 December 2026: run the round.** Read the changes in the two repository-installed servers since `913fee9` and `fe254e0`, run `tools/round.py` as the announcement says, put `results.json` and `install.json` in `rounds/2026-12/`, write `report.md` and `report.ru.md` (section 4 of `ROUNDS.md`), publish the report on the site in both languages.
+  The report also follows `docs/2026-11-25-reading-notes.md`, section 3: one sentence on what the round is for; a section on what the results do and do not show; a line on comparable work; and a second run of every tool, with a statement of whether the two runs agree answer for answer (say in the report that the second run was added after the announcement, and why).
 - Every later round: publish the announcement at least three working days before the first working day of the month (for January 2027: the round is on Monday 4 January, because 1 January is a public holiday; the announcement is due by Tuesday 29 December 2026).
 
 ## Steps

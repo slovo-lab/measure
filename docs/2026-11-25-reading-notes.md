@@ -2,7 +2,7 @@
 
 *Русская версия: [2026-11-25-reading-notes.ru.md](2026-11-25-reading-notes.ru.md)*
 
-Written by Claude (AI) on 25 November 2026. Three documents were to be read before the round of 1 December. Two were read, as summaries made by the fetch tool from the pages, not as full texts; the third could not be opened. Formulas below are as the summary gave them; one of them was marked there as a reading of a damaged formula. Check against the paper before using any of them.
+Written by Claude (AI) on 25 November 2026. Three documents were to be read before the round of 1 December. All three were read, as summaries made by the fetch tool from the pages, not as full texts; the third only after the owner approved the request. Formulas below are as the summary gave them; one of them was marked there as a reading of a damaged formula. Check against the paper before using any of them.
 
 ## 1. Reference data for software validation (the TraCIM work)
 
@@ -35,8 +35,19 @@ What this means for Measure:
 2. The weak point this shows is validation by someone else. That is the review the lab's owner was asked for, and what a metrologist from the outreach list could give.
 3. To do: open the tool itself and fill it in for Measure. Not done today.
 
-## 3. NIST AI 800-2 (not read)
+## 3. NIST AI 800-2
 
-"Practices for Automated Benchmark Evaluations of Language Models", initial public draft of 30 January 2026, comments closed 31 March 2026 (https://www.nist.gov/node/1905466; full text http://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf). Known from its page only: three parts (objectives and choice of benchmarks; implementing and running; analysing and reporting) and a glossary; it covers language models and agent systems.
+Read on 25 November, after the owner approved the request: "Practices for Automated Benchmark Evaluations of Language Models", initial public draft of 30 January 2026, comments closed 31 March 2026 (http://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf). Read as a summary made by the fetch tool, not as the full text. The document carries no statement on copyright or reuse; nothing is copied from it here.
 
-The full text could not be opened on 25 November: the request needed a permission that was not answered. It is the most relevant of the three for how a round's report is written, and it is still to be read before 1 December.
+What it says, in our words. Nine practices in three groups: say what the evaluation is for and choose tests that fit; design, code, run and debug the evaluation; analyse, share and report. For the report it asks for the objective, the version of the test set, how many items of what kind, the exact versions of what was tested, the settings, results per item, the code, and the uncertainty of the results with each source of variation named and the unmeasured ones pointed out. It asks authors to keep what was observed apart from what is inferred, to state limits, and to compare with similar evaluations. Among the usual defects of an evaluation it lists errors in calling tools and test items that cannot be solved.
+
+It is written for evaluations of language models. Measure has no model between the question and the tool, so the parts about model sampling, budgets and "evaluation awareness" do not apply. The parts about reporting do.
+
+What this means for the report of 1 December:
+
+1. **Already there:** the version of the test set (a commit and a checksum in the announcement), the number and kinds of items, exact versions of every tool (the install lines), results per item (`results.json`), the code.
+2. **To add to the report:** one sentence saying what the round is for; a section "what these results do and do not show", with observations (this tool gave this answer to this question on this day) kept apart from anything wider; a line on comparable work, or that none was found.
+3. **Uncertainty, stated honestly.** The tools are deterministic programs, so there is no sampling to average over. That is an assumption until checked: run every tool twice in the round and say whether the two runs agree answer for answer. The source of variation that is not measured is the choice of questions: 43 pairs are a small, hand-picked sample of what these tools do, and the report must say so in those words.
+4. **Our own defects, their list applied to us:** an error in the adapter is not an error of the tool (the verdict "error" and the rule that an adapter never calculates exist for this); a pair with a wrong reference is their "unsolvable item" (section 2 of `ROUNDS.md` covers it).
+
+A second run changes nothing that the announcement fixed (questions, tools, checks), so it can be added without touching the announcement; the report will say that it was added after the announcement and why.
