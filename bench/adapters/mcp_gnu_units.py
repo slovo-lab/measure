@@ -7,9 +7,9 @@ database's functions, `tempC(25)`, and temperature differences use its
 interval units, `degC` and `degF`. The server has no tool for adding
 quantities or for uncertainty.
 
-The server needs a newer `mcp` package than the other servers tested, so it is
-installed in an environment of its own and found through the variable
-MEASURE_SERVER_MCP_GNU_UNITS (see README).
+The server installs next to the other tools (requirements-adapters.txt). If it
+is kept somewhere else, name it through the variable
+MEASURE_SERVER_MCP_GNU_UNITS.
 
 Written by Claude (AI).
 """

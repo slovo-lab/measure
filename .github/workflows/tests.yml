@@ -32,11 +32,6 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install -r requirements-adapters.txt
-      - name: Install mcp-gnu-units in an environment of its own
-        run: |
-          python3 -m venv "$RUNNER_TEMP/gnu-env"
-          "$RUNNER_TEMP/gnu-env/bin/pip" install mcp-gnu-units==0.1.1
-          echo "MEASURE_SERVER_MCP_GNU_UNITS=$RUNNER_TEMP/gnu-env/bin/mcp-gnu-units" >> "$GITHUB_ENV"
       - run: python3 -m unittest discover -s tests -v
       - name: Every adapter must have run, not been skipped
         run: |
