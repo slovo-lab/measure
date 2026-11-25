@@ -630,6 +630,12 @@ class QuantitiesAdapterTests(unittest.TestCase):
         self.assertEqual(self.adapter.solve(BY_ID["conv-degc-interval-k"]).outputs["value"], 15.0)
 
 
+def _importable(*modules):
+    import importlib.util
+    return all(importlib.util.find_spec(m) is not None for m in modules)
+
+
+@unittest.skipUnless(_importable("astropy", "unyt"), "astropy and unyt are not installed")
 class AstropyAndUnytAdapterTests(unittest.TestCase):
     """Checks that the two adapters are wired correctly, not that the packages are right."""
 
