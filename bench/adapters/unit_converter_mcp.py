@@ -38,6 +38,9 @@ UNITS = {
     "m^2": ("convert_area", "square meter"),
     "min": ("convert_time", "minutes"), "h": ("convert_time", "hours"),
     "s": ("convert_time", "seconds"),
+    # Bare words, for the questions that do not say which reading is meant.
+    "cal": ("convert_energy", "calorie"), "gal": ("convert_volume", "gallon"),
+    "pt": ("convert_volume", "pint"), "ton": ("convert_mass", "ton"),
 }
 
 # Spellings for which the server's lists have no unit.
@@ -79,6 +82,10 @@ class UnitConverterMcpAdapter:
             "to_unit": to_name,
         })
         if is_error:
+            if "Input should be" in text:
+                # The tool has a fixed list of unit names and turned the word
+                # down, naming the ones it accepts.
+                return Refusal(" ".join(text.split())[:400])
             if tool != target_tool:
                 # The tool for one kind of quantity was offered a unit of
                 # another kind and turned the request down.
@@ -86,4 +93,7 @@ class UnitConverterMcpAdapter:
             raise RuntimeError("server error: %s" % text[:300])
         if not isinstance(payload, dict) or "converted_value" not in payload:
             raise RuntimeError("unreadable answer from the server: %r" % text[:200])
-        return Answer({"value": float(payload["converted_value"])})
+        # What the server itself says: its names for the two units.
+        return Answer({"value": float(payload["converted_value"])},
+                      stated={"unit": payload.get("converted_unit"),
+                              "reading": payload.get("original_unit")})

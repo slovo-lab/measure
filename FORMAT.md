@@ -151,7 +151,8 @@ The lab's owner left this to the AI. Six tools were asked by hand what they take
 1. **The verdict stays `incomplete`.** It describes the answer truthfully: one of the right numbers, and no word about which reading was taken. A convention that every tool shares is still a convention the reader of the answer cannot see.
 2. **An `incomplete` is never reported to a tool's authors as a defect on its own.** It is a choice, usually a documented one. In a round it is shown in its own column and summed over tools ("six of six took the US gallon and did not say so"), which is where it tells something.
 3. **A question of this kind is published only with a source for each reading**, and preferably where the readings are both in daily use (the gallon, the pint) more than where one is a specialist's distinction (the calorie). The calorie stays as the example in the proposal file.
-4. A tool that names its reading in the answer, or gives both, passes. A tool whose name for the unit is the bare word again ("calorie") has not named its reading.
+5. **What counts as declining.** A reply that turns the bare word down and shows the readings the tool does have (a list of accepted names, or "similar units: metric_ton, short_ton") is a decline and passes. A bare "unknown unit" is recorded as the unit not being offered: it does not tell the asker what to choose from. (Added the same day, after two servers answered "ton" in the first way and three libraries in the second.)
+6. A tool that names its reading in the answer, or gives both, passes. A tool whose name for the unit is the bare word again ("calorie") has not named its reading.
 
 ### What is still open
 

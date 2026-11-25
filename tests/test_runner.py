@@ -778,6 +778,43 @@ class DecimalPlaces(unittest.TestCase):
         self.assertEqual(decimal_places("1234", 2), -2)
 
 
+@unittest.skipUnless(HAVE_UCON_MCP and HAVE_UNIT_CONVERTER_MCP and HAVE_MCP_UNITS
+                     and HAVE_MCP_GNU_UNITS, "the four converting servers are not installed")
+class ServersSayWhatTheyRead(unittest.TestCase):
+    """The server adapters hand over what the server's reply says, not a guess."""
+
+    @classmethod
+    def setUpClass(cls):
+        from bench.adapters.mcp_gnu_units import McpGnuUnitsAdapter
+        from bench.adapters.mcp_units import McpUnitsAdapter
+        from bench.adapters.ucon_mcp import UconMcpAdapter
+        from bench.adapters.unit_converter_mcp import UnitConverterMcpAdapter
+        cls.adapters = {a.name: a for a in (UconMcpAdapter(), UnitConverterMcpAdapter(),
+                                            McpUnitsAdapter(), McpGnuUnitsAdapter())}
+        with open(os.path.join(ROOT, "pairs", "proposed-v2.json"), encoding="utf-8") as handle:
+            cls.items = {item["id"]: item for item in json.load(handle)["pairs"]}
+
+    @classmethod
+    def tearDownClass(cls):
+        for adapter in cls.adapters.values():
+            adapter.close()
+
+    def test_every_server_states_the_unit_of_its_result(self):
+        for name, adapter in self.adapters.items():
+            answer = adapter.solve(BY_ID["conv-inch-mm"])
+            self.assertTrue(answer.stated and answer.stated.get("unit"), name)
+
+    def test_no_error_on_the_proposed_questions(self):
+        for name, adapter in self.adapters.items():
+            report = runner.run(list(self.items.values()), adapter)
+            self.assertEqual(report["summary"]["error"], 0, name)
+
+    def test_a_bare_ton_is_turned_down_by_the_two_servers_with_fixed_lists(self):
+        for name in ("ucon-mcp (server)", "unit-converter-mcp (server)"):
+            self.assertIsInstance(self.adapters[name].solve(self.items["amb-ton-kilogram"]),
+                                  Refusal, name)
+
+
 class VersionTwo(unittest.TestCase):
     """The proposed format version 2: several right answers, labels, relations."""
 

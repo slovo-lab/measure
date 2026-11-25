@@ -136,3 +136,18 @@ No tool gave the imperial reading, and none declined. Not offering a bare "ton" 
 - js-quantities defines the gallon as 0.0037854118 cubic metres and the pint as 0.000473176475, both rounded; 4 parts in a billion.
 
 For most uses the difference does not matter. Both libraries give the inch, the pound and the mile exactly, and the gallon is exact by definition too. Existing issues were searched: astropy has none about the gallon's value; js-quantities has an open one about precision in comparisons (132) that does not name the rounded definitions. Both were reported the same day after the owner's yes: astropy issue 20948, js-quantities issue 153.
+
+## Servers asked the same three questions (25 November, afternoon)
+
+Four server adapters now report what the server's reply says about units, so the questions with several readings can be put to them. Their results on the 43 published pairs did not change.
+
+| Server | calorie | gallon | pint | ton |
+|---|---|---|---|---|
+| ucon-mcp | thermochemical, unsaid | US, unsaid | US liquid, unsaid | **declines**, and names `metric_ton` and `short_ton` |
+| unit-converter-mcp | thermochemical, unsaid | US, unsaid | US liquid, unsaid | **declines**: its list has "short ton (US)", "long ton (UK)", "tonne" and no bare "ton" |
+| mcp-units | thermochemical, unsaid | US, unsaid | US liquid, unsaid | short, unsaid |
+| mcp-gnu-units | thermochemical, unsaid | US, unsaid | US liquid, unsaid | short, unsaid |
+
+All numbers are exact. Two servers handle "ton" the way a careful person would: they do not guess, and their reply shows the choices. That is counted as a pass. A library that only says "unknown unit" is counted as not offering the unit, because its reply does not show what it has instead (written into `FORMAT.md`).
+
+Across all twelve tools asked: "gallon" was read as the US gallon by every tool that knows the word, and one (quantities) said so. No tool gave or mentioned the imperial gallon unasked.
