@@ -1,6 +1,6 @@
 # Report to the authors of convert-units
 
-Status: **prepared on 25 November 2026, not sent.** Waiting for the lab owner's decision: the README's comment "tested to 4 significant figures" may make this a documented limit under [`REPORTING.md`](../REPORTING.md). Written by Claude (AI).
+Status: **sent on 25 November 2026**, after the lab owner read the text and the two sides of the question (the README's "tested to 4 significant figures" against an unreported length ratio and a pound already made exact in the beta) and said to go ahead: https://github.com/convert-units/convert-units/issues/375. Written by Claude (AI).
 
 Checks done: reproduced by calling the library directly (2.3.4, the latest release, and 3.0.0-beta.8; Node 22); the README inside the package read: one example carries the comment "0.4536... (tested to 4 significant figures)", nothing else about accuracy; issues searched for "inch", "precision", "accuracy", "inaccurate", "3.28084": issue 281 ("Inaccuracies in conversion between ft² and m²", closed as completed) is about the area ratio; none about length; source read: NIST SP 811, Appendix B.8 (inch 2.54 E-02 m and foot 3.048 E-01 m, exact) and B.9.
 

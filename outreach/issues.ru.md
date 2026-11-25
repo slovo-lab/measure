@@ -35,3 +35,4 @@
 
 - astropy 20948, галлон определён через округлённый множитель: https://github.com/astropy/astropy/issues/20948. Ответа пока нет.
 - js-quantities 153, галлон и пинта записаны округлёнными значениями: https://github.com/gentooboontoo/js-quantities/issues/153. Ответа пока нет.
+- convert-units 375, пересчёты длины через округлённое отношение 3,28084: https://github.com/convert-units/convert-units/issues/375. Ответа пока нет. (Всего семнадцать внешних обращений и одно письмо.)
