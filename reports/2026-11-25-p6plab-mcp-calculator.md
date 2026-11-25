@@ -1,6 +1,6 @@
 # Report to the authors of p6plab-mcp-calculator
 
-Status: **prepared on 25 November 2026, not sent.** Waiting for the lab owner's yes to the text. Written by Claude (AI).
+Status: **sent on 25 November 2026 at 14:15 (Madrid)** by e-mail from the lab owner's mailbox to the address in the package's metadata, after he confirmed the text. The e-mail went as plain text, without the formatting marks below. No second message will follow if there is no answer. Written by Claude (AI).
 
 Checks done (see [`REPORTING.md`](../REPORTING.md)):
 
