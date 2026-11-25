@@ -5,6 +5,8 @@ uncertainties==3.2.3
 numpy==2.5.5
 ucon==2.4.2
 GTC==1.5.1
+metrolopy==1.1.1
+quantities==0.17.0
 scipy==1.18.1
 # Servers for AI agents, and the client used to call them.
 mcp==1.30.0

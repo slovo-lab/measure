@@ -17,8 +17,13 @@ BY_KEY = {tool["key"]: tool for tool in round_script.TOOLS}
 
 
 class ToolsTable(unittest.TestCase):
-    def test_every_adapter_is_in_the_round_and_nothing_else(self):
-        self.assertEqual(sorted(BY_KEY), sorted(ADAPTERS))
+    def test_every_adapter_is_in_the_round_or_waiting_for_the_next(self):
+        waiting = round_script.WAITING_FOR_THE_NEXT_ROUND
+        self.assertEqual(sorted(list(BY_KEY) + list(waiting)), sorted(ADAPTERS))
+        self.assertFalse(set(BY_KEY) & set(waiting))
+
+    def test_the_round_of_december_has_the_eight_announced_tools(self):
+        self.assertEqual(len(BY_KEY), 8)
 
     def test_no_tool_is_pinned_to_a_version(self):
         for tool in round_script.TOOLS:

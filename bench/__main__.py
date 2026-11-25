@@ -12,6 +12,8 @@ ADAPTERS = {
     "pint": ("bench.adapters.pint_uncertainties", "PintUncertaintiesAdapter"),
     "ucon": ("bench.adapters.ucon_adapter", "UconAdapter"),
     "gtc": ("bench.adapters.gtc_adapter", "GtcAdapter"),
+    "metrolopy": ("bench.adapters.metrolopy_adapter", "MetrolopyAdapter"),
+    "quantities": ("bench.adapters.quantities_adapter", "QuantitiesAdapter"),
     "ucon-mcp": ("bench.adapters.ucon_mcp", "UconMcpAdapter"),
     "unit-converter-mcp": ("bench.adapters.unit_converter_mcp", "UnitConverterMcpAdapter"),
     "mcp-units": ("bench.adapters.mcp_units", "McpUnitsAdapter"),
