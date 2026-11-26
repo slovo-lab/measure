@@ -78,3 +78,7 @@ Two of the trial's findings are not covered by a printed value and need their ow
 3. Adapters: the libraries first (PROJ through pyproj, GeographicLib), then the three servers of the trial.
 
 Earliest round: 4 January 2027, if built and announced by 29 December.
+
+---
+
+*Note added 26 November 2026:* the three kinds of question this note left without a source (zone exceptions, area, a line of points) now have one: see [`2026-11-26-positions-remaining-sources.md`](2026-11-26-positions-remaining-sources.md).
