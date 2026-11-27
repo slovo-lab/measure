@@ -66,3 +66,5 @@ Neither is a check of whether a calculator's answer carries its unit, time zone 
 1. No kit and no audit. Two things dropped before they were started.
 2. The `FORMAT.md` change covers kinds 1, 3 and 4. Kind 2 is not a pair; it belongs in the rules of a round (`ROUNDS.md`).
 3. Before publishing pairs for other frameworks: read `mcp-assert`'s documentation and the suites repository linked from `mcp-test-harness`.
+
+**Note of 27 November 2026.** The two documents named above as not read were read: see [`2026-11-27-test-frameworks.md`](2026-11-27-test-frameworks.md). Neither framework compares a number within a tolerance in its declarative form; the repository linked from `mcp-test-harness` holds connectors for other languages, not test suites for a field. No export of the pairs.
